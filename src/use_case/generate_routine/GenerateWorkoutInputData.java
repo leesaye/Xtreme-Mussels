@@ -1,4 +1,4 @@
-package use_case.generate_workout;
+package use_case.generate_routine;
 
 public class GenerateWorkoutInputData {
 }
