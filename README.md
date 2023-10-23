@@ -8,7 +8,7 @@ Domain: Health and fitness - we're focused on improving self-improvement and wel
 
 Software Specification:
 
-The program should allow users to look up different types of exercises based on which muscle group they want to target while also accounting for their chosen difficulty level. It should also be able to generate and suggest workout routines depending on what kind of routine the user wants, such as an upper-body workout routine or a routine to build leg muscle. It should also assign random missions, have a daily-streak function, and contain achievements so individual users can complete them to stay motivated.
+The program should allow users to look up different types of exercises based on which muscle group they want to target while also accounting for their chosen difficulty level. It should also be able to generate and suggest workout routines depending on what kind of routine the user wants, such as an upper-body workout routine or a routine to build leg muscle. It should allow users to create new routines and add, edit, and delete exercises from those routines. It should allow  the user to start a real-time workout session and guide the user through reps and timed breaks. It should also assign random missions, have a daily-streak function, and contain achievements so individual users can complete them to stay motivated.
 
 Additional features: The program would also allow users to connect with each other to keep each other motivated, either through collaboration or competition. Users can join a leaderboard with other users, or complete missions on their own. In leaderboards, users gain points by completing weekly/monthly missions. The program also celebrates the user’s achievements as a way to reward the user for exercising.
 
