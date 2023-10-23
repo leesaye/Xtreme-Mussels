@@ -1,2 +1,4 @@
-package interface_adapter.generate_workout;public class GenerateWorkoutViewModel {
+package interface_adapter.generate_workout;
+
+public class GenerateWorkoutViewModel {
 }
