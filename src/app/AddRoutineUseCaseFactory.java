@@ -11,24 +11,21 @@ public class AddRoutineUseCaseFactory {
     private AddRoutineUseCaseFactory() {}
 
     public static AddRoutineView create(
-            AddRoutineViewModel addRoutineViewModel
+            AddRoutineViewModel addRoutineViewModel) {
+        return null;
     }
 
-    private static AddRoutineController createAddRoutineUseCase(
-            ViewManagerModel viewManagerModel,
-            AddRoutineViewModel addRoutineViewModel,
-            LoggedInViewModel loggedInViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) throws IOException {
+
+    // private static AddRoutineController createAddRoutineUseCase(
+    // AddRoutineViewModel addRoutineViewModel,
 
         // Notice how we pass this method's parameters to the Presenter.
-        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
+    // LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
-        UserFactory userFactory = new CommonUserFactory();
+    // UserFactory userFactory = new CommonUserFactory();
 
-        LoginInputBoundary loginInteractor = new LoginInteractor(
-                userDataAccessObject, loginOutputBoundary);
+// LoginInputBoundary loginInteractor = new LoginInteractor(
+// userDataAccessObject, loginOutputBoundary);
 
-        return new LoginController(loginInteractor);
-    }
-
+    // return new LoginController(loginInteractor);
 }
