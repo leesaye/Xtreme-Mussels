@@ -27,3 +27,10 @@ Additional stuff:
 - *signup/login/logout
 - *logging completed routine
 - *pvp
+
+NOTES:
+Entities
+- Routine
+  - Routine = List of elements each of type Exercise
+- Exercise
+  - DAO (from json file or calling api each time)
