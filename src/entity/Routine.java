@@ -4,25 +4,22 @@ import java.util.*;
 
 public class Routine {
     private int id;
-    private String name;
+    private String routineName;
     private ArrayList<Map<String, Object>> exercisesList;
 
-    public Routine(int id, String name, ArrayList<Map<String, Object>> exercisesList) {
+    public Routine(int id, String routineName, ArrayList<Map<String, Object>> exercisesList) {
         this.id = id;
-        this.name = name;
+        this.routineName = routineName;
         this.exercisesList = exercisesList;
     }
 
     public int getId() {
         return id;
     }
-
     public String getName() {
-        return name;
+        return routineName;
     }
-
     public ArrayList<Map<String, Object>> getExercisesList() {
         return exercisesList;
     }
 }
-
