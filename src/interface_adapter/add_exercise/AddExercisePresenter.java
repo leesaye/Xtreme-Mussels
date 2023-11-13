@@ -1,2 +1,4 @@
-package interface_adapter.add_exercise;public class AddExercisePresenter {
+package interface_adapter.add_exercise;
+
+public class AddExercisePresenter{
 }
