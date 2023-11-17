@@ -34,3 +34,7 @@ Entities
   - Routine = List of elements each of type Exercise
 - Exercise
   - DAO (from json file or calling api each time)
+ 
+TODOS:
+- multiple api calls (change how DAO works, get by exercise target and name) - lisa
+- view (GUI) - yan
