@@ -36,5 +36,13 @@ Entities
   - DAO (from json file or calling api each time)
  
 TODOS:
-- multiple api calls (change how DAO works, get by exercise target and name, drop down bar with target list endpoint) - lisa
-- view (GUI) - yan
+- multiple api calls (change how DAO works, get by exercise target and name, drop-down bar with target list endpoint) - lisa
+- look at routine use case - lisa
+- view (GUI) - yan et. al
+- integration testing (when everything is put together) - someone
+- unit testing (individual use case, each person makes one test for their own)
+- documentation (javadocs) - each person documents their own
+- make the presentation
+
+
+
