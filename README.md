@@ -36,5 +36,5 @@ Entities
   - DAO (from json file or calling api each time)
  
 TODOS:
-- multiple api calls (change how DAO works, get by exercise target and name) - lisa
+- multiple api calls (change how DAO works, get by exercise target and name, drop down bar with target list endpoint) - lisa
 - view (GUI) - yan
