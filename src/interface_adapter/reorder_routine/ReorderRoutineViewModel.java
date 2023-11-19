@@ -12,11 +12,13 @@ public class ReorderRoutineViewModel extends ViewModel {
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
-    private ReorderRoutineState state = new ReorderRoutineState();
+    private static ReorderRoutineState state = new ReorderRoutineState();
 
     public ReorderRoutineViewModel() {
         super("reorder");
     }
+
+    public void setState(ReorderRoutineState state) {this.state = state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -28,7 +30,7 @@ public class ReorderRoutineViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public ReorderRoutineState getState() {
+    public static ReorderRoutineState getState() {
         return state;
     }
 }

@@ -1,5 +1,7 @@
 package interface_adapter.reorder_routine;
 
+import interface_adapter.ViewManagerModel;
+import interface_adapter.reorder_routine.ReorderRoutineViewModel;
 import use_case.reorder_routine.ReorderRoutineOutputBoundary;
 import use_case.reorder_routine.ReorderRoutineOutputData;
 
@@ -7,8 +9,11 @@ public class ReorderRoutinePresenter implements ReorderRoutineOutputBoundary {
 
     private final ReorderRoutineViewModel reorderRoutineViewModel;
 
-    public ReorderRoutinePresenter(ReorderRoutineViewModel reorderRoutineViewModel, ReorderRoutineViewModel reorderRoutineViewModel1) {
-        this.reorderRoutineViewModel = reorderRoutineViewModel1;
+    private ViewManagerModel viewManagerModel;
+
+    public ReorderRoutinePresenter(ViewManagerModel viewManagerModel, ReorderRoutineViewModel reorderRoutineViewModel) {
+        this.viewManagerModel = viewManagerModel;
+        this.reorderRoutineViewModel = reorderRoutineViewModel;
     }
 
     @Override
