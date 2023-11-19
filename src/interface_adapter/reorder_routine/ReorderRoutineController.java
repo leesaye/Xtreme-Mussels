@@ -1,7 +1,7 @@
 package interface_adapter.reorder_routine;
 
 import use_case.reorder_routine.ReorderRoutineInputBoundary;
-import entity.Exercise
+import entity.Exercise;
 import use_case.reorder_routine.ReorderRoutineInputData;
 
 import java.util.ArrayList;
