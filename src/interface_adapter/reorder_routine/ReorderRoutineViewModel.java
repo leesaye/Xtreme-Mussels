@@ -6,6 +6,12 @@ import java.beans.PropertyChangeSupport;
 
 public class ReorderRoutineViewModel extends ViewModel {
 
+    public static final String TITLE_LABEL = "Reorder routine view";
+
+    public static final String SAVE_BUTTON_LABEL = "Save";
+
+    public static final String CANCEL_BUTTON_LABEL = "Cancel";
+
     private ReorderRoutineState state = new ReorderRoutineState();
 
     public ReorderRoutineViewModel() {
