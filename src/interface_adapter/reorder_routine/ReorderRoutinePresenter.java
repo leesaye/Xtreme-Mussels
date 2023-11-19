@@ -13,15 +13,15 @@ public class ReorderRoutinePresenter implements ReorderRoutineOutputBoundary {
 
     @Override
     public void prepareSuccessView(ReorderRoutineOutputData data) {
-        ReorderRoutineState editState = reorderRoutineViewModel.getState();
-        editState.setRoutineName(data.getName());
+        ReorderRoutineState reorderState = reorderRoutineViewModel.getState();
+        reorderState.setRoutineName(data.getName());
         reorderRoutineViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        ReorderRoutineState editState = reorderRoutineViewModel.getState();
-        editState.setRoutineNameError(error);
+        ReorderRoutineState reorderState = reorderRoutineViewModel.getState();
+        reorderState.setRoutineNameError(error);
         reorderRoutineViewModel.firePropertyChanged();
     }
 }

@@ -9,7 +9,7 @@ public class ReorderRoutineViewModel extends ViewModel {
     private ReorderRoutineState state = new ReorderRoutineState();
 
     public ReorderRoutineViewModel() {
-        super("clear");
+        super("reorder");
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
