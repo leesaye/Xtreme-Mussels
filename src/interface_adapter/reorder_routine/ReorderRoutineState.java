@@ -1,11 +1,11 @@
-package interface_adapter.edit_routine;
+package interface_adapter.reorder_routine;
 
-public class EditRoutineState {
+public class ReorderRoutineState {
 
     private String name;
     private String nameError;
 
-    public EditRoutineState() {
+    public ReorderRoutineState() {
     }
 
     public void setRoutineName(String name) {

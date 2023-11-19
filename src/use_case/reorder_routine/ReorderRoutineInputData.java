@@ -1,10 +1,10 @@
-package use_case.edit_routine;
+package use_case.reorder_routine;
 
 import entity.Exercise;
 
 import java.util.ArrayList;
 
-public class EditRoutineInputData {
+public class ReorderRoutineInputData {
 
     final private String name;
 
@@ -16,8 +16,8 @@ public class EditRoutineInputData {
 
     final private ArrayList<Exercise>  exercises;
 
-    public EditRoutineInputData(String name, int id, ArrayList<Integer> reps,
-                                ArrayList<Integer> sets, ArrayList<Exercise> exercises ) {
+    public ReorderRoutineInputData(String name, int id, ArrayList<Integer> reps,
+                                   ArrayList<Integer> sets, ArrayList<Exercise> exercises ) {
         this.name = name;
         this.id = id;
         this.reps = reps;

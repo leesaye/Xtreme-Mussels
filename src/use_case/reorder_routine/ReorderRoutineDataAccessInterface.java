@@ -1,11 +1,10 @@
-package use_case.edit_routine;
+package use_case.reorder_routine;
 
 import entity.Exercise;
-import entity.Routine;
 
 import java.util.ArrayList;
 
-public interface EditRoutineDataAccessInterface {
+public interface ReorderRoutineDataAccessInterface {
     boolean existsById(int id);
 
     void updateRoutine(int id, String name, ArrayList<Exercise> exercises, ArrayList<Integer> reps, ArrayList<Integer> sets);

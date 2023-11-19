@@ -1,14 +1,14 @@
-package interface_adapter.edit_routine;
+package interface_adapter.reorder_routine;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class EditRoutineViewModel extends ViewModel {
+public class ReorderRoutineViewModel extends ViewModel {
 
-    private EditRoutineState state = new EditRoutineState();
+    private ReorderRoutineState state = new ReorderRoutineState();
 
-    public EditRoutineViewModel() {
+    public ReorderRoutineViewModel() {
         super("clear");
     }
 
@@ -22,7 +22,7 @@ public class EditRoutineViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public EditRoutineState getState() {
+    public ReorderRoutineState getState() {
         return state;
     }
 }

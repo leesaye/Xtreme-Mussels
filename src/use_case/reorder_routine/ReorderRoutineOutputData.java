@@ -1,8 +1,8 @@
-package use_case.edit_routine;
+package use_case.reorder_routine;
 
-public class EditRoutineOutputData {
+public class ReorderRoutineOutputData {
     private final String name; // display message that says eg "Edits to <name> saved"
-    public EditRoutineOutputData(String name) {
+    public ReorderRoutineOutputData(String name) {
         this.name = name;
     }
 
