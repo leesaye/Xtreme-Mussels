@@ -4,54 +4,56 @@ import java.util.ArrayList;
 
 public class Exercise {
     private String name;
-    private String difficulty;
     private String target;
-    private ArrayList secondaryMuscles;
     private String equipment;
-    private String gifURL;
-    private int id;
-    private ArrayList instructions;
+    private String instructions;
+    private String id;
+    private int sets;
+    private int reps;
 
-    public Exercise(String name, String difficulty, String target, ArrayList secondaryMuscles, String equipment, String gifURL, int id, ArrayList instructions) {
+    public Exercise(String name, String target, String equipment, String instructions, String id, int sets, int reps) {
         this.name = name;
-        this.difficulty = difficulty;
         this.target = target;
-        this.secondaryMuscles = secondaryMuscles;
         this.equipment = equipment;
-        this.gifURL = gifURL;
-        this.id = id;
         this.instructions = instructions;
+        this.id = id;
+        this.sets = sets;
+        this.reps = reps;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDifficulty() {
-        return difficulty;
-    }
-
     public String getTarget() {
         return target;
-    }
-
-    public ArrayList getSecondaryMuscles() {
-        return secondaryMuscles;
     }
 
     public String getEquipment() {
         return equipment;
     }
 
-    public String getGifURL() {
-        return gifURL;
+    public String getInstructions() {
+        return instructions;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public ArrayList getInstructions() {
-        return instructions;
+    public int getSets() {
+        return sets;
+    }
+
+    public int getReps() {
+        return reps;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
     }
 }
