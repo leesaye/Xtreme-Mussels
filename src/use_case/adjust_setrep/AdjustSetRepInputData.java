@@ -1,15 +1,15 @@
-package use_case.reorder_routine;
+package use_case.adjust_setrep;
 
 import entity.Exercise;
 
 import java.util.ArrayList;
 
-public class ReorderRoutineInputData {
+public class AdjustSetRepInputData {
     final private int id;
 
     final private ArrayList<Exercise>  exercises;
 
-    public ReorderRoutineInputData(int id, ArrayList<Exercise> exercises ) {
+    public AdjustSetRepInputData(int id, ArrayList<Exercise> exercises ) {
         this.id = id;
         this.exercises = exercises;
     }

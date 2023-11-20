@@ -1,8 +1,8 @@
-package use_case.reorder_routine;
+package use_case.adjust_setrep;
 
-public class ReorderRoutineOutputData {
+public class AdjustSetRepOutputData {
     private final String name; // display message that says eg "Edits to <name> saved"
-    public ReorderRoutineOutputData(String name) {
+    public AdjustSetRepOutputData(String name) {
         this.name = name;
     }
 

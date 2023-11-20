@@ -1,8 +1,8 @@
 package view.edit_routine;
 
-import interface_adapter.reorder_routine.ReorderRoutineController;
-import interface_adapter.reorder_routine.ReorderRoutineState;
-import interface_adapter.reorder_routine.ReorderRoutineViewModel;
+import interface_adapter.adjust_setrep.AdjustSetRepController;
+import interface_adapter.adjust_setrep.AdjustSetRepState;
+import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +11,13 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ReorderRoutineView extends JPanel implements ActionListener, PropertyChangeListener {
+public class AdjustSetRepView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "reorder";
+    public final String viewName = "adjust";
 
-    private final ReorderRoutineViewModel reorderViewModel;
+    private final AdjustSetRepViewModel adjustViewModel;
 
-    private final ReorderRoutineController reorderController;
+    private final AdjustSetRepController adjustController;
 
     private final JButton save;
 
@@ -25,25 +25,25 @@ public class ReorderRoutineView extends JPanel implements ActionListener, Proper
 
     private final JTable table;
 
-    public ReorderRoutineView(ReorderRoutineController controller, ReorderRoutineViewModel reorderRoutineViewModel) {
+    public AdjustSetRepView(AdjustSetRepController controller, AdjustSetRepViewModel adjustSetRepViewModel) {
 
-        this.reorderController = controller;
-        this.reorderViewModel = reorderRoutineViewModel;
-        reorderViewModel.addPropertyChangeListener(this);
+        this.adjustController = controller;
+        this.adjustViewModel = adjustSetRepViewModel;
+        adjustViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(ReorderRoutineViewModel.TITLE_LABEL);
+        JLabel title = new JLabel(AdjustSetRepViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // TODO: create a list of exercises which can be moved around, then a listener to update State with new order
-//        JTable exercises = new JTable(ReorderRoutineViewModel.getState().getExercisesReps(), ReorderRoutineViewModel.COLUMN_HEADERS);
+//        JTable exercises = new JTable(AdjustSetRepViewModel.getState().getExercisesReps(), AdjustSetRepViewModel.COLUMN_HEADERS);
         // TEMPORARY WHILE DAO HASN'T BEEN CREATED YET
-        table = new JTable(new Object[][]{{"pullups", 52}, {"squats", 10}}, ReorderRoutineViewModel.COLUMN_HEADERS);
+        table = new JTable(new Object[][]{{"pullups", 52}, {"squats", 10}}, AdjustSetRepViewModel.COLUMN_HEADERS);
 
         JScrollPane tableScrlPane = new JScrollPane(table);
 
         JPanel buttons = new JPanel();
-        save = new JButton(ReorderRoutineViewModel.SAVE_BUTTON_LABEL);
-        cancel = new JButton(ReorderRoutineViewModel.CANCEL_BUTTON_LABEL);
+        save = new JButton(AdjustSetRepViewModel.SAVE_BUTTON_LABEL);
+        cancel = new JButton(AdjustSetRepViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(save);
         buttons.add(cancel);
 
@@ -51,9 +51,9 @@ public class ReorderRoutineView extends JPanel implements ActionListener, Proper
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(save)) {
-                            ReorderRoutineState currentState = ReorderRoutineViewModel.getState();
+                            AdjustSetRepState currentState = AdjustSetRepViewModel.getState();
 
-                            reorderController.execute(currentState.getId(), currentState.getExercises());
+                            adjustController.execute(currentState.getId(), currentState.getExercises());
                         }
 
                     }

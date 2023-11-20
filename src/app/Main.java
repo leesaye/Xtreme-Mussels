@@ -2,13 +2,12 @@ package app;
 
 import data_access.FileRoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.reorder_routine.ReorderRoutineViewModel;
+import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import view.ViewManager;
-import view.edit_routine.ReorderRoutineView;
+import view.edit_routine.AdjustSetRepView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 class Main {
     public static void main(String[] args) {
@@ -32,7 +31,7 @@ class Main {
         // results from the use case. The ViewModels are observable, and will
         // be observed by the Views.
 
-        ReorderRoutineViewModel reorderRoutineViewModel = new ReorderRoutineViewModel();
+        AdjustSetRepViewModel adjustSetRepViewModel = new AdjustSetRepViewModel();
 
         // TODO: uncomment the try/catch block when DAO has been written
         FileRoutineDataAccessObject routineDataAccessObject;
@@ -42,10 +41,10 @@ class Main {
 //            throw new RuntimeException(e);
 //        }
 
-        ReorderRoutineView reorderView = ReorderUseCaseFactory.create(viewManagerModel, reorderRoutineViewModel, routineDataAccessObject);
-        views.add(reorderView, reorderView.viewName);
+        AdjustSetRepView adjustView = AdjustSetRepUseCaseFactory.create(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
+        views.add(adjustView, adjustView.viewName);
 
-        viewManagerModel.setActiveView(reorderView.viewName);
+        viewManagerModel.setActiveView(adjustView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

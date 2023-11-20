@@ -1,11 +1,10 @@
-package interface_adapter.reorder_routine;
+package interface_adapter.adjust_setrep;
 
 import entity.Exercise;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ReorderRoutineState {
+public class AdjustSetRepState {
 
     private String name;
 
@@ -15,7 +14,7 @@ public class ReorderRoutineState {
 
     private String nameError;
 
-    public ReorderRoutineState() {
+    public AdjustSetRepState() {
     }
 
     public ArrayList<Exercise> getExercises() {

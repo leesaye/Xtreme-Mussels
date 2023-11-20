@@ -1,12 +1,12 @@
-package interface_adapter.reorder_routine;
+package interface_adapter.adjust_setrep;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ReorderRoutineViewModel extends ViewModel {
+public class AdjustSetRepViewModel extends ViewModel {
 
-    public static final String TITLE_LABEL = "Reorder routine view";
+    public static final String TITLE_LABEL = "Adjust sets and reps routine view";
 
     public static final String SAVE_BUTTON_LABEL = "Save";
 
@@ -14,13 +14,13 @@ public class ReorderRoutineViewModel extends ViewModel {
 
     public static final String[] COLUMN_HEADERS = {"Exercises", "Sets and Reps"};
 
-    private static ReorderRoutineState state = new ReorderRoutineState();
+    private static AdjustSetRepState state = new AdjustSetRepState();
 
-    public ReorderRoutineViewModel() {
-        super("reorder");
+    public AdjustSetRepViewModel() {
+        super("adjust");
     }
 
-    public void setState(ReorderRoutineState state) {this.state = state; }
+    public void setState(AdjustSetRepState state) {this.state = state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -32,7 +32,7 @@ public class ReorderRoutineViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public static ReorderRoutineState getState() {
+    public static AdjustSetRepState getState() {
         return state;
     }
 }
