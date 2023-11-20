@@ -6,12 +6,12 @@ public class Exercise {
     private String name;
     private String target;
     private String equipment;
-    private String instructions;
+    private ArrayList<String> instructions;
     private String id;
     private int sets;
     private int reps;
 
-    public Exercise(String name, String target, String equipment, String instructions, String id, int sets, int reps) {
+    public Exercise(String name, String target, String equipment, ArrayList<String> instructions, String id, int sets, int reps) {
         this.name = name;
         this.target = target;
         this.equipment = equipment;
@@ -33,7 +33,7 @@ public class Exercise {
         return equipment;
     }
 
-    public String getInstructions() {
+    public ArrayList<String> getInstructions() {
         return instructions;
     }
 
