@@ -12,6 +12,8 @@ public class ReorderRoutineViewModel extends ViewModel {
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
+    public static final String[] COLUMN_HEADERS = {"Exercises", "Sets and Reps"};
+
     private static ReorderRoutineState state = new ReorderRoutineState();
 
     public ReorderRoutineViewModel() {

@@ -23,6 +23,7 @@ public class ReorderRoutineView extends JPanel implements ActionListener, Proper
 
     private final JButton cancel;
 
+    private final JTable table;
 
     public ReorderRoutineView(ReorderRoutineController controller, ReorderRoutineViewModel reorderRoutineViewModel) {
 
@@ -34,6 +35,11 @@ public class ReorderRoutineView extends JPanel implements ActionListener, Proper
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // TODO: create a list of exercises which can be moved around, then a listener to update State with new order
+//        JTable exercises = new JTable(ReorderRoutineViewModel.getState().getExercisesReps(), ReorderRoutineViewModel.COLUMN_HEADERS);
+        // TEMPORARY WHILE DAO HASN'T BEEN CREATED YET
+        table = new JTable(new Object[][]{{"pullups", 52}, {"squats", 10}}, ReorderRoutineViewModel.COLUMN_HEADERS);
+
+        JScrollPane tableScrlPane = new JScrollPane(table);
 
         JPanel buttons = new JPanel();
         save = new JButton(ReorderRoutineViewModel.SAVE_BUTTON_LABEL);
@@ -65,6 +71,7 @@ public class ReorderRoutineView extends JPanel implements ActionListener, Proper
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(tableScrlPane);
         this.add(buttons);
     }
 
