@@ -7,5 +7,5 @@ import java.util.ArrayList;
 public interface AdjustSetRepDataAccessInterface {
     boolean existsById(int id);
 
-    void updateRoutine(int id, ArrayList<Exercise> exercises);
+    void updateRoutine(int id, ArrayList<Integer> sets, ArrayList<Integer> reps);
 }

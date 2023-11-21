@@ -5,11 +5,17 @@ import interface_adapter.adjust_setrep.AdjustSetRepState;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 
 import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class AdjustSetRepView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -25,6 +31,8 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
 
     private final JTable table;
 
+    static DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+
     public AdjustSetRepView(AdjustSetRepController controller, AdjustSetRepViewModel adjustSetRepViewModel) {
 
         this.adjustController = controller;
@@ -35,10 +43,10 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // TODO: create a list of exercises which can be moved around, then a listener to update State with new order
-//        JTable exercises = new JTable(AdjustSetRepViewModel.getState().getExercisesReps(), AdjustSetRepViewModel.COLUMN_HEADERS);
+//        JTable exercises = new JTable(AdjustSetRepViewModel.getState().getSetReps(), AdjustSetRepViewModel.COLUMN_HEADERS);
         // TEMPORARY WHILE DAO HASN'T BEEN CREATED YET
-        table = new JTable(new Object[][]{{"pullups", 52}, {"squats", 10}}, AdjustSetRepViewModel.COLUMN_HEADERS);
-
+        table = new JTable(new Object[][]{{"pullups", 3, 10124}, {"squats", 342, 23125}}, AdjustSetRepViewModel.COLUMN_HEADERS);
+        table.setModel(model);
         JScrollPane tableScrlPane = new JScrollPane(table);
 
         JPanel buttons = new JPanel();
@@ -53,7 +61,16 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
                         if (evt.getSource().equals(save)) {
                             AdjustSetRepState currentState = AdjustSetRepViewModel.getState();
 
-                            adjustController.execute(currentState.getId(), currentState.getExercises());
+                            // Pass in data from set and reps columns to the controller
+                            ArrayList<Integer> sets = new ArrayList<>();
+                            ArrayList<Integer> reps = new ArrayList<>();
+
+                            for(int i = 1; i <= model.getRowCount(); i++) {
+                                sets.add(parseInt(model.getValueAt(i, 1).toString()));
+                                reps.add(parseInt(model.getValueAt(i, 2).toString()));
+                            }
+
+                            adjustController.execute(currentState.getId(), sets, reps);
                         }
 
                     }

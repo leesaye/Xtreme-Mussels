@@ -7,16 +7,19 @@ import java.util.ArrayList;
 public class AdjustSetRepInputData {
     final private int id;
 
-    final private ArrayList<Exercise>  exercises;
+    final private ArrayList<Integer> sets;
 
-    public AdjustSetRepInputData(int id, ArrayList<Exercise> exercises ) {
+    final private ArrayList<Integer> reps;
+
+    public AdjustSetRepInputData(int id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
         this.id = id;
-        this.exercises = exercises;
+        this.sets = sets;
+        this.reps = reps;
     }
 
     public int getId() { return id; }
 
-    public ArrayList<Exercise> getExercises() {
-        return exercises;
-    }
+    public ArrayList<Integer> getSets() { return sets; }
+
+    public ArrayList<Integer> getReps() { return reps; }
 }
