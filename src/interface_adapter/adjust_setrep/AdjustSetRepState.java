@@ -12,6 +12,10 @@ public class AdjustSetRepState {
 
     private ArrayList<Exercise> exercises = null;
 
+    private ArrayList<Integer> sets = null;
+
+    private ArrayList<Integer> reps = null;
+
     private String nameError;
 
     public AdjustSetRepState() {
@@ -49,11 +53,11 @@ public class AdjustSetRepState {
         return nameError;
     }
 
-    public Object[][] getExercisesReps() {
+    public Object[][] getSetAndRepsArray() {
         ArrayList<Object[]> tempExercises = new ArrayList<>();
 
         for (Exercise exercise : this.exercises) {
-            tempExercises.add(new Object[]{exercise.getName(), exercise.getRepsSets()});
+            tempExercises.add(new Object[]{exercise.getName(), exercise.getSets(), exercise.getReps()});
         }
 
         Object[][] tempArray = new Object[tempExercises.size()][2];
@@ -63,6 +67,14 @@ public class AdjustSetRepState {
         }
 
         return tempArray;
+    }
+
+    public ArrayList<Integer> getSets() {
+        return sets;
+    }
+
+    public ArrayList<Integer> getReps() {
+        return reps;
     }
 
 }
