@@ -21,7 +21,7 @@ public class AdjustSetRepInteractor implements AdjustSetRepInputBoundary {
             adjustPresenter.prepareFailView(id + ": Routine does not exist");
         } else {
             // Update the routine with the new name and exercises/sets
-            adjustDataAccessObject.updateRoutine(id, adjustSetRepInputData.getExercises());
+            adjustDataAccessObject.updateRoutine(id, adjustSetRepInputData.getSets(), adjustSetRepInputData.getReps());
             adjustPresenter.prepareSuccessView(new AdjustSetRepOutputData("temp proraory")); // TODO: change this
         }
     }
