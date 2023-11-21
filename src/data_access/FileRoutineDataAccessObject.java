@@ -12,7 +12,7 @@ public class FileRoutineDataAccessObject implements AdjustSetRepDataAccessInterf
     }
 
     @Override
-    public void updateRoutine(int id, ArrayList<Exercise> exercises) {
+    public void updateRoutine(int id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
 
     }
 }
