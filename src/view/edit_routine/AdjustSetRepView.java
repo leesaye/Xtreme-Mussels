@@ -5,8 +5,6 @@ import interface_adapter.adjust_setrep.AdjustSetRepState;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 
 import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +29,7 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
 
     private final JTable table;
 
-    static DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+    private static DefaultTableModel model;
 
     public AdjustSetRepView(AdjustSetRepController controller, AdjustSetRepViewModel adjustSetRepViewModel) {
 
@@ -43,10 +41,10 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // TODO: create a list of exercises which can be moved around, then a listener to update State with new order
-//        JTable exercises = new JTable(AdjustSetRepViewModel.getState().getSetReps(), AdjustSetRepViewModel.COLUMN_HEADERS);
+//        model = new DefaultTableModel(AdjustSetRepViewModel.getState().getSetReps(), AdjustSetRepViewModel.COLUMN_HEADERS);
         // TEMPORARY WHILE DAO HASN'T BEEN CREATED YET
-        table = new JTable(new Object[][]{{"pullups", 3, 10124}, {"squats", 342, 23125}}, AdjustSetRepViewModel.COLUMN_HEADERS);
-        table.setModel(model);
+        model = new DefaultTableModel(new Object[][]{{"pullups", 3, 10124}, {"squats", 342, 23125}}, AdjustSetRepViewModel.COLUMN_HEADERS);
+        table = new JTable(model);
         JScrollPane tableScrlPane = new JScrollPane(table);
 
         JPanel buttons = new JPanel();
@@ -61,11 +59,11 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
                         if (evt.getSource().equals(save)) {
                             AdjustSetRepState currentState = AdjustSetRepViewModel.getState();
 
-                            // Pass in data from set and reps columns to the controller
+                            // Create ArrayLists of integers for the controller
                             ArrayList<Integer> sets = new ArrayList<>();
                             ArrayList<Integer> reps = new ArrayList<>();
 
-                            for(int i = 1; i <= model.getRowCount(); i++) {
+                            for(int i = 0; i < model.getRowCount(); i++) {
                                 sets.add(parseInt(model.getValueAt(i, 1).toString()));
                                 reps.add(parseInt(model.getValueAt(i, 2).toString()));
                             }
@@ -94,7 +92,7 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        // Show a popup saying save was successful
     }
 
     @Override
