@@ -17,6 +17,11 @@ public class GenerateRoutinePresenter implements GenerateRoutineOutputBoundary {
     @Override
     public void prepareSuccessView(GenerateRoutineOutputData generateRoutineOutputData) {
         GenerateRoutineState generateRoutineState = generateRoutineViewModel.getGenerateRoutineState();
+        generateRoutineState.setRoutineList(generateRoutineOutputData.getListOfExercises());
+        this.generateRoutineViewModel.setGenerateRoutineState(generateRoutineState);
+        generateRoutineViewModel.firePropertyChanged();
+        //TODO: add view manager fire
+
 
     }
 
@@ -24,7 +29,7 @@ public class GenerateRoutinePresenter implements GenerateRoutineOutputBoundary {
     public void prepareFailedView(String message) {
         GenerateRoutineState generateRoutineState = generateRoutineViewModel.getGenerateRoutineState();
         generateRoutineState.setErrorMessage(message);
-        // generateRoutineViewModel.firePropertyChanged() <- // TODO: need to implement this!!
+        generateRoutineViewModel.firePropertyChanged(); // TODO: need to implement this!!
     }
 
 }
