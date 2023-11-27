@@ -1,2 +1,4 @@
-package entity;public class RoutineFactory {
+package entity;
+
+public class RoutineFactory {
 }
