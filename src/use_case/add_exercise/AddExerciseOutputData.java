@@ -1,15 +1,20 @@
 package use_case.add_exercise;
 
+import java.util.ArrayList;
+import entity.Exercise;
+import entity.Routine;
+
 public class AddExerciseOutputData {
-    /* is output data for this use case the updated routine or something more like
-     * a success message like the other edit-related use cases? **/
 
     private final int id;
     private final String name; // message: Added <name> to routine id
-    public AddExerciseOutputData(int id, String name) {
+
+    private final ArrayList<Exercise> exercises;
+    public AddExerciseOutputData(int id, String name, ArrayList<Exercise> exercises) {
 
         this.id = id;
         this.name = name;
+        this.exercises = exercises;
     }
 
     public String getName() {
@@ -19,4 +24,10 @@ public class AddExerciseOutputData {
     public int getId() {
         return id;
     }
+
+    public ArrayList<Exercise> getExercises() {
+        return exercises;
+    }
+
+    // get routine necessary?
 }
