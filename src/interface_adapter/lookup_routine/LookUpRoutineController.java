@@ -1,2 +1,4 @@
-package interface_adapter.lookup_routine;public class LookUpRoutineController {
+package interface_adapter.lookup_routine;
+
+public class LookUpRoutineController {
 }
