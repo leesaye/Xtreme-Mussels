@@ -1,2 +1,4 @@
-package view;public class LookUpRoutineView {
+package view;
+
+public class LookUpRoutineView {
 }
