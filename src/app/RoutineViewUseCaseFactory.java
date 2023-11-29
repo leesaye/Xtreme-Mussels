@@ -43,7 +43,7 @@ public class RoutineViewUseCaseFactory {
     private static DeleteExerciseController createDeleteExerciseUseCase(ViewManagerModel viewManagerModel, DeleteExerciseViewModel deleteExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
         DeleteExerciseOutputBoundary deleteExerciseOutputBoundary = new DeleteExercisePresenter(viewManagerModel, deleteExerciseViewModel);
 
-        DeleteExerciseInputBoundary deleteExerciseInteractor= new DeleteExerciseInteractor(routineDataAccessObject, deleteExerciseOutputBoundary);
+        DeleteExerciseInputBoundary deleteExerciseInteractor = new DeleteExerciseInteractor(routineDataAccessObject, deleteExerciseOutputBoundary);
 
         return new DeleteExerciseController(deleteExerciseInteractor);
     }
