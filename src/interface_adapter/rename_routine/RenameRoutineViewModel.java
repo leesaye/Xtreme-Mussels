@@ -7,9 +7,11 @@ import java.beans.PropertyChangeSupport;
 
 public class RenameRoutineViewModel extends ViewModel {
 
+    public static String RENAME_BUTTON_LABEL = "Rename";
+
     private static RenameRoutineState state = new RenameRoutineState();
 
-    public RenameRoutineViewModel() { super("rename")};
+    public RenameRoutineViewModel() { super("rename"); }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
