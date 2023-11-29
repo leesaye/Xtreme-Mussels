@@ -7,6 +7,7 @@ import use_case.add_exercise.AddExerciseDataAccessInterface;
 import use_case.add_routine.AddRoutineDataAccessInterface;
 import use_case.delete_exercise.DeleteExerciseDataAccessInterface;
 import use_case.generate_routine.GenerateRoutineDataAccessInterface;
+import use_case.lookup_routine.LookUpRoutineDataAccessInterface;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -14,8 +15,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface {
+public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface, LookUpRoutineDataAccessInterface {
     private Routine routine;
     private HashMap<String, Routine> routineList;
     private String path;
@@ -56,10 +58,23 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
      */
 
 
-    // For AdjustSetRepDataAccessInterface
+    // For AdjustSetRepDataAccessInterface, name is the routine name
     @Override
     public boolean existsByName(String identifier) {
         return routineList.containsKey(identifier);
+    }
+
+    // For AddExerciseDataAccessInterface (id is the id of the exercise, identifier is routine identifier/name)
+    @Override
+    public boolean existsById(String identifier, String id) {
+        ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
+
+        for (int i = 0; i < exercises.size(); i++) {
+            if (exercises.get(i).getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // For AdjustSetRepDataAccessInterface
@@ -95,11 +110,19 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     @Override
     public void deleteExercise(String identifier, String exerciseName) {
         ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
+        int index = 0;
         for (int i = 0; i < exercises.size(); i++) {
             if (exercises.get(i).getName().equals(exerciseName)) {
-                exercises.remove(i);
+                index = i;
+                break;
             }
         }
+        exercises.remove(index);
         routineList.get(identifier).setExercisesList(exercises);
+    }
+
+    // For LookUpRoutineDataAccessInterface
+    public Routine getRoutine(String name) {
+        return routineList.get(name);
     }
 }

@@ -18,8 +18,7 @@ public class ApiDataAccessObject {
                 .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                 .build();
         try {
-            Response response = client.newCall(request).execute();
-            return response;
+            return client.newCall(request).execute();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,8 +34,33 @@ public class ApiDataAccessObject {
                 .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                 .build();
         try {
-            Response response = client.newCall(request).execute();
-            return response;
+            return client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // No limit, returns all
+    public static Response getApiByQuery(String value, String query) {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request;
+        if (query.equals("target")) {
+            request = new Request.Builder()
+                    .url("https://exercisedb.p.rapidapi.com/exercises/target/" + value)
+                    .get()
+                    .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                    .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
+                    .build();
+        } else {    // query is either "target" or "name"
+            request = new Request.Builder()
+                    .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value)
+                    .get()
+                    .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                    .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
+                    .build();
+        }
+        try {
+            return client.newCall(request).execute();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

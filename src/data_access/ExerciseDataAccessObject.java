@@ -12,8 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static data_access.ApiDataAccessObject.getApiName;
-import static data_access.ApiDataAccessObject.getApiTarget;
+import static data_access.ApiDataAccessObject.*;
 
 public class ExerciseDataAccessObject {
 
@@ -30,6 +29,13 @@ public class ExerciseDataAccessObject {
     @Override
     public ArrayList<Exercise> getExercisesByName(String name, int numberOfExercises) {
         Response response = getApiName(name, numberOfExercises);
+        return convertResponse(response);
+    }
+
+    // For LookUpDataAccessInterface, returns all exercises
+    @Override
+    public ArrayList<Exercise> getExercisesByQuery(String value, String query) {
+        Response response = getApiByQuery(value, query);
         return convertResponse(response);
     }
 
