@@ -2,13 +2,7 @@ package data_access;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.Exercise;
-import entity.ExerciseFactory;
 import entity.Routine;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import use_case.add_exercise.AddExerciseDataAccessInterface;
 import use_case.add_routine.AddRoutineDataAccessInterface;
 import use_case.delete_exercise.DeleteExerciseDataAccessInterface;
@@ -19,10 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-
-import static data_access.ApiDataAccessObject.getApi;
 
 public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface {
     private Routine routine;
@@ -46,7 +37,6 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
             final ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(sw, routineList);
             String json = sw.toString();
-            System.out.println(json);
             sw.close();
 
             BufferedWriter writer;
@@ -61,7 +51,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
 
 
     /**
-     * The following are methods written for data access objects
+     * The following are methods written for specific use cases
      *
      */
 
@@ -87,15 +77,29 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         routineList.put(identifier, routine);
     }
 
-    // For AddRoutineDataAccessInterface
+    // For AddRoutineDataAccessInterface and GenerateRoutineDataAccessInterface
     @Override
     public void addRoutine(Routine routine) {
         routineList.put(routine.getName(), routine);
     }
 
-    // For GenerateRoutineDataAccessInterface
+    // For AddExerciseDataAccessInterface, assumes exercises is of length 1
     @Override
-    public void generateRoutine(Routine routine) {
-        routineList.put(routine.getName(), routine);
+    public void addExercise(String identifier, ArrayList<Exercise> exercises) {
+        ArrayList<Exercise> currExercises = routineList.get(identifier).getExercisesList();
+        currExercises.add(exercises.get(0));
+        routineList.get(identifier).setExercisesList(currExercises);
+    }
+
+    // For DeleteExerciseDataAccessInterface
+    @Override
+    public void deleteExercise(String identifier, String exerciseName) {
+        ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
+        for (int i = 0; i < exercises.size(); i++) {
+            if (exercises.get(i).getName().equals(exerciseName)) {
+                exercises.remove(i);
+            }
+        }
+        routineList.get(identifier).setExercisesList(exercises);
     }
 }
