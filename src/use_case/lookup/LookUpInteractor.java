@@ -17,9 +17,9 @@ public class LookUpInteractor implements LookUpInputBoundary {
     public void execute(LookUpInputData lookUpInputData) {
         ArrayList<Exercise> exercises;
         if (lookUpInputData.getQuery().equals("target")) {
-            exercises = exerciseDataAccessObject.getExercises("target");
+            exercises = exerciseDataAccessObject.getExercisesByQuery(lookUpInputData.getValue(),"target");
         } else if (lookUpInputData.getQuery().equals("name")) {
-            exercises = exerciseDataAccessObject.getExercises("name");
+            exercises = exerciseDataAccessObject.getExercisesByQuery(lookUpInputData.getValue(),"name");
         } else {
             exercisePresenter.prepareFailView("Invalid query option.");
             return;
