@@ -15,6 +15,10 @@ public class LookUpViewModel extends ViewModel {
 
     private static LookUpState state = new LookUpState();
 
+    public LookUpViewModel(String viewName) {
+        super("look up exercise");
+    }
+
     public void setState(LookUpState state) {this.state = state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
