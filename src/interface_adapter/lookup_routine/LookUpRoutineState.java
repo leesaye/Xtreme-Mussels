@@ -52,7 +52,7 @@ public class LookUpRoutineState {
             display.add("Name: " + value.getName() +
                     "\nEquipment: " + value.getEquipment() +
                     "\nSets x Reps: " + value.getSets() + "x" + value.getReps() +
-                    "\nInstructions: " + value.getInstructions().toString());
+                    "\nInstructions: " + value.getInstructions().toString() + "\n\n");
         }
         return display;
     }
