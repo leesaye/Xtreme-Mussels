@@ -38,20 +38,20 @@ public class LookUpState {
     }
 
     public void setExercisesDisplay(ArrayList<Exercise> exercises) {
-        this.exercisesDisplay = this.toString(exercises);
+        this.exercisesDisplay = this.toStringArray(exercises);
     }
 
-    public void setExercisesDisplayError() {
+    public void setExercisesDisplayError(String exercisesDisplayError) {
         this.exercisesDisplayError = exercisesDisplayError;
     }
 
-    public ArrayList<String> toString(ArrayList<Exercise> exercise) {
+    public ArrayList<String> toStringArray(ArrayList<Exercise> exercise) {
         ArrayList<String> display = new ArrayList<>();
-        for (int i = 0; i < exercises.size(); i++) {
-            display.add("Name: " + exercise.get(i).getName() +
-                    "\nTarget muscle: " + exercise.get(i).getTarget() +
-                    "\n Equipment needed: " + exercise.get(i).getEquipment() +
-                    "\n Instructions: " + exercise.get(i).getInstructions().toString());
+        for (Exercise value : exercise) {
+            display.add("Name: " + value.getName() +
+                    "\nTarget muscle: " + value.getTarget() +
+                    "\nEquipment: " + value.getEquipment() +
+                    "\nInstructions: " + value.getInstructions().toString());
         }
         return display;
     }

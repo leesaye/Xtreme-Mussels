@@ -21,6 +21,7 @@ public class LookUpPresenter implements LookUpOutputBoundary {
         ArrayList<Exercise> exercises = response.getExercises();
         lookUpState.setExercises(exercises);
         lookUpState.setExercisesDisplay(exercises);
+        lookUpViewModel.setState(lookUpState);
         this.lookUpViewModel.firePropertyChanged();
     }
 
@@ -28,6 +29,7 @@ public class LookUpPresenter implements LookUpOutputBoundary {
     public void prepareFailView(String error) {
         LookUpState lookUpState = lookUpViewModel.getState();
         lookUpState.setExercisesError(error);
+        lookUpViewModel.setState(lookUpState);
         lookUpViewModel.firePropertyChanged();
     }
 }
