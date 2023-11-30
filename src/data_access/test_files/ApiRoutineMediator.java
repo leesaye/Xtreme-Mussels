@@ -1,4 +1,4 @@
-package data_access.testing;
+package data_access;
 
 import entity.Exercise;
 import entity.ExerciseFactory;

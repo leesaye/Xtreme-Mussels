@@ -1,6 +1,7 @@
-package data_access;
+package data_access.testing;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import data_access.ApiRoutineMediator;
 import entity.Exercise;
 import entity.ExerciseFactory;
 import entity.Routine;
@@ -9,7 +10,6 @@ import entity.RoutineFactory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class RoutineToJson {

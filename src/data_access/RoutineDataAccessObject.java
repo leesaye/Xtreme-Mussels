@@ -2,25 +2,40 @@ package data_access;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.Exercise;
+import entity.ExerciseFactory;
 import entity.Routine;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import use_case.add_exercise.AddExerciseDataAccessInterface;
 import use_case.add_routine.AddRoutineDataAccessInterface;
 import use_case.delete_exercise.DeleteExerciseDataAccessInterface;
 import use_case.generate_routine.GenerateRoutineDataAccessInterface;
+import use_case.lookup.LookUpDataAccessInterface;
 import use_case.lookup_routine.LookUpRoutineDataAccessInterface;
+import use_case.adjust_setrep.AdjustSetRepDataAccessInterface;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Objects;
 
-public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface, LookUpRoutineDataAccessInterface {
+import static data_access.ApiDataAccessObject.*;
+
+/**
+ * TODO: needs to be better designed
+ */
+
+public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface, LookUpDataAccessInterface, LookUpRoutineDataAccessInterface {
     private Routine routine;
     private HashMap<String, Routine> routineList;
     private String path;
+    private ExerciseFactory exerciseFactory;
 
     public RoutineDataAccessObject(Routine routine, HashMap<String, Routine> routineList, String path) {
         this.routine = routine;
@@ -125,4 +140,56 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     public Routine getRoutine(String name) {
         return routineList.get(name);
     }
+
+    /**
+     * The following are exercise-related methods for use case
+     */
+
+    // For GenerateRoutineDataAccessInterface
+    @Override
+    public ArrayList<Exercise> getExercisesByTarget(String target, int numberOfExercises) {
+        Response response = getApiTarget(target, numberOfExercises);
+        return convertResponse(response);
+    }
+
+    // For AddExerciseDataAccessInterface
+    @Override
+    public ArrayList<Exercise> getExercisesByName(String name, int numberOfExercises) {
+        Response response = getApiName(name, numberOfExercises);
+        return convertResponse(response);
+    }
+
+    // For LookUpDataAccessInterface, returns all exercises
+    @Override
+    public ArrayList<Exercise> getExercisesByQuery(String value, String query) {
+        Response response = getApiByQuery(value, query);
+        return convertResponse(response);
+    }
+
+    // Converts api response to array list of exercise entities
+    private ArrayList<Exercise> convertResponse(Response response) {
+        try {
+            ResponseBody responseBody = response.body();
+            assert responseBody != null;
+
+            String responseBodyStr = responseBody.string();
+            JSONTokener jsonTokener = new JSONTokener(responseBodyStr);
+            JSONArray jsonArray = new JSONArray(jsonTokener);
+
+            // Generating array list of exercises from jsonArray
+            ArrayList<Exercise> exercises = new ArrayList<>();
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                ArrayList<String> instructions = new ArrayList<>(Arrays.asList(object.optString("instructions").replaceAll("[\\[\\]]", "").split(",")));
+                Exercise exercise = exerciseFactory.create(object.getString("name"), object.getString("target"), object.getString("equipment"), instructions, object.getString("id"), 0, 0);
+                exercises.add(exercise);
+            }
+            return exercises;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
