@@ -1,12 +1,16 @@
 package interface_adapter.lookup;
 
+import data_access.ApiDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import entity.Exercise;
+import entity.ExerciseFactory;
+import entity.RoutineFactory;
 
 import java.util.ArrayList;
 
 public class LookUpState {
     private ArrayList<Exercise> exercises = null;
-    private ArrayList<String> exercisesDisplay = null;
+    private String[][] exercisesDisplay = null;
     private String exercisesError = null;
     private String exercisesDisplayError = null;
 
@@ -29,7 +33,7 @@ public class LookUpState {
         this.exercisesError = exercisesError;
     }
 
-    public ArrayList<String> getExercisesDisplay() {
+    public String[][] getExercisesDisplay() {
         return exercisesDisplay;
     }
 
@@ -45,13 +49,12 @@ public class LookUpState {
         this.exercisesDisplayError = exercisesDisplayError;
     }
 
-    public ArrayList<String> toStringArray(ArrayList<Exercise> exercise) {
-        ArrayList<String> display = new ArrayList<>();
-        for (Exercise value : exercise) {
-            display.add("Name: " + value.getName() +
-                    "\nTarget muscle: " + value.getTarget() +
-                    "\nEquipment: " + value.getEquipment() +
-                    "\nInstructions: " + value.getInstructions().toString());
+    public String[][] toStringArray(ArrayList<Exercise> exercise) {
+        String[][] display = new String[exercise.size()][4];
+
+        for (int i = 0; i < exercise.size(); i++) {
+            String [] row = {exercise.get(i).getName(), exercise.get(i).getTarget(), exercise.get(i).getEquipment(), String.join("\n", exercise.get(i).getInstructions())};
+            display[i] = row;
         }
         return display;
     }
