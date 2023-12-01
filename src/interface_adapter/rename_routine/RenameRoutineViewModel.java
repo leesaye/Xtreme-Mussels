@@ -9,7 +9,7 @@ public class RenameRoutineViewModel extends ViewModel {
 
     public static String RENAME_BUTTON_LABEL = "Rename";
 
-    private static RenameRoutineState state = new RenameRoutineState();
+    private RenameRoutineState state = new RenameRoutineState();
 
     public RenameRoutineViewModel() { super("rename"); }
 
@@ -26,7 +26,7 @@ public class RenameRoutineViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public static RenameRoutineState getState() {
+    public RenameRoutineState getState() {
         return state;
     }
 }
