@@ -1,7 +1,5 @@
 package use_case.adjust_setrep;
 
-import entity.Exercise;
-
 import java.util.ArrayList;
 
 public class AdjustSetRepInputData {

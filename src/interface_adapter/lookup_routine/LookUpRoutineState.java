@@ -1,32 +1,33 @@
-package interface_adapter.lookup;
+package interface_adapter.lookup_routine;
 
 import entity.Exercise;
+import entity.Routine;
 
 import java.util.ArrayList;
 
-public class LookUpState {
-    private ArrayList<Exercise> exercises = null;
+public class LookUpRoutineState {
+    private Routine routine = null;
     private ArrayList<String> exercisesDisplay = null;
-    private String exercisesError = null;
+    private String routineError = null;
     private String exercisesDisplayError = null;
 
-    public LookUpState() {
+    public LookUpRoutineState() {
     }
 
-    public ArrayList<Exercise> getExercises() {
-        return exercises;
+    public Routine getRoutine() {
+        return routine;
     }
 
-    public String getExercisesError() {
-        return exercisesError;
+    public String getRoutineError() {
+        return routineError;
     }
 
-    public void setExercises(ArrayList<Exercise> exercises) {
-        this.exercises = exercises;
+    public void setRoutine(Routine routine) {
+        this.routine = routine;
     }
 
-    public void setExercisesError(String exercisesError) {
-        this.exercisesError = exercisesError;
+    public void setRoutineError(String routineError) {
+        this.routineError = routineError;
     }
 
     public ArrayList<String> getExercisesDisplay() {
@@ -37,8 +38,8 @@ public class LookUpState {
         return exercisesDisplayError;
     }
 
-    public void setExercisesDisplay(ArrayList<Exercise> exercises) {
-        this.exercisesDisplay = this.toStringArray(exercises);
+    public void setExercisesDisplay(Routine routine) {
+        this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 
     public void setExercisesDisplayError(String exercisesDisplayError) {
@@ -49,10 +50,11 @@ public class LookUpState {
         ArrayList<String> display = new ArrayList<>();
         for (Exercise value : exercise) {
             display.add("Name: " + value.getName() +
-                    "\nTarget muscle: " + value.getTarget() +
                     "\nEquipment: " + value.getEquipment() +
-                    "\nInstructions: " + value.getInstructions().toString());
+                    "\nSets x Reps: " + value.getSets() + "x" + value.getReps() +
+                    "\nInstructions: " + value.getInstructions().toString() + "\n\n");
         }
         return display;
     }
+
 }
