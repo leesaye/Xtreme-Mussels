@@ -1,30 +1,28 @@
-package view;
+package interface_adapter;
 
-import interface_adapter.ViewManagerModel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
-public class ViewManager implements PropertyChangeListener {
+public class ViewManagerModel {
+    private String activeViewName;
 
-    private final CardLayout cardLayout;
-    private final JPanel views;
-    private ViewManagerModel viewManagerModel;
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public ViewManager(JPanel views, CardLayout cardLayout, ViewManagerModel viewManagerModel) {
-        this.views = views;
-        this.cardLayout = cardLayout;
-        this.viewManagerModel = viewManagerModel;
-        this.viewManagerModel.addPropertyChangeListener(this);
+    public String getActiveView() {
+        return activeViewName;
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("view")) {
-            String viewModelName = (String) evt.getNewValue();
-            cardLayout.show(views, viewModelName);
-        }
+    public void setActiveView(String activeView) {
+        this.activeViewName = activeView;
+    }
+
+    // This is what the Signup Presenter will call to let the ViewModel know
+    // to alert the View
+    public void firePropertyChanged() {
+        support.firePropertyChange("view", null, this.activeViewName);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
     }
 }
