@@ -1,9 +1,20 @@
 package entity;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public class RoutineFactory {
-    public Routine create(String routineName, ArrayList<Exercise> exercises) {
-        return new Routine(routineName, exercises);
+public class Routine {
+    private String routineName;
+    private ArrayList<Exercise> exercisesList;
+
+    public Routine(String routineName) {
+        this.routineName = routineName;
+        this.exercisesList = new ArrayList<>();
+    }
+    
+    public String getRoutineName() {
+        return routineName;
+    }
+    public ArrayList<Exercise> getExercisesList() {
+        return exercisesList;
     }
 }
