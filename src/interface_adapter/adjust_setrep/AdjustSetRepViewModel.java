@@ -14,7 +14,7 @@ public class AdjustSetRepViewModel extends ViewModel {
 
     public static final String[] COLUMN_HEADERS = {"Exercises", "Sets", "Reps"};
 
-    private static AdjustSetRepState state = new AdjustSetRepState();
+    private AdjustSetRepState state = new AdjustSetRepState();
 
     public AdjustSetRepViewModel() {
         super("adjust");
@@ -32,7 +32,7 @@ public class AdjustSetRepViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public static AdjustSetRepState getState() {
+    public AdjustSetRepState getState() {
         return state;
     }
 }
