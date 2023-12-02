@@ -10,8 +10,8 @@ public class GenerateRoutineController {
         this.generateRoutineUseCaseInteractor = generateRoutineUseCaseInteractor;
     }
 
-    public void execute(String targetBodyParts, int numberOfExercises) {
-        GenerateRoutineInputData generateRoutineInputData = new GenerateRoutineInputData(targetBodyParts, numberOfExercises);
+    public void execute(String targetBodyParts, int numberOfExercises, String name) {
+        GenerateRoutineInputData generateRoutineInputData = new GenerateRoutineInputData(targetBodyParts, numberOfExercises, name);
         generateRoutineUseCaseInteractor.execute(generateRoutineInputData);
     }
 }
