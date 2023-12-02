@@ -50,13 +50,13 @@ class Main {
 //        }
 
         RoutineView routineView = RoutineViewUseCaseFactory.create(viewManagerModel, renameRoutineViewModel,
-                addExerciseViewModel, deleteExerciseViewModel, routineDataAccessObject);
+                addExerciseViewModel, deleteExerciseViewModel, adjustSetRepViewModel, routineDataAccessObject);
         views.add(routineView, routineView.viewName);
 
-        AdjustSetRepView adjustView = AdjustSetRepUseCaseFactory.create(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
-        views.add(adjustView, adjustView.viewName);
+//        AdjustSetRepView adjustView = AdjustSetRepUseCaseFactory.create(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
+//        views.add(adjustView, adjustView.viewName);
 
-        viewManagerModel.setActiveView(adjustView.viewName);
+        viewManagerModel.setActiveView(routineView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

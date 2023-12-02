@@ -14,19 +14,7 @@ public class AdjustSetRepUseCaseFactory {
 
     private AdjustSetRepUseCaseFactory() {}
 
-    public static AdjustSetRepView create(
-            ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel,
-            FileRoutineDataAccessObject routineDataAccessObject) {
-        // TODO: Uncomment when data access has been written
-//        try {
-            AdjustSetRepController adjustController = createAdjustSetRepUseCase(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
-            return new AdjustSetRepView(adjustController, adjustSetRepViewModel);
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Could not open routine data file.");
-//        }
-    }
-
-    private static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    public static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
         AdjustSetRepOutputBoundary adjustOutputBoundary = new AdjustSetRepPresenter(viewManagerModel, adjustSetRepViewModel);
 
         AdjustSetRepInputBoundary adjustInteractor = new AdjustSetRepInteractor(routineDataAccessObject, adjustOutputBoundary);
