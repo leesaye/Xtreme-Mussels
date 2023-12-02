@@ -57,7 +57,7 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(save)) {
-                            AdjustSetRepState currentState = AdjustSetRepViewModel.getState();
+                            AdjustSetRepState currentState = adjustViewModel.getState();
 
                             // Create ArrayLists of integers for the controller
                             ArrayList<Integer> sets = new ArrayList<>();
@@ -97,6 +97,6 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        // Update the table with new info
     }
 }
