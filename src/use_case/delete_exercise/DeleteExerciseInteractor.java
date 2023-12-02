@@ -21,20 +21,20 @@ public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
 
     @Override
     public void execute(DeleteExerciseInputData deleteExerciseInputData) {
-        int id = deleteExerciseInputData.getId();
-        String exercise_name = deleteExerciseInputData.getName();
+        String routine_name = deleteExerciseInputData.getRoutineName();
+        String exercise_name = deleteExerciseInputData.getExerciseName();
 
         // Check routine with id corresponding to id exists
-        if (!deleteExerciseDataAccessObject.existsById(id)) {
+        if (!deleteExerciseDataAccessObject.existsByName(routine_name )) {
             // Use exceptions? instead
-            // addExercisePresenter.prepareFailView("Routine" + id + "does not exist"); - temp until presenter implemented
+            deleteExercisePresenter.prepareFailView("Routine" + routine_name+ "does not exist");
             // Check exercise with name corresponding to exercise_name exists
-        } else if (!deleteExerciseDataAccessObject.existsByName(exercise_name)) {
-
+        } else if (!deleteExerciseDataAccessObject.existsById(routine_name, exercise_name)) {
+            deleteExercisePresenter.prepareFailView("Exercise" + exercise_name+ "does not exist in specified routine");
         } else {
-            // Update the routine corresponding to id by adding the exercise corresponding to exercise_name
-            deleteExerciseDataAccessObject.updateRoutine(id, exercise_name);
-            //addExercisePresenter.prepareSuccessView(new AddExerciseOutputData()); - as above
+            // Update the routine named routine_name by adding the exercise corresponding to exercise_name
+            deleteExerciseDataAccessObject.deleteExercise(routine_name, exercise_name);
+            deleteExercisePresenter.prepareSuccessView(new DeleteExerciseOutputData(routine_name, exercise_name));
         }
 
     }

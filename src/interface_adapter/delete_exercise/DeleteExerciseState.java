@@ -5,9 +5,9 @@ import entity.Exercise;
 import java.util.ArrayList;
 
 public class DeleteExerciseState {
-    private String name;
+    private String routine_name;
 
-    private int id;
+    private String exercise_name;
 
     private ArrayList<Exercise> exercises = null;
 
@@ -16,12 +16,12 @@ public class DeleteExerciseState {
     public DeleteExerciseState() {
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return routine_name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.routine_name = routine_name;
     }
 
     public void setExercises(ArrayList<Exercise> exercises) {

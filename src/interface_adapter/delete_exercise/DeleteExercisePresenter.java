@@ -19,7 +19,8 @@ public class DeleteExercisePresenter implements DeleteExerciseOutputBoundary {
     @Override
     public void prepareSuccessView(DeleteExerciseOutputData data) {
         DeleteExerciseState deleteExerciseState = deleteExerciseViewModel.getState();
-        deleteExerciseState.setExercises(data.getExercises());
+        //exercises?
+        deleteExerciseState.setName(data.getRoutineName());
         deleteExerciseViewModel.firePropertyChanged();
     }
 

@@ -10,9 +10,9 @@ public class DeleteExerciseController{
         this.deleteExerciseUseCaseInteractor = deleteExerciseUseCaseInteractor;
     }
 
-    public void execute(int id, String name) {
+    public void execute(String routine_name, String exercise_name) {
         //pass in data / exercise name?
-        DeleteExerciseInputData addExerciseInputData = new DeleteExerciseInputData(id, name);
+        DeleteExerciseInputData addExerciseInputData = new DeleteExerciseInputData(routine_name, exercise_name);
         deleteExerciseUseCaseInteractor.execute(addExerciseInputData);
     }
 

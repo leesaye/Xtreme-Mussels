@@ -1,12 +1,13 @@
 package use_case.delete_exercise;
 
 public interface DeleteExerciseDataAccessInterface {
-    boolean existsById(int id);
+    boolean existsByName(String routine_name);
 
     //dependent on implementation- current, likely will change: search for exercise to delete it
     // maybe have [x]s next to each exercise in the view/delete?
-    boolean existsByName(String exercise_name);
+    boolean existsById(String routine_name, String exercise_name);
 
-    void updateRoutine(int id, String name);
+    //note: discuss implementation, possible exception/changing to take a name
+    void deleteExercise(String identifier, String exerciseName);
 
 }
