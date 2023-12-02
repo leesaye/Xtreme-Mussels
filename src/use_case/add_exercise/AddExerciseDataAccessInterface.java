@@ -1,12 +1,14 @@
 package use_case.add_exercise;
 
+import entity.Exercise;
+
 import java.util.ArrayList;
 
 public interface AddExerciseDataAccessInterface {
-    boolean existsById(int id);
+    boolean existsByName(String routine_name);
 
-    boolean existsByName(String exercise_name);
+    ArrayList<Exercise> getExercisesByName(String name, int numberOfExercises);
 
-    void updateRoutine(int id, String name);
+    void addExercise(String identifier, ArrayList<Exercise> exercises);
 
 }

@@ -19,7 +19,7 @@ public class AddExercisePresenter implements AddExerciseOutputBoundary {
     @Override
     public void prepareSuccessView(AddExerciseOutputData data) {
         AddExerciseState addExerciseState = addExerciseViewModel.getState();
-        addExerciseState.setExercises(data.getExercises());
+        addExerciseState.setRoutineName(data.getRoutineName());
         addExerciseViewModel.firePropertyChanged();
     }
 
