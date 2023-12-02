@@ -3,26 +3,31 @@ package entity;
 import java.util.*;
 
 public class Routine {
-    private int id;
     private String name;
-    private ArrayList<Map<String, Object>> exercisesList;
 
-    public Routine(int id, String name, ArrayList<Map<String, Object>> exercisesList) {
-        this.id = id;
+    private ArrayList<Exercise> exercisesList;
+
+    public Routine() {}
+
+    public Routine(String name, ArrayList<Exercise> exercisesList) {
         this.name = name;
         this.exercisesList = exercisesList;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Map<String, Object>> getExercisesList() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Exercise> getExercisesList() {
         return exercisesList;
+    }
+
+    public void setExercisesList(ArrayList<Exercise> exercisesList) {
+        this.exercisesList = exercisesList;
     }
 }
 

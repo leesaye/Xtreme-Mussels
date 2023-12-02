@@ -11,6 +11,8 @@ public class Exercise {
     private int sets;
     private int reps;
 
+    public Exercise() {}
+
     public Exercise(String name, String target, String equipment, ArrayList<String> instructions, String id, int sets, int reps) {
         this.name = name;
         this.target = target;

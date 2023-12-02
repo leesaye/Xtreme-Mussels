@@ -1,4 +1,11 @@
 package interface_adapter.add_routine;
 
-public class AddRoutinePresenter {
+import use_case.add_routine.AddRoutineOutputBoundary;
+
+public class AddRoutinePresenter implements AddRoutineOutputBoundary {
+    private final AddRoutineViewModel addRoutineViewModel;
+
+    public AddRoutinePresenter(AddRoutineViewModel addRoutineViewModel) {
+        this.addRoutineViewModel = addRoutineViewModel;
+    }
 }
