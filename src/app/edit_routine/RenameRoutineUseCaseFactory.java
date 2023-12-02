@@ -1,6 +1,6 @@
 package app.edit_routine;
 
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.rename_routine.RenameRoutineController;
 import interface_adapter.rename_routine.RenameRoutinePresenter;
@@ -14,7 +14,7 @@ public class RenameRoutineUseCaseFactory {
     private RenameRoutineUseCaseFactory() {}
 
     public static RenameRoutineController createRenameRoutineRepUseCase(ViewManagerModel viewManagerModel, RenameRoutineViewModel renameRoutineRepViewModel,
-                                                                         FileRoutineDataAccessObject routineDataAccessObject) {
+                                                                         RoutineDataAccessObject routineDataAccessObject) {
         RenameRoutineOutputBoundary renameRoutineOutputBoundary = new RenameRoutinePresenter(viewManagerModel, renameRoutineRepViewModel);
 
         RenameRoutineInputBoundary renameInteractor = new RenameRoutineInteractor(routineDataAccessObject, renameRoutineOutputBoundary);

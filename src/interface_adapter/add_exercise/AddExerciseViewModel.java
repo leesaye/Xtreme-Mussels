@@ -7,6 +7,8 @@ import java.beans.PropertyChangeSupport;
 
 public class AddExerciseViewModel extends ViewModel {
 
+    public static String ADD_BUTTON_LABEL = "Add exercise";
+
     private static AddExerciseState state = new AddExerciseState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

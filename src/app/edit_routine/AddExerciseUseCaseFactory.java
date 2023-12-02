@@ -1,6 +1,6 @@
 package app.edit_routine;
 
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_exercise.AddExerciseController;
 import interface_adapter.add_exercise.AddExercisePresenter;
@@ -11,7 +11,7 @@ import use_case.add_exercise.AddExerciseOutputBoundary;
 
 public class AddExerciseUseCaseFactory {
     private AddExerciseUseCaseFactory() {}
-    public static AddExerciseController createAddExerciseUseCase(ViewManagerModel viewManagerModel, AddExerciseViewModel addExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    public static AddExerciseController createAddExerciseUseCase(ViewManagerModel viewManagerModel, AddExerciseViewModel addExerciseViewModel, RoutineDataAccessObject routineDataAccessObject) {
         AddExerciseOutputBoundary addExerciseOutputBoundary = new AddExercisePresenter(viewManagerModel, addExerciseViewModel);
 
         AddExerciseInputBoundary addExerciseInteractor = new AddExerciseInteractor(routineDataAccessObject, addExerciseOutputBoundary);

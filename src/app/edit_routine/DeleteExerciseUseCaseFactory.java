@@ -1,6 +1,6 @@
 package app.edit_routine;
 
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExercisePresenter;
@@ -12,7 +12,7 @@ import use_case.delete_exercise.DeleteExerciseOutputBoundary;
 public class DeleteExerciseUseCaseFactory {
     private DeleteExerciseUseCaseFactory() {}
 
-    public static DeleteExerciseController createDeleteExerciseUseCase(ViewManagerModel viewManagerModel, DeleteExerciseViewModel deleteExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    public static DeleteExerciseController createDeleteExerciseUseCase(ViewManagerModel viewManagerModel, DeleteExerciseViewModel deleteExerciseViewModel, RoutineDataAccessObject routineDataAccessObject) {
         DeleteExerciseOutputBoundary deleteExerciseOutputBoundary = new DeleteExercisePresenter(viewManagerModel, deleteExerciseViewModel);
 
         DeleteExerciseInputBoundary deleteExerciseInteractor = new DeleteExerciseInteractor(routineDataAccessObject, deleteExerciseOutputBoundary);

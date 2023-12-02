@@ -43,7 +43,7 @@ class AdjustSetRepInteractorTest {
 
 
 
-        AdjustSetRepInputData inputData = new AdjustSetRepInputData(1, sets, reps);
+        AdjustSetRepInputData inputData = new AdjustSetRepInputData("1", sets, reps);
         AdjustSetRepInteractor interactor = new AdjustSetRepInteractor(dataAccess, adjustPresenter);
 
         interactor.execute(inputData);
@@ -67,7 +67,7 @@ class AdjustSetRepInteractorTest {
 
 
 
-        AdjustSetRepInputData inputData = new AdjustSetRepInputData(2, sets, reps);
+        AdjustSetRepInputData inputData = new AdjustSetRepInputData("1", sets, reps);
         AdjustSetRepInteractor interactor = new AdjustSetRepInteractor(dataAccess, adjustPresenter);
 
         interactor.execute(inputData);
@@ -76,7 +76,7 @@ class AdjustSetRepInteractorTest {
 
 class TestDataAccess implements AdjustSetRepDataAccessInterface {
 
-    int id = 1;
+    String id = "1";
 
     ArrayList<Integer> sets = new ArrayList<>();
 
@@ -92,12 +92,12 @@ class TestDataAccess implements AdjustSetRepDataAccessInterface {
     }
 
     @Override
-    public boolean existsById(int id) {
-        return this.id == id;
+    public boolean existsByName(String id) {
+        return this.id.equals(id);
     }
 
     @Override
-    public void updateRoutine(int id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
+    public void updateRoutine(String id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
         this.sets = sets;
         this.reps = reps;
     }

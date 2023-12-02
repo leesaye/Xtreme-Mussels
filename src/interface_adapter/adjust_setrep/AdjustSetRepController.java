@@ -14,7 +14,7 @@ public class AdjustSetRepController {
         this.adjustUseCaseInteractor = adjustUseCaseInteractor;
     }
 
-    public void execute(int id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
+    public void execute(String id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
         AdjustSetRepInputData adjustInputData = new AdjustSetRepInputData(id, sets, reps);
 
         adjustUseCaseInteractor.execute(adjustInputData);

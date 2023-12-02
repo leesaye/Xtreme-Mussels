@@ -8,7 +8,7 @@ public class AdjustSetRepState {
 
     private String name;
 
-    private int id;
+    private String id;
 
     private ArrayList<Exercise> exercises = null;
 
@@ -29,11 +29,11 @@ public class AdjustSetRepState {
         this.exercises = exercises;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

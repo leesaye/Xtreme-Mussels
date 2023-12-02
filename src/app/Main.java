@@ -1,7 +1,7 @@
 package app;
 
-import app.edit_routine.AdjustSetRepUseCaseFactory;
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
+import entity.Routine;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_exercise.AddExerciseViewModel;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
@@ -9,7 +9,6 @@ import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
 import view.RoutineView;
 import view.ViewManager;
-import view.edit_routine.AdjustSetRepView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,9 +41,9 @@ class Main {
         DeleteExerciseViewModel deleteExerciseViewModel = new DeleteExerciseViewModel();
 
         // TODO: uncomment the try/catch block when DAO has been written
-        FileRoutineDataAccessObject routineDataAccessObject;
+        RoutineDataAccessObject routineDataAccessObject;
 //        try {
-            routineDataAccessObject = new FileRoutineDataAccessObject();
+            routineDataAccessObject = new RoutineDataAccessObject();
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
@@ -53,8 +52,6 @@ class Main {
                 addExerciseViewModel, deleteExerciseViewModel, adjustSetRepViewModel, routineDataAccessObject);
         views.add(routineView, routineView.viewName);
 
-//        AdjustSetRepView adjustView = AdjustSetRepUseCaseFactory.create(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
-//        views.add(adjustView, adjustView.viewName);
 
         viewManagerModel.setActiveView(routineView.viewName);
         viewManagerModel.firePropertyChanged();
