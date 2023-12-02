@@ -7,11 +7,6 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary{
     final AddRoutineOutputBoundary addRoutinePresenter;
     final AddRoutineDataAccessInterface addRoutineDataAccessObject;
     final RoutineFactory routineFactory;
-    private static int lastAssignedId = 0;
-
-    private synchronized int generateId() {
-        return ++lastAssignedId; // generate an id for each routine created
-    }
 
     public AddRoutineInteractor(AddRoutineDataAccessInterface addRoutineDataAccessObject,
                                 AddRoutineOutputBoundary addRoutineOutputBoundary, RoutineFactory routineFactory) {
@@ -25,11 +20,11 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary{
         if (addRoutineDataAccessObject.existsByName(addRoutineInputData.getRoutineName())) {
             addRoutinePresenter.prepareFailView("Routine name already exists.");
         } else {
-
-            AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(addRoutineDataAccessObject.addRoutine());
-            addRoutinePresenter.prepareSuccessView(addRoutineOutputData);
-            Routine routine = new Routine(generateId(), addRoutineInputData.getRoutineName());
+            Routine routine = routineFactory.create(addRoutineInputData.getRoutineName());
             addRoutineDataAccessObject.save(routine);
+
+            AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false);
+            addRoutinePresenter.prepareSuccessView(addRoutineOutputData);
         }
     }
 }

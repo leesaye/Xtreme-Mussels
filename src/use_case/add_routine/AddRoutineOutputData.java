@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class AddRoutineOutputData {
-    private ArrayList<Map<String, Object>> exerciseList;
-
-    public AddRoutineOutputData(ArrayList<Map<String, Object>> exercisesList) {
-        this.exerciseList = exercisesList;
+    private final String routineName;
+    private boolean useCaseFailed;
+    public AddRoutineOutputData(String routineName, boolean useCaseFailed) {
+        this.routineName = routineName;
+        this.useCaseFailed = useCaseFailed;
+    }
+    public String getRoutineName() {
+        return routineName;
     }
 }
