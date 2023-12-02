@@ -1,4 +1,4 @@
-package app;
+package app.edit_routine;
 
 import data_access.FileRoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
