@@ -53,7 +53,7 @@ public class ApiDataAccessObject {
                     .build();
         } else {    // query is either "target" or "name"
             request = new Request.Builder()
-                    .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value)
+                    .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value.replaceAll("\\s","%20"))
                     .get()
                     .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
                     .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
