@@ -6,9 +6,9 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class ApiCaller {
+public class ApiAdapter implements ApiToDaoInterface {
 
-    public static Response getApiTarget(String target, int numberOfExercises) {
+    public Response getApiTarget(String target, int numberOfExercises) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         Request request = new Request.Builder()
@@ -24,7 +24,7 @@ public class ApiCaller {
         }
     }
 
-    public static Response getApiName(String name, int numberOfExercises) {
+    public Response getApiName(String name, int numberOfExercises) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         Request request = new Request.Builder()
@@ -41,7 +41,7 @@ public class ApiCaller {
     }
 
     // No limit, returns all
-    public static Response getApiByQuery(String value, String query) {
+    public Response getApiByQuery(String value, String query) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request;
         if (query.equals("target")) {

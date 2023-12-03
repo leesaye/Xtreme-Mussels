@@ -13,15 +13,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static data_access.ApiDataAccessObject.getApiByQuery;
+public class ExerciseDataAccessObject implements LookUpDataAccessInterface {
 
-public class ExerciseApiAdapter implements LookUpDataAccessInterface {
-
+    private final ApiToDaoInterface apiAccess = new ApiAdapter();
 
     // For LookUpDataAccessInterface, returns all exercises
     @Override
     public ArrayList<Exercise> getExercisesByQuery(String value, String query) {
-        Response response = getApiByQuery(value, query);
+        Response response = apiAccess.getApiByQuery(value, query);
         return convertResponse(response);
     }
 
