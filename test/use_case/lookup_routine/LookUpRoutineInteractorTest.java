@@ -1,22 +1,11 @@
 package use_case.lookup_routine;
 
-import data_access.ExerciseDataAccessObject;
 import data_access.RoutineDataAccessObject;
-import entity.Exercise;
-import entity.ExerciseFactory;
 import entity.Routine;
-import entity.RoutineFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.lookup.LookUpInputData;
-import use_case.lookup.LookUpInteractor;
-import use_case.lookup.LookUpOutputBoundary;
-import use_case.lookup.LookUpOutputData;
-import use_case.rename_routine.RenameRoutineDataAccessInterface;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 

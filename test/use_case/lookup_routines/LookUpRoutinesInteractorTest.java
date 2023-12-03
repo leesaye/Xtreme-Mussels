@@ -1,12 +1,9 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
 import data_access.RoutineDataAccessObject;
 import entity.Routine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.lookup_routines.LookUpRoutinesInteractor;
-import use_case.lookup_routines.LookUpRoutinesOutputBoundary;
-import use_case.lookup_routines.LookUpRoutinesOutputData;
 
 import java.util.HashMap;
 

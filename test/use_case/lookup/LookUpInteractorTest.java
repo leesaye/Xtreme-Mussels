@@ -1,9 +1,7 @@
 package use_case.lookup;
 
 import data_access.ExerciseDataAccessObject;
-import data_access.RoutineDataAccessObject;
 import entity.Exercise;
-import entity.ExerciseFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
