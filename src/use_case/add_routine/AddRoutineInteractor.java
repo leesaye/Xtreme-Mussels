@@ -18,14 +18,13 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary {
         this.routineFactory = routineFactory;
     }
 
-
     @Override
     public void execute(AddRoutineInputData addRoutineInputData) {
         if (addRoutineDataAccessObject.existsByName(addRoutineInputData.getRoutineName())) {
             addRoutinePresenter.prepareFailView("Routine name already exists.");
         } else {
-            Routine routine = routineFactory.create(addRoutineInputData.getRoutineName());
-            addRoutineDataAccessObject.save(routine);
+            Routine routine = RoutineFactory.create(addRoutineInputData.getRoutineName());
+            addRoutineDataAccessObject.addRoutine(routine);
 
 
             AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false);
