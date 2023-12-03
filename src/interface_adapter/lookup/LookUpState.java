@@ -1,18 +1,13 @@
 package interface_adapter.lookup;
 
-import data_access.ApiDataAccessObject;
-import data_access.RoutineDataAccessObject;
 import entity.Exercise;
-import entity.ExerciseFactory;
-import entity.RoutineFactory;
 
 import java.util.ArrayList;
 
 public class LookUpState {
     private ArrayList<Exercise> exercises = null;
+    private String exercisesError;
     private String[][] exercisesDisplay = null;
-    private String exercisesError = null;
-    private String exercisesDisplayError = null;
 
     public LookUpState() {
     }
@@ -37,19 +32,15 @@ public class LookUpState {
         return exercisesDisplay;
     }
 
-    public String getExercisesDisplayError() {
-        return exercisesDisplayError;
-    }
-
     public void setExercisesDisplay(ArrayList<Exercise> exercises) {
         this.exercisesDisplay = this.toStringArray(exercises);
     }
 
-    public void setExercisesDisplayError(String exercisesDisplayError) {
-        this.exercisesDisplayError = exercisesDisplayError;
-    }
-
     public String[][] toStringArray(ArrayList<Exercise> exercise) {
+        if (exercise.isEmpty()) {
+            return new String[][]{{}};
+        }
+
         String[][] display = new String[exercise.size()][4];
 
         for (int i = 0; i < exercise.size(); i++) {
