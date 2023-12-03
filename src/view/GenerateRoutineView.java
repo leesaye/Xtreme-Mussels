@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class GenerateWorkoutView extends JPanel implements ActionListener, PropertyChangeListener {
+public class GenerateRoutineView extends JPanel implements ActionListener, PropertyChangeListener {
 
     //adding all the text fields for target, name and number of exercises required by the user
     private final JTextField targetBodyPartField = new JTextField(20);
@@ -23,7 +23,7 @@ public class GenerateWorkoutView extends JPanel implements ActionListener, Prope
 
     private final JButton generateRoutine;
 
-    public GenerateWorkoutView(GenerateRoutineController controller, GenerateRoutineViewModel generateRoutineViewModel) {
+    public GenerateRoutineView(GenerateRoutineController controller, GenerateRoutineViewModel generateRoutineViewModel) {
         this.controller = controller;
         this.generateRoutineViewModel = generateRoutineViewModel;
         generateRoutineViewModel.addPropertyChangeListener(this);

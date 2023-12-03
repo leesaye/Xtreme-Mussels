@@ -23,9 +23,7 @@ public class GenerateRoutinePresenter implements GenerateRoutineOutputBoundary {
         GenerateRoutineState generateRoutineState = generateRoutineViewModel.getGenerateRoutineState();
         generateRoutineState.setRoutineList(generateRoutineOutputData.getListOfExercises());
         generateRoutineState.setRoutineName(generateRoutineOutputData.getName());
-        generateRoutineState.setReps(generateRoutineOutputData.getReps());
-        generateRoutineState.setSets(generateRoutineOutputData.getSets());
-//        this.generateRoutineViewModel.setGenerateRoutineState(generateRoutineState);
+        this.generateRoutineViewModel.setGenerateRoutineState(generateRoutineState);
         generateRoutineViewModel.firePropertyChanged();
 
 
