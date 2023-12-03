@@ -7,14 +7,12 @@ import java.util.ArrayList;
 public class GenerateRoutineOutputData {
     private ArrayList<Exercise> listOfExercises;
     private String name;
-    private int sets;
-    private int reps;
 
-    public GenerateRoutineOutputData(ArrayList<Exercise> listOfExercises, String name, int sets, int reps) {
+
+    public GenerateRoutineOutputData(ArrayList<Exercise> listOfExercises, String name) {
         this.listOfExercises = listOfExercises;
         this.name = name;
-        this.sets = sets;
-        this.reps = reps;
+
     }
     public ArrayList<Exercise> getListOfExercises() {
         return listOfExercises;
@@ -25,12 +23,8 @@ public class GenerateRoutineOutputData {
         return name;
     }
 
-    public int getSets() {
-        return sets;
-    }
 
-    public int getReps() {
-        return reps;
-    }
+
+
 
 }

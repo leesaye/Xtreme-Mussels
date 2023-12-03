@@ -56,10 +56,7 @@ public class GenerateRoutineInteractorTest {
                     assertEquals(expectedExercise.getTarget(), actualExercise.getTarget());
                 }
                 assertEquals("routine 1", generateRoutineOutputData.getName());
-                int sets_test = generateRoutineOutputData.getSets();
-                assertTrue(1 <= sets_test && sets_test <=5);
-                int reps_test = generateRoutineOutputData.getReps();
-                assertTrue(10 <= reps_test && reps_test <= 20);
+
             }
 
             @Override

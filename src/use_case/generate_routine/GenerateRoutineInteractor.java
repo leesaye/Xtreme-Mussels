@@ -59,7 +59,7 @@ public class GenerateRoutineInteractor implements GenerateRoutineInputBoundary {
 //            generateRoutineDataAccessObject.addRoutine(generatedRoutine);
 
 
-            GenerateRoutineOutputData generateRoutineOutputData = new GenerateRoutineOutputData(listOfExercises, name, randomSets, randomReps);
+            GenerateRoutineOutputData generateRoutineOutputData = new GenerateRoutineOutputData(listOfExercises, name);
             generateRoutinePresenter.prepareSuccessView(generateRoutineOutputData);
         } catch (Exception e) {
             generateRoutinePresenter.prepareFailedView("Routine could not be created"); //TODO: add a more specific error message

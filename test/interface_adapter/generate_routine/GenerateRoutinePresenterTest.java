@@ -40,15 +40,12 @@ public class GenerateRoutinePresenterTest {
             public void firePropertyChange() {
                 assertEquals(exercises, state.getRoutineList());
                 assertEquals(name, state.getRoutineName());
-                int sets_test = state.getSets();
-                assertTrue(1 <= sets_test && sets_test <=5);
-                int reps_test = state.getReps();
-                assertTrue(10 <= reps_test && reps_test <= 20);
+
             }
         };
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         GenerateRoutineOutputBoundary present = new GenerateRoutinePresenter(generateRoutineViewModel, viewManagerModel);
-        present.prepareSuccessView(new GenerateRoutineOutputData(exercises, name, sets, reps));
+        present.prepareSuccessView(new GenerateRoutineOutputData(exercises, name));
     }
 
     @Test
