@@ -25,7 +25,7 @@ public class LookUpRoutinePresenter implements LookUpRoutineOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         LookUpRoutineState lookUpRoutineState = lookUpRoutineViewModel.getState();
-        lookUpRoutineState.setExercisesDisplayError(error);
+        lookUpRoutineState.setRoutineError(error);
         lookUpRoutineViewModel.setState(lookUpRoutineState);
         lookUpRoutineViewModel.firePropertyChanged();
     }

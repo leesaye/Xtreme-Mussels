@@ -3,6 +3,7 @@ package use_case.lookup;
 import entity.Exercise;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LookUpInteractor implements LookUpInputBoundary {
     final LookUpDataAccessInterface exerciseDataAccessObject;
@@ -20,6 +21,10 @@ public class LookUpInteractor implements LookUpInputBoundary {
             exercises = exerciseDataAccessObject.getExercisesByQuery(lookUpInputData.getValue(),"target");
         } else if (lookUpInputData.getQuery().equals("name")) {
             exercises = exerciseDataAccessObject.getExercisesByQuery(lookUpInputData.getValue(),"name");
+            if (exercises.isEmpty()) {
+                exercisePresenter.prepareFailView("No exercises found.");
+                return;
+            }
         } else {
             exercisePresenter.prepareFailView("Invalid query option.");
             return;

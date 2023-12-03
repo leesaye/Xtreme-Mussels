@@ -11,7 +11,7 @@ public class LookUpRoutineInteractor implements LookUpRoutineInputBoundary {
 
     @Override
     public void execute(LookUpRoutineInputData lookUpRoutineInputData) {
-        if (routineDataAccessObject.existsByName(lookUpRoutineInputData.getRoutineName())) {
+        if (!routineDataAccessObject.existsByName(lookUpRoutineInputData.getRoutineName())) {
             routinePresenter.prepareFailView("Invalid routine name.");
         } else {
             routineDataAccessObject.getRoutine(lookUpRoutineInputData.getRoutineName());

@@ -6,9 +6,9 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class ApiDataAccessObject {
+public class ApiAdapter implements ApiToDaoInterface {
 
-    public static Response getApiTarget(String target, int numberOfExercises) {
+    public Response getApiTarget(String target, int numberOfExercises) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         Request request = new Request.Builder()
@@ -24,7 +24,7 @@ public class ApiDataAccessObject {
         }
     }
 
-    public static Response getApiName(String name, int numberOfExercises) {
+    public Response getApiName(String name, int numberOfExercises) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         Request request = new Request.Builder()
@@ -41,7 +41,7 @@ public class ApiDataAccessObject {
     }
 
     // No limit, returns all
-    public static Response getApiByQuery(String value, String query) {
+    public Response getApiByQuery(String value, String query) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request;
         if (query.equals("target")) {
@@ -53,7 +53,7 @@ public class ApiDataAccessObject {
                     .build();
         } else {    // query is either "target" or "name"
             request = new Request.Builder()
-                    .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value)
+                    .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value.replaceAll("\\s","%20"))
                     .get()
                     .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
                     .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")

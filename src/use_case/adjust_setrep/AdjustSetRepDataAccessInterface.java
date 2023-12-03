@@ -5,7 +5,7 @@ import entity.Exercise;
 import java.util.ArrayList;
 
 public interface AdjustSetRepDataAccessInterface {
-    boolean existsById(int id);
+    boolean existsByName(String id);
 
-    void updateRoutine(int id, ArrayList<Integer> sets, ArrayList<Integer> reps);
+    void updateRoutine(String id, ArrayList<Integer> sets, ArrayList<Integer> reps);
 }
