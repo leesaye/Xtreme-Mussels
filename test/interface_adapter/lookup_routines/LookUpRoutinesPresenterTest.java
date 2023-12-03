@@ -41,8 +41,8 @@ public class LookUpRoutinesPresenterTest {
 
             public void firePropertyChanged() {
                 assertEquals(state.getRoutines().size(), 2);
-                assertEquals(state.getRoutines().get(0).getName(), "routine1 test");
-                assertEquals(state.getRoutines().get(1).getName(), "routine2 test");
+                assertEquals(state.getRoutines().get(0).getRoutineName(), "routine1 test");
+                assertEquals(state.getRoutines().get(1).getRoutineName(), "routine2 test");
                 assertEquals(state.getRoutines().get(1).getExercisesList().get(0).getName(), "test name");
             }
         };

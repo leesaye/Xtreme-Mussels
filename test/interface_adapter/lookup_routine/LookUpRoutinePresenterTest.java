@@ -35,7 +35,7 @@ public class LookUpRoutinePresenterTest {
             public LookUpRoutineState getState() { return state; }
 
             public void firePropertyChanged() {
-                assertEquals(state.getRoutine().getName(), "routine test");
+                assertEquals(state.getRoutine().getRoutineName(), "routine test");
                 assertEquals(state.getRoutine().getExercisesList().get(0).getName(), "test name");
                 assertEquals(state.getExercisesDisplay()[0][0], "test name");
             }
