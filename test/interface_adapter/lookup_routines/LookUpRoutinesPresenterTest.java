@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LookUpRoutinesPresenterTest {
-    ArrayList<Routine> routines;
+    ArrayList<Routine> routines = new ArrayList<>();
 
     @BeforeEach
     void init () {
@@ -40,10 +40,10 @@ public class LookUpRoutinesPresenterTest {
             public LookUpRoutinesState getState() { return state; }
 
             public void firePropertyChanged() {
-                assertEquals(state.getRoutines().size(), 3);
+                assertEquals(state.getRoutines().size(), 2);
                 assertEquals(state.getRoutines().get(0).getName(), "routine1 test");
                 assertEquals(state.getRoutines().get(1).getName(), "routine2 test");
-                assertEquals(state.getRoutines().get(1).getExercisesList().get(0), "test name");
+                assertEquals(state.getRoutines().get(1).getExercisesList().get(0).getName(), "test name");
             }
         };
 
