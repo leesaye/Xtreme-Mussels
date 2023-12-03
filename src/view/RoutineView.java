@@ -1,25 +1,36 @@
 package view;
 
+import entity.Routine;
 import interface_adapter.add_exercise.AddExerciseController;
+import interface_adapter.add_exercise.AddExerciseState;
 import interface_adapter.add_exercise.AddExerciseViewModel;
 import interface_adapter.adjust_setrep.AdjustSetRepController;
 import interface_adapter.adjust_setrep.AdjustSetRepState;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
+import interface_adapter.delete_exercise.DeleteExerciseState;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
+import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.rename_routine.RenameRoutineController;
+import interface_adapter.rename_routine.RenameRoutineState;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class RoutineView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "single routine";
+
+    private final LookUpRoutineViewModel lookUpRoutineViewModel;
 
     private final RenameRoutineViewModel renameRoutineViewModel;
 
@@ -47,10 +58,20 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
 
     private final JTable table;
 
-    public RoutineView(RenameRoutineController renameRoutineController, RenameRoutineViewModel renameRoutineViewModel,
+    private static DefaultTableModel model;
+
+    private final Routine routine;
+
+    private final JButton back;
+
+    public RoutineView(LookUpRoutineViewModel lookUpRoutineViewModel,
+                       RenameRoutineController renameRoutineController, RenameRoutineViewModel renameRoutineViewModel,
                        AddExerciseController addExerciseController, AddExerciseViewModel addExerciseViewModel,
                        DeleteExerciseController deleteExerciseController, DeleteExerciseViewModel deleteExerciseViewModel,
                        AdjustSetRepController adjustSetRepController, AdjustSetRepViewModel adjustSetRepViewModel) {
+
+        this.lookUpRoutineViewModel = lookUpRoutineViewModel;
+
         this.renameRoutineController = renameRoutineController;
         this.renameRoutineViewModel = renameRoutineViewModel;
 
@@ -63,10 +84,13 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
         this.adjustSetRepController = adjustSetRepController;
         this.adjustSetRepViewModel = adjustSetRepViewModel;
 
-        JLabel title = new JLabel("Routine");
+        routine = lookUpRoutineViewModel.getState().getRoutine();
+
+        JLabel title = new JLabel(LookUpRoutineViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        table = new JTable();
+        model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+        table = new JTable(model);
         JScrollPane tableScrlPane = new JScrollPane(table);
 
         JPanel buttons = new JPanel();
@@ -74,16 +98,21 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
         delete = new JButton(DeleteExerciseViewModel.DELETE_BUTTON_LABEL);
         rename = new JButton(RenameRoutineViewModel.RENAME_BUTTON_LABEL);
         adjust = new JButton(AdjustSetRepViewModel.ADJUST_BUTTON_LABEL);
+        back = new JButton(LookUpRoutineViewModel.BACK_BUTTON_LABEL);
         buttons.add(add);
         buttons.add(delete);
         buttons.add(rename);
         buttons.add(adjust);
+        buttons.add(back);
 
         add.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        if (e.getSource().equals(add)) {
+                            String newExercise = JOptionPane.showInputDialog(("Enter a new exercise:"));
+                            addExerciseController.execute(routine.getName(), newExercise);
+                        }
                     }
                 }
         );
@@ -92,7 +121,14 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        if (e.getSource().equals(delete)) {
+                            if (table.getSelectedRow() != -1) {
+                                String exerciseName = table.getValueAt(table.getSelectedRow(), 0).toString();
+                                deleteExerciseController.execute(routine.getName(), exerciseName);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Select a row and try again");
+                            }
+                        }
                     }
                 }
         );
@@ -101,7 +137,10 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        if (e.getSource().equals(rename)) {
+                            String newName = JOptionPane.showInputDialog("Enter a new routine name: ");
+                            renameRoutineController.execute(routine.getName(), newName); // TODO: Doesn't work yet because DAO is yet to exist
+                        }
                     }
                 }
         );
@@ -110,7 +149,29 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(adjust)) {
+                            AdjustSetRepState currentState = adjustSetRepViewModel.getState();
 
+                            // Create ArrayLists of integers for the controller
+                            ArrayList<Integer> sets = new ArrayList<>();
+                            ArrayList<Integer> reps = new ArrayList<>();
+
+                            for(int i = 0; i < model.getRowCount(); i++) {
+                                sets.add(parseInt(model.getValueAt(i, 1).toString()));
+                                reps.add(parseInt(model.getValueAt(i, 2).toString()));
+                            }
+
+                            adjustSetRepController.execute(routine.getName(), sets, reps);
+                        }
+                    }
+                }
+        );
+
+        back.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // TODO: call controller to multiple routines view
                     }
                 }
         );
@@ -123,11 +184,28 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        JOptionPane.showConfirmDialog(this, "Button not implemented yet");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getNewValue() instanceof AddExerciseState) {
+            JOptionPane.showMessageDialog(this, "Exercise added");
+        }
+
+        if (evt.getNewValue() instanceof DeleteExerciseState) {
+            JOptionPane.showMessageDialog(this, "Exercise deleted");
+        }
+
+        if (evt.getNewValue() instanceof RenameRoutineState) {
+            RenameRoutineState state = (RenameRoutineState) evt.getNewValue();
+            JOptionPane.showMessageDialog(this, state.getName() + ": rename success");
+        }
+
+        if (evt.getNewValue() instanceof AdjustSetRepState) {
+            JOptionPane.showMessageDialog(this, "New sets and reps saved");
+        }
+
 
     }
 }
