@@ -1,5 +1,5 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
-public interface LookUpRoutineInputBoundary {
-    void execute(LookUpRoutineInputData lookUpRoutineInputData);
+public interface LookUpRoutinesInputBoundary {
+    void execute();
 }

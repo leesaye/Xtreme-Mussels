@@ -1,22 +1,18 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
-public class LookUpRoutineInteractor implements LookUpRoutineInputBoundary {
-    final LookUpRoutineDataAccessInterface routineDataAccessObject;
-    final LookUpRoutineOutputBoundary routinePresenter;
+public class LookUpRoutinesInteractor implements LookUpRoutinesInputBoundary {
+    final LookUpRoutinesDataAccessInterface routineDataAccessObject;
+    final LookUpRoutinesOutputBoundary routinePresenter;
 
-    public LookUpRoutineInteractor(LookUpRoutineDataAccessInterface routineDataAccessObject, LookUpRoutineOutputBoundary routinePresenter) {
+    public LookUpRoutinesInteractor(LookUpRoutinesDataAccessInterface routineDataAccessObject, LookUpRoutinesOutputBoundary routinePresenter) {
         this.routineDataAccessObject = routineDataAccessObject;
         this.routinePresenter = routinePresenter;
     }
 
     @Override
-    public void execute(LookUpRoutineInputData lookUpRoutineInputData) {
-        if (routineDataAccessObject.existsByName(lookUpRoutineInputData.getRoutineName())) {
-            routinePresenter.prepareFailView("Invalid routine name.");
-        } else {
-            routineDataAccessObject.getRoutine(lookUpRoutineInputData.getRoutineName());
-            LookUpRoutineOutputData lookUpRoutineOutputData = new LookUpRoutineOutputData(routineDataAccessObject.getRoutine(lookUpRoutineInputData.getRoutineName()), false);
-            routinePresenter.prepareSuccessView(lookUpRoutineOutputData);
-        }
+    public void execute() {
+        routineDataAccessObject.getRoutines();
+        LookUpRoutinesOutputData lookUpRoutinesOutputData = new LookUpRoutinesOutputData(routineDataAccessObject.getRoutines());
+        routinePresenter.prepareSuccessView(lookUpRoutinesOutputData);
     }
 }

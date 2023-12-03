@@ -1,8 +1,9 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
 import entity.Routine;
 
-public interface LookUpRoutineDataAccessInterface {
-    boolean existsByName(String name);
-    Routine getRoutine(String name);
+import java.util.ArrayList;
+
+public interface LookUpRoutinesDataAccessInterface {
+    ArrayList<Routine> getRoutines();
 }

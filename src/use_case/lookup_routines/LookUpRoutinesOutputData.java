@@ -1,17 +1,18 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
 import entity.Routine;
 
-public class LookUpRoutineOutputData {
-    private final Routine routine;
-    private boolean useCaseFailed;
+import java.util.ArrayList;
 
-    public LookUpRoutineOutputData(Routine routine, boolean useCaseFailed) {
-        this.routine = routine;
-        this.useCaseFailed = useCaseFailed;
+public class LookUpRoutinesOutputData {
+    private final ArrayList<Routine> routines;
+
+    // No useCaseFailed, assumes will always be successful (outputs empty list if empty)
+    public LookUpRoutinesOutputData(ArrayList<Routine> routines) {
+        this.routines = routines;
     }
 
-    public Routine getRoutine() {
-        return routine;
+    public ArrayList<Routine> getAllRoutines() {
+        return routines;
     }
 }

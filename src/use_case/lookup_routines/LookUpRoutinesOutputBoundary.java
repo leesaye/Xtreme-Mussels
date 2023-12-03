@@ -1,7 +1,5 @@
-package use_case.lookup_routine;
+package use_case.lookup_routines;
 
-public interface LookUpRoutineOutputBoundary {
-    void prepareSuccessView(LookUpRoutineOutputData routine);
-
-    void prepareFailView(String error);
+public interface LookUpRoutinesOutputBoundary {
+    void prepareSuccessView(LookUpRoutinesOutputData routine);
 }
