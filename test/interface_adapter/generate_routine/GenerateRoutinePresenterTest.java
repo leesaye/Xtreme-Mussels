@@ -1,6 +1,7 @@
 package interface_adapter.generate_routine;
 
 import entity.Exercise;
+import interface_adapter.ViewManagerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.generate_routine.GenerateRoutineOutputBoundary;
@@ -45,7 +46,8 @@ public class GenerateRoutinePresenterTest {
                 assertTrue(10 <= reps_test && reps_test <= 20);
             }
         };
-        GenerateRoutineOutputBoundary present = new GenerateRoutinePresenter(generateRoutineViewModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        GenerateRoutineOutputBoundary present = new GenerateRoutinePresenter(generateRoutineViewModel, viewManagerModel);
         present.prepareSuccessView(new GenerateRoutineOutputData(exercises, name, sets, reps));
     }
 
@@ -64,7 +66,8 @@ public class GenerateRoutinePresenterTest {
 
             }
         };
-        GenerateRoutineOutputBoundary present = new GenerateRoutinePresenter(generateRoutineViewModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        GenerateRoutineOutputBoundary present = new GenerateRoutinePresenter(generateRoutineViewModel, viewManagerModel);
         present.prepareFailedView("Error");
 
     }
