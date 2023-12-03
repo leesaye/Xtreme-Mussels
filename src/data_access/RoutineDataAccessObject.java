@@ -100,7 +100,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
             HashMap<String, Routine> hashMap = new HashMap<>();
 
             for (Routine r : routines) {
-                hashMap.put(r.getName(), r);
+                hashMap.put(r.getRoutineName(), r);
             }
             return hashMap;
         } catch (IOException e) {
@@ -193,7 +193,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     }
 
     // For RenameRoutineDataAccessInterface
-    @Override
+//    @Override
     public void changeName(String identifier, String newName) {
         Routine routine = routineList.get(identifier);
         routine.setName(newName);
@@ -205,7 +205,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     // For AddRoutineDataAccessInterface and GenerateRoutineDataAccessInterface
     @Override
     public void addRoutine(Routine routine) {
-        routineList.put(routine.getName(), routine);
+        routineList.put(routine.getRoutineName(), routine);
         this.save();
     }
 
