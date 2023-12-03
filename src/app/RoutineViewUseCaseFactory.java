@@ -8,6 +8,7 @@ import interface_adapter.adjust_setrep.AdjustSetRepController;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
+import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.rename_routine.RenameRoutineController;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
 import view.RoutineView;
@@ -22,7 +23,7 @@ public class RoutineViewUseCaseFactory {
     private RoutineViewUseCaseFactory() {}
 
     public static RoutineView create(
-            ViewManagerModel viewManagerModel, RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
+            ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
             DeleteExerciseViewModel deleteExerciseViewModel, AdjustSetRepViewModel adjustViewModel, RoutineDataAccessObject routineDataAccessObject) {
         // TODO: Uncomment when data access has been written
 //        try {
@@ -31,7 +32,7 @@ public class RoutineViewUseCaseFactory {
         DeleteExerciseController deleteExerciseController = createDeleteExerciseUseCase(viewManagerModel, deleteExerciseViewModel, routineDataAccessObject);
         AdjustSetRepController adjustSetRepController = createAdjustSetRepUseCase(viewManagerModel, adjustViewModel, routineDataAccessObject);
 
-        return new RoutineView(renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
+        return new RoutineView(lookUpRoutineViewModel, renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
                 deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel);
 //        } catch (IOException e) {
 //            JOptionPane.showMessageDialog(null, "Could not open routine data file.");
