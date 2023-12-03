@@ -1,12 +1,33 @@
 package use_case.add_routine;
 
-public class AddRoutineInteractor implements AddRoutineInputBoundary{
+import entity.RoutineFactory;
+import entity.Routine;
 
-    public AddRoutineInteractor() {
+
+public class AddRoutineInteractor implements AddRoutineInputBoundary {
+    final AddRoutineOutputBoundary addRoutinePresenter;
+    final AddRoutineDataAccessInterface addRoutineDataAccessObject;
+    final RoutineFactory routineFactory;
+
+
+    public AddRoutineInteractor(AddRoutineDataAccessInterface addRoutineDataAccessObject,
+                                AddRoutineOutputBoundary addRoutineOutputBoundary, RoutineFactory routineFactory) {
+        this.addRoutineDataAccessObject = addRoutineDataAccessObject;
+        this.addRoutinePresenter = addRoutineOutputBoundary;
+        this.routineFactory = routineFactory;
     }
 
     @Override
     public void execute(AddRoutineInputData addRoutineInputData) {
+        if (addRoutineDataAccessObject.existsByName(addRoutineInputData.getRoutineName())) {
+            addRoutinePresenter.prepareFailView("Routine name already exists.");
+        } else {
+            Routine routine = RoutineFactory.create(addRoutineInputData.getRoutineName());
+            addRoutineDataAccessObject.addRoutine(routine);
 
+
+            AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false);
+            addRoutinePresenter.prepareSuccessView(addRoutineOutputData);
+        }
     }
 }

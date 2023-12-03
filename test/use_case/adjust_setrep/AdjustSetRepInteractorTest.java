@@ -65,9 +65,7 @@ class AdjustSetRepInteractorTest {
             }
         };
 
-
-
-        AdjustSetRepInputData inputData = new AdjustSetRepInputData("1", sets, reps);
+        AdjustSetRepInputData inputData = new AdjustSetRepInputData("2", sets, reps);
         AdjustSetRepInteractor interactor = new AdjustSetRepInteractor(dataAccess, adjustPresenter);
 
         interactor.execute(inputData);

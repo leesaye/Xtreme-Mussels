@@ -11,14 +11,17 @@ import use_case.adjust_setrep.AdjustSetRepOutputBoundary;
 
 public class AdjustSetRepUseCaseFactory {
 
-    private AdjustSetRepUseCaseFactory() {}
+    private AdjustSetRepUseCaseFactory() {
+    }
 
-    public static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, RoutineDataAccessObject routineDataAccessObject) {
+
+    public static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, RoutineDataAccessObject routineDataAccessObject){
         AdjustSetRepOutputBoundary adjustOutputBoundary = new AdjustSetRepPresenter(viewManagerModel, adjustSetRepViewModel);
 
         AdjustSetRepInputBoundary adjustInteractor = new AdjustSetRepInteractor(routineDataAccessObject, adjustOutputBoundary);
 
         return new AdjustSetRepController(adjustInteractor);
     }
+
 
 }

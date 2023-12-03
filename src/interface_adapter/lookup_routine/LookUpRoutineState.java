@@ -38,19 +38,11 @@ public class LookUpRoutineState {
         return exercisesDisplay;
     }
 
-    public String getExercisesDisplayError() {
-        return exercisesDisplayError;
-    }
-
     public void setExercisesDisplay(Routine routine) {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 
-    public void setExercisesDisplayError(String exercisesDisplayError) {
-        this.exercisesDisplayError = exercisesDisplayError;
-    }
-
-    private String[][] toStringArray(ArrayList<Exercise> exercise) {
+    public String[][] toStringArray(ArrayList<Exercise> exercise) {
         if (exercise.isEmpty()) {
             return new String[][]{{}};
         }
@@ -63,5 +55,4 @@ public class LookUpRoutineState {
         }
         return display;
     }
-
 }

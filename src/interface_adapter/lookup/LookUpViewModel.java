@@ -13,7 +13,7 @@ public class LookUpViewModel extends ViewModel {
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
-    private static LookUpState state = new LookUpState();
+    private LookUpState state = new LookUpState();
 
     public LookUpViewModel(String viewName) {
         super("look up exercise");
@@ -31,7 +31,7 @@ public class LookUpViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public static LookUpState getState() {
+    public LookUpState getState() {
         return state;
     }
 }
