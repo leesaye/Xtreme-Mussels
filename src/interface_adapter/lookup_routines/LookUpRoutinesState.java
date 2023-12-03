@@ -1,17 +1,17 @@
-package interface_adapter.lookup_routines;
+package interface_adapter.lookup_routine;
 
 import entity.Exercise;
 import entity.Routine;
 
 import java.util.ArrayList;
 
-public class LookUpRoutineState {
+public class LookUpRoutinesState {
     private Routine routine = null;
     private String[][] exercisesDisplay = null;
     private String routineError = null;
     private String exercisesDisplayError = null;
 
-    public LookUpRoutineState() {
+    public LookUpRoutinesState() {
     }
 
     public Routine getRoutine() {
