@@ -1,5 +1,6 @@
 package interface_adapter.generate_routine;
 
+import interface_adapter.ViewManagerModel;
 import use_case.generate_routine.GenerateRoutineOutputBoundary;
 import use_case.generate_routine.GenerateRoutineOutputData;
 import view.ViewManager;
@@ -9,13 +10,13 @@ public class GenerateRoutinePresenter implements GenerateRoutineOutputBoundary {
     private final GenerateRoutineViewModel generateRoutineViewModel;
     private GenerateRoutineController generateRoutineController;
 //    TODO: uncomment this once pulled all the changes from Git
-//    private ViewManagerModel viewManager;
+    private ViewManagerModel viewManager;
 
     public GenerateRoutinePresenter(GenerateRoutineViewModel generateRoutineViewModel
-//            , ViewManagerModel viewManager
+            , ViewManagerModel viewManager
     ) {
         this.generateRoutineViewModel = generateRoutineViewModel;
-//        this.viewManager = viewManager;
+        this.viewManager = viewManager;
     }
     @Override
     public void prepareSuccessView(GenerateRoutineOutputData generateRoutineOutputData) {

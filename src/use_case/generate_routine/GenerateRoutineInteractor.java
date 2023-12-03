@@ -1,6 +1,8 @@
 package use_case.generate_routine;
 
 import entity.Exercise;
+import entity.Routine;
+import entity.RoutineFactory;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,6 +11,7 @@ public class GenerateRoutineInteractor implements GenerateRoutineInputBoundary {
 
     private final GenerateRoutineDataAccessInterface generateRoutineDataAccessObject;
     private final GenerateRoutineOutputBoundary generateRoutinePresenter;
+
 
     public GenerateRoutineInteractor(GenerateRoutineDataAccessInterface generateRoutineDataAccessObject, GenerateRoutineOutputBoundary generateRoutinePresenter) {
         this.generateRoutineDataAccessObject = generateRoutineDataAccessObject;
@@ -45,16 +48,15 @@ public class GenerateRoutineInteractor implements GenerateRoutineInputBoundary {
 
             int randomSets = randomGenerator(1,5);
             int randomReps = randomGenerator(10,20);
-
             for (int i = 0; i < listOfExercises.size(); i++) {
                 Exercise curr = listOfExercises.get(i);
                 curr.setReps(randomReps);
                 curr.setSets(randomSets);
             }
-
             //TODO: add the create workout method with param RoutineFactory.create(name, arraylist)
-            // Routine generatedRoutine = RoutineFactory.create(name, listOfExercises);
-            // generateRoutineDataAccessObject.addRoutine(generatedRoutine);
+//            Routine generatedRoutine = RoutineFactory.create(name);
+//            generatedRoutine.setExercisesList(listOfExercises);
+//            generateRoutineDataAccessObject.addRoutine(generatedRoutine);
 
 
             GenerateRoutineOutputData generateRoutineOutputData = new GenerateRoutineOutputData(listOfExercises, name, randomSets, randomReps);

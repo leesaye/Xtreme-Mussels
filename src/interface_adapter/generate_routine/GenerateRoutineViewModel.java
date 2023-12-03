@@ -3,7 +3,7 @@ package interface_adapter.generate_routine;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GenerateRoutineViewModel {
+public abstract class GenerateRoutineViewModel {
 
     public static final String VIEW_NAME = "Generate Routine";
     public static final String GENERATE_ROUTINE_LABEL = "Generate routine";
@@ -31,4 +31,6 @@ public class GenerateRoutineViewModel {
     public GenerateRoutineState getGenerateRoutineState() {
         return generateRoutineState;
     }
+
+    public abstract void firePropertyChange();
 }
