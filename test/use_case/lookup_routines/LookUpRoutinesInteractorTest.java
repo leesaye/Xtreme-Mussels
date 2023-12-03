@@ -32,9 +32,9 @@ public class LookUpRoutinesInteractorTest {
         LookUpRoutinesOutputBoundary lookUpRoutinesPresenter = new LookUpRoutinesOutputBoundary() {
             @Override
             public void prepareSuccessView(LookUpRoutinesOutputData output) {
-                assertThat(output.getAllRoutines().get(0).getName(), anyOf(is("test1"), is("test2"), is("test3")));
-                assertThat(output.getAllRoutines().get(1).getName(), anyOf(is("test1"), is("test2"), is("test3")));
-                assertThat(output.getAllRoutines().get(2).getName(), anyOf(is("test1"), is("test2"), is("test3")));
+                assertThat(output.getAllRoutines().get(0).getRoutineName(), anyOf(is("test1"), is("test2"), is("test3")));
+                assertThat(output.getAllRoutines().get(1).getRoutineName(), anyOf(is("test1"), is("test2"), is("test3")));
+                assertThat(output.getAllRoutines().get(2).getRoutineName(), anyOf(is("test1"), is("test2"), is("test3")));
             }
         };
 
@@ -55,6 +55,6 @@ class TestRoutinesDataAccess {
     @Test
     void getRoutinesTest() {
         assertEquals(routineDataAccessObject.getRoutines().size(), 3);
-        assertThat(routineDataAccessObject.getRoutines().get(0).getName(), anyOf(is("test1"), is("test2"), is("test3")));
+        assertThat(routineDataAccessObject.getRoutines().get(0).getRoutineName(), anyOf(is("test1"), is("test2"), is("test3")));
     }
 }
