@@ -1,6 +1,9 @@
 package entity;
 
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class RoutineFactory {
     /**
      * Requires: routine name is valid.
@@ -8,7 +11,7 @@ public class RoutineFactory {
      * @param routineName
      * @return
      */
-    public Routine create(String routineName) {
-        return new Routine(routineName);
+    public static Routine create(String routineName) {
+        return new Routine(routineName, new ArrayList<>());
     }
 }
