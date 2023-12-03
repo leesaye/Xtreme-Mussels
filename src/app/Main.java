@@ -41,13 +41,8 @@ class Main {
         AddExerciseViewModel addExerciseViewModel = new AddExerciseViewModel();
         DeleteExerciseViewModel deleteExerciseViewModel = new DeleteExerciseViewModel();
 
-        // TODO: uncomment the try/catch block when DAO has been written
         RoutineDataAccessObject routineDataAccessObject;
-//        try {
-            routineDataAccessObject = new RoutineDataAccessObject();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        routineDataAccessObject = new RoutineDataAccessObject();
 
         RoutineView routineView = RoutineViewUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel, renameRoutineViewModel,
                 addExerciseViewModel, deleteExerciseViewModel, adjustSetRepViewModel, routineDataAccessObject);
