@@ -1,9 +1,8 @@
 package entity;
 
-import java.util.ArrayList;
 
 public class RoutineFactory {
-    public Routine create(String name) {
-        return new Routine(name, new ArrayList<>());
+    public Routine create(String routineName) {
+        return new Routine(routineName);
     }
 }

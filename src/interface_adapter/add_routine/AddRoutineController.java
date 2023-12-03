@@ -3,6 +3,10 @@ package interface_adapter.add_routine;
 import use_case.add_routine.AddRoutineInputBoundary;
 import use_case.add_routine.AddRoutineInputData;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.Executor;
+
 public class AddRoutineController {
 
     final AddRoutineInputBoundary addRoutineUseCaseInteractor;
@@ -10,10 +14,9 @@ public class AddRoutineController {
         this.addRoutineUseCaseInteractor = addRoutineUseCaseInteractor;
     }
 
-    public void execute() {
-        AddRoutineInputData addRoutineInputData = new AddRoutineInputData(
-        );
+    public void execute(int id, String routineName, ArrayList<Map<String, Object>> exercisesList) {
+        AddRoutineInputData addRoutineInputData = new AddRoutineInputData(id, routineName, exercisesList);
 
-        // AddRoutineUseCaseInteractor.execute(AddRoutineInputData);
+        addRoutineUseCaseInteractor.execute(addRoutineInputData);
     }
 }
