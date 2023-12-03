@@ -1,6 +1,6 @@
 package app.edit_routine;
 
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.adjust_setrep.AdjustSetRepController;
 import interface_adapter.adjust_setrep.AdjustSetRepPresenter;
@@ -16,7 +16,7 @@ public class AdjustSetRepUseCaseFactory {
 
     public static AdjustSetRepView create(
             ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel,
-            FileRoutineDataAccessObject routineDataAccessObject) {
+            RoutineDataAccessObject routineDataAccessObject) {
         // TODO: Uncomment when data access has been written
 //        try {
             AdjustSetRepController adjustController = createAdjustSetRepUseCase(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
@@ -26,7 +26,7 @@ public class AdjustSetRepUseCaseFactory {
 //        }
     }
 
-    private static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    private static AdjustSetRepController createAdjustSetRepUseCase(ViewManagerModel viewManagerModel, AdjustSetRepViewModel adjustSetRepViewModel, RoutineDataAccessObject routineDataAccessObject) {
         AdjustSetRepOutputBoundary adjustOutputBoundary = new AdjustSetRepPresenter(viewManagerModel, adjustSetRepViewModel);
 
         AdjustSetRepInputBoundary adjustInteractor = new AdjustSetRepInteractor(routineDataAccessObject, adjustOutputBoundary);

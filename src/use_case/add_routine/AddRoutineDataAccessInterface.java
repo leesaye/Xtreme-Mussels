@@ -7,5 +7,5 @@ public interface AddRoutineDataAccessInterface {
     boolean existsByName(String identifier);
 
 
-    void save(Routine routine);
+    void addRoutine(Routine routine);
 }

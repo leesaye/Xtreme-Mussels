@@ -17,4 +17,12 @@ public class Routine {
     public ArrayList<Exercise> getExercisesList() {
         return exercisesList;
     }
+
+    public void setName(String routineName) {
+        this.routineName = routineName;
+    }
+
+    public void setExercisesList(ArrayList<Exercise> exercisesList) {
+        this.exercisesList = exercisesList;
+    }
 }
