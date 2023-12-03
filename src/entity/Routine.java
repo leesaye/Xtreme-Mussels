@@ -18,8 +18,8 @@ public class Routine {
         return exercisesList;
     }
 
-    public void setName(String name) {
-        this.routineName = name;
+    public void setName(String routineName) {
+        this.routineName = routineName;
     }
 
     public void setExercisesList(ArrayList<Exercise> exercisesList) {
