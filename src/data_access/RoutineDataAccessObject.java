@@ -16,18 +16,18 @@ import use_case.delete_exercise.DeleteExerciseDataAccessInterface;
 import use_case.generate_routine.GenerateRoutineDataAccessInterface;
 import use_case.lookup_routine.LookUpRoutineDataAccessInterface;
 import use_case.adjust_setrep.AdjustSetRepDataAccessInterface;
+import use_case.lookup_routines.LookUpRoutinesDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface, LookUpRoutineDataAccessInterface {
+public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface, GenerateRoutineDataAccessInterface, LookUpRoutineDataAccessInterface, LookUpRoutinesDataAccessInterface {
     private HashMap<String, Routine> routineList;
     private String path;
-
     private ApiToDaoInterface apiAccess = new ApiAdapter();
 
     public  RoutineDataAccessObject() {
-        this.routineList = null;
+        this.routineList = new HashMap<>();
         this.path = null;
     }
 
@@ -55,7 +55,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     // Converts json of routines into hashmap
     public HashMap<String, Routine> read() {
         try {
-            File file = new File("TestRoutineFile.json");
+            File file = new File(path);
             String line = null;
             StringBuilder stringBuilder = new StringBuilder();
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -108,18 +108,6 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         }
     }
 
-    /**
-     * Set and get for hashmap
-     */
-
-    public void setRoutineList(HashMap<String, Routine> routineList) {
-        this.routineList = routineList;
-    }
-
-    public HashMap<String, Routine> getRoutineList() {
-        return routineList;
-    }
-
     public void save() {
         this.save(routineList, path);
     }
@@ -143,6 +131,25 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         }
     }
 
+    /**
+     * Setters and getters
+     */
+
+    public void setRoutineList(HashMap<String, Routine> routineList) {
+        this.routineList = routineList;
+    }
+
+    public HashMap<String, Routine> getRoutineList() {
+        return routineList;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
 
     /**
      * The following are methods written for specific use cases
@@ -151,26 +158,13 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
 
 
     // For AdjustSetRepDataAccessInterface, name is the routine name
-//    @Override
+    @Override
     public boolean existsByName(String identifier) {
         return routineList.containsKey(identifier);
     }
 
-    // For AddExerciseDataAccessInterface (id is the id of the exercise, identifier is routine identifier/name)
-//    @Override
-    public boolean existsById(String identifier, String id) {
-        ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
-
-        for (int i = 0; i < exercises.size(); i++) {
-            if (exercises.get(i).getId().equals(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // For AdjustSetRepDataAccessInterface
-//    @Override
+    @Override
     public void updateRoutine(String identifier, ArrayList<Integer> sets, ArrayList<Integer> reps) {
         Routine routine = routineList.get(identifier);
         ArrayList<Exercise> exercises = routine.getExercisesList();
@@ -185,8 +179,22 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         this.save();
     }
 
-//    @Override
-    public void renameRoutine(String identifier, String newName) {
+    // For AddExerciseDataAccessInterface (id is the id of the exercise, identifier is routine identifier/name)
+    @Override
+    public boolean existsById(String identifier, String id) {
+        ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
+
+        for (int i = 0; i < exercises.size(); i++) {
+            if (exercises.get(i).getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // For RenameRoutineDataAccessInterface
+    @Override
+    public void changeName(String identifier, String newName) {
         Routine routine = routineList.get(identifier);
         routine.setName(newName);
         routineList.put(newName, routine);
@@ -195,14 +203,14 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     }
 
     // For AddRoutineDataAccessInterface and GenerateRoutineDataAccessInterface
-//    @Override
+    @Override
     public void addRoutine(Routine routine) {
         routineList.put(routine.getName(), routine);
         this.save();
     }
 
     // For AddExerciseDataAccessInterface, assumes exercises is of length 1
-//    @Override
+    @Override
     public void addExercise(String identifier, ArrayList<Exercise> exercises) {
         ArrayList<Exercise> currExercises = routineList.get(identifier).getExercisesList();
         currExercises.add(exercises.get(0));
@@ -211,7 +219,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     }
 
     // For DeleteExerciseDataAccessInterface
-//    @Override
+    @Override
     public void deleteExercise(String identifier, String exerciseName) {
         ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
         int index = 0;
@@ -230,6 +238,16 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     @Override
     public Routine getRoutine(String name) {
         return routineList.get(name);
+    }
+
+    // For LookUpRoutinesDataAccessInterface
+    @Override
+    public ArrayList<Routine> getRoutines() {
+        ArrayList<Routine> routines = new ArrayList<>();
+        for (String name : routineList.keySet()) {
+            routines.add(routineList.get(name));
+        }
+        return routines;
     }
 
     /**
