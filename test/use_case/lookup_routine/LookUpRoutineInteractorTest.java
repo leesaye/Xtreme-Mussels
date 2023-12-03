@@ -89,7 +89,7 @@ class TestRoutineDataAccess {
 
     @Test
     void getRoutineTest() {
-        assertEquals(routineDataAccessObject.getRoutine("test2").getName(), "test2");
+        assertEquals(routineDataAccessObject.getRoutine("test2").getRoutineName(), "test2");
         assertEquals(routineDataAccessObject.getRoutine("test2").getExercisesList().get(0).getName(), "astride jumps (male)");
     }
 }

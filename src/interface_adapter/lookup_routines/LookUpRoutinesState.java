@@ -55,7 +55,7 @@ public class LookUpRoutinesState {
         String[][] display = new String[routine.size()][2];
 
         for (int i = 0; i < routine.size(); i++) {
-            String [] row = {routine.get(i).getName(), toExerciseStringArray(routine.get(i).getExercisesList())};
+            String [] row = {routine.get(i).getRoutineName(), toExerciseStringArray(routine.get(i).getExercisesList())};
             display[i] = row;
         }
         return display;
