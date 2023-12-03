@@ -6,7 +6,7 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class ApiDataAccessObject {
+public class ApiCaller {
 
     public static Response getApiTarget(String target, int numberOfExercises) {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
