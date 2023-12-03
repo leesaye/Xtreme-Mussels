@@ -1,4 +1,4 @@
-package interface_adapter.lookup_routines;
+package interface_adapter.lookup_routine;
 
 import entity.Exercise;
 import entity.Routine;
@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public class LookUpRoutineState {
     private Routine routine = null;
     private String[][] exercisesDisplay = null;
-    private String routineError = null;
-    private String exercisesDisplayError = null;
+    private String routineError;
 
     public LookUpRoutineState() {
     }
@@ -34,19 +33,15 @@ public class LookUpRoutineState {
         return exercisesDisplay;
     }
 
-    public String getExercisesDisplayError() {
-        return exercisesDisplayError;
-    }
-
     public void setExercisesDisplay(Routine routine) {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 
-    public void setExercisesDisplayError(String exercisesDisplayError) {
-        this.exercisesDisplayError = exercisesDisplayError;
-    }
-
     public String[][] toStringArray(ArrayList<Exercise> exercise) {
+        if (exercise.isEmpty()) {
+            return new String[][]{{}};
+        }
+
         String[][] display = new String[exercise.size()][4];
 
         for (int i = 0; i < exercise.size(); i++) {

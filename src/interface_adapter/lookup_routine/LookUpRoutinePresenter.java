@@ -1,4 +1,4 @@
-package interface_adapter.lookup_routines;
+package interface_adapter.lookup_routine;
 
 import interface_adapter.ViewManagerModel;
 import use_case.lookup_routine.LookUpRoutineOutputBoundary;
@@ -25,7 +25,7 @@ public class LookUpRoutinePresenter implements LookUpRoutineOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         LookUpRoutineState lookUpRoutineState = lookUpRoutineViewModel.getState();
-        lookUpRoutineState.setExercisesDisplayError(error);
+        lookUpRoutineState.setRoutineError(error);
         lookUpRoutineViewModel.setState(lookUpRoutineState);
         lookUpRoutineViewModel.firePropertyChanged();
     }
