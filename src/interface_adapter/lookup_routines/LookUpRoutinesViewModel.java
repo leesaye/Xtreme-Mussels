@@ -1,4 +1,4 @@
-package interface_adapter.lookup_routine;
+package interface_adapter.lookup_routines;
 
 import interface_adapter.ViewModel;
 
@@ -7,14 +7,14 @@ import java.beans.PropertyChangeSupport;
 
 public class LookUpRoutinesViewModel extends ViewModel {
 
-    public static final String TITLE_LABEL = "Routine View";
+    public static final String TITLE_LABEL = "All Routines View";
 
     public static final String BACK_BUTTON_LABEL = "Back";
 
-    private static LookUpRoutinesState state = new LookUpRoutinesState();
+    private LookUpRoutinesState state = new LookUpRoutinesState();
 
     public LookUpRoutinesViewModel(String viewName) {
-        super("look up routine");
+        super("look up all routine");
     }
 
     public void setState(LookUpRoutinesState state) {this.state = state; }
@@ -31,7 +31,7 @@ public class LookUpRoutinesViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public static LookUpRoutinesState getState() {
+    public LookUpRoutinesState getState() {
         return state;
     }
 }

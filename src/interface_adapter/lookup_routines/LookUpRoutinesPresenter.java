@@ -1,7 +1,6 @@
-package interface_adapter.lookup_routine;
+package interface_adapter.lookup_routines;
 
 import interface_adapter.ViewManagerModel;
-import use_case.lookup_routine.LookUpRoutineOutputData;
 import use_case.lookup_routines.LookUpRoutinesOutputBoundary;
 import use_case.lookup_routines.LookUpRoutinesOutputData;
 
@@ -16,10 +15,10 @@ public class LookUpRoutinesPresenter implements LookUpRoutinesOutputBoundary {
 
     @Override
     public void prepareSuccessView(LookUpRoutinesOutputData response) {
-        LookUpRoutinesState lookUpRoutineState = lookUpRoutinesViewModel.getState();
-//        lookUpRoutineState.setRoutine(response.getRoutine());
-//        lookUpRoutineState.setExercisesDisplay(response.getRoutine());
-        lookUpRoutinesViewModel.setState(lookUpRoutineState);
+        LookUpRoutinesState lookUpRoutinesState = lookUpRoutinesViewModel.getState();
+        lookUpRoutinesState.setRoutines(response.getAllRoutines());
+        lookUpRoutinesState.setRoutinesDisplay(response.getAllRoutines());
+        lookUpRoutinesViewModel.setState(lookUpRoutinesState);
         this.lookUpRoutinesViewModel.firePropertyChanged();
     }
 }

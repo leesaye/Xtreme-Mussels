@@ -1,4 +1,4 @@
-package interface_adapter.lookup_routine;
+package interface_adapter.lookup_routines;
 
 import entity.Exercise;
 import entity.Routine;
@@ -6,51 +6,56 @@ import entity.Routine;
 import java.util.ArrayList;
 
 public class LookUpRoutinesState {
-    private Routine routine = null;
-    private String[][] exercisesDisplay = null;
-    private String routineError = null;
-    private String exercisesDisplayError = null;
+    private ArrayList<Routine> routines = null;
+    private String[][] routinesDisplay = null;
+    private String routinesError;
 
     public LookUpRoutinesState() {
     }
 
-    public Routine getRoutine() {
-        return routine;
+    public ArrayList<Routine> getRoutines() {
+        return routines;
     }
 
-    public String getRoutineError() {
-        return routineError;
+    public String getRoutinesError() {
+        return routinesError;
     }
 
-    public void setRoutine(Routine routine) {
-        this.routine = routine;
+    public void setRoutines(ArrayList<Routine> routines) {
+        this.routines = routines;
     }
 
-    public void setRoutineError(String routineError) {
-        this.routineError = routineError;
+    public void setRoutinesError(String routinesError) {
+        this.routinesError = routinesError;
     }
 
-    public String[][] getExercisesDisplay() {
-        return exercisesDisplay;
+    public String[][] getRoutinesDisplay() {
+        return routinesDisplay;
     }
 
-    public String getExercisesDisplayError() {
-        return exercisesDisplayError;
+    public void setRoutinesDisplay(ArrayList<Routine> routines) {
+        this.routinesDisplay = this.toRoutineStringArray(routines);
     }
 
-    public void setExercisesDisplay(Routine routine) {
-        this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
-    }
-
-    public void setExercisesDisplayError(String exercisesDisplayError) {
-        this.exercisesDisplayError = exercisesDisplayError;
-    }
-
-    public String[][] toStringArray(ArrayList<Exercise> exercise) {
-        String[][] display = new String[exercise.size()][4];
+    public String toExerciseStringArray(ArrayList<Exercise> exercise) {
+        String[] display = new String[exercise.size()];
 
         for (int i = 0; i < exercise.size(); i++) {
-            String [] row = {exercise.get(i).getName(), Integer.toString(exercise.get(i).getSets()), Integer.toString(exercise.get(i).getReps())};
+            display[i] = exercise.get(i).getName();
+        }
+
+        return String.join(", ", display);
+    }
+
+    public String[][] toRoutineStringArray(ArrayList<Routine> routine) {
+        if (routine.isEmpty()) {
+            return new String[][]{{}};
+        }
+
+        String[][] display = new String[routine.size()][2];
+
+        for (int i = 0; i < routine.size(); i++) {
+            String [] row = {routine.get(i).getName(), toExerciseStringArray(routine.get(i).getExercisesList())};
             display[i] = row;
         }
         return display;

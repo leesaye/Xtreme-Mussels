@@ -1,4 +1,4 @@
-package interface_adapter.lookup_routine;
+package interface_adapter.lookup_routines;
 
 import use_case.lookup_routines.LookUpRoutinesInputBoundary;
 
