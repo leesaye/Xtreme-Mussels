@@ -4,6 +4,8 @@ package use_case.add_routine;
 import entity.Routine;
 import entity.RoutineFactory;
 
+import java.util.ArrayList;
+
 
 public class AddRoutineInteractor implements AddRoutineInputBoundary {
     final AddRoutineOutputBoundary addRoutinePresenter;
@@ -18,6 +20,7 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary {
         this.routineFactory = routineFactory;
     }
 
+
     @Override
     public void execute(AddRoutineInputData addRoutineInputData) {
         if (addRoutineDataAccessObject.existsByName(addRoutineInputData.getRoutineName())) {
@@ -25,7 +28,6 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary {
         } else {
             Routine routine = RoutineFactory.create(addRoutineInputData.getRoutineName());
             addRoutineDataAccessObject.addRoutine(routine);
-
 
             AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false);
             addRoutinePresenter.prepareSuccessView(addRoutineOutputData);
