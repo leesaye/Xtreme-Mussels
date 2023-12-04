@@ -12,8 +12,8 @@ public class AddExerciseController {
        this.addExerciseUseCaseInteractor = addExerciseUseCaseInteractor;
     }
 
-    public void execute(String routine_name, String name) {
-        AddExerciseInputData addExerciseInputData = new AddExerciseInputData(routine_name, name);
+    public void execute(String routineName, String exerciseName) {
+        AddExerciseInputData addExerciseInputData = new AddExerciseInputData(routineName, exerciseName);
         addExerciseUseCaseInteractor.execute(addExerciseInputData);
     }
 }

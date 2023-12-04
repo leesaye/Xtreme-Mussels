@@ -5,7 +5,7 @@ import entity.Exercise;
 import java.util.ArrayList;
 
 public interface AddExerciseDataAccessInterface {
-    boolean existsByName(String routine_name);
+    boolean existsByName(String routineName);
 
     ArrayList<Exercise> getExercisesByName(String name, int numberOfExercises);
 

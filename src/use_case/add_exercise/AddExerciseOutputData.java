@@ -6,21 +6,21 @@ import entity.Routine;
 
 public class AddExerciseOutputData {
 
-    private final String routine_name;
-    private final String name; // message: Added <name> to routine id
+    private final String routineName;
+    private final String exerciseName; // message: Added <name> to routine id
 
-    public AddExerciseOutputData(String routine_name, String name) {
+    public AddExerciseOutputData(String routineName, String exerciseName) {
 
-        this.routine_name = routine_name;
-        this.name = name;
+        this.routineName= routineName;
+        this.exerciseName =  exerciseName;
     }
 
-    public String getName() {
-        return name;
+    public String getExerciseName() {
+        return exerciseName;
     }
 
     public String getRoutineName() {
-        return routine_name;
+        return routineName;
     }
 
     // get routine, exercises necessary?
