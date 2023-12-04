@@ -7,7 +7,7 @@ import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
-import view.RoutineView;
+import view.LookUpRoutineView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -44,12 +44,11 @@ class Main {
         RoutineDataAccessObject routineDataAccessObject;
         routineDataAccessObject = new RoutineDataAccessObject();
 
-        RoutineView routineView = RoutineViewUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel, renameRoutineViewModel,
+        LookUpRoutineView lookUpRoutineView = LookUpRoutineViewUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel, renameRoutineViewModel,
                 addExerciseViewModel, deleteExerciseViewModel, adjustSetRepViewModel, routineDataAccessObject);
-        views.add(routineView, routineView.viewName);
+        views.add(lookUpRoutineView, lookUpRoutineView.viewName);
 
-
-        viewManagerModel.setActiveView(routineView.viewName);
+        viewManagerModel.setActiveView(lookUpRoutineView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

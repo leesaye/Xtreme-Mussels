@@ -11,33 +11,40 @@ import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.rename_routine.RenameRoutineController;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
-import view.RoutineView;
+import view.LookUpRoutineView;
 
 import static app.edit_routine.AddExerciseUseCaseFactory.createAddExerciseUseCase;
 import static app.edit_routine.AdjustSetRepUseCaseFactory.createAdjustSetRepUseCase;
 import static app.edit_routine.DeleteExerciseUseCaseFactory.createDeleteExerciseUseCase;
 import static app.edit_routine.RenameRoutineUseCaseFactory.createRenameRoutineRepUseCase;
 
-public class RoutineViewUseCaseFactory {
+public class LookUpRoutineViewUseCaseFactory {
 
-    private RoutineViewUseCaseFactory() {}
+    private LookUpRoutineViewUseCaseFactory() {}
 
-    public static RoutineView create(
+    public static LookUpRoutineView create(
             ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
             DeleteExerciseViewModel deleteExerciseViewModel, AdjustSetRepViewModel adjustViewModel, RoutineDataAccessObject routineDataAccessObject) {
-        // TODO: Uncomment when data access has been written
-//        try {
+
+//        LookUpRoutineController controller = createLookUpRoutineUseCase(viewManagerModel, lookUpRoutineViewModel, routineDataAccessObject);
+
         RenameRoutineController renameRoutineController = createRenameRoutineRepUseCase(viewManagerModel, renameRoutineRepViewModel, routineDataAccessObject);
         AddExerciseController addExerciseController = createAddExerciseUseCase(viewManagerModel, addExerciseViewModel, routineDataAccessObject);
         DeleteExerciseController deleteExerciseController = createDeleteExerciseUseCase(viewManagerModel, deleteExerciseViewModel, routineDataAccessObject);
         AdjustSetRepController adjustSetRepController = createAdjustSetRepUseCase(viewManagerModel, adjustViewModel, routineDataAccessObject);
 
-        return new RoutineView(lookUpRoutineViewModel, renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
+        return new LookUpRoutineView(lookUpRoutineViewModel, renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
                 deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel);
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Could not open routine data file.");
-//        }
     }
 
+    // May not need these create use case methods, keeping them here just in case
+
+//    private static LookUpRoutineController createLookUpRoutineUseCase(ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, RoutineDataAccessObject routineDataAccessObject) {
+//        LookUpRoutineOutputBoundary presenter = new LookUpRoutinePresenter(viewManagerModel, lookUpRoutineViewModel);
+//
+//        LookUpRoutineInputBoundary interactor = new LookUpRoutineInteractor(routineDataAccessObject, presenter);
+//
+//        return new LookUpRoutineController(interactor);
+//    }
 
 }
