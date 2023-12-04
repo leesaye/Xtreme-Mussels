@@ -6,7 +6,10 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class AddRoutineViewModel extends ViewModel {
-    public static String Add_ROUTINE_BUTTON_LABEL = "Add Routine";
+    public static final String TITLE_LABEL = "Routines";
+    public static final String ROUTINE_NAME_LABEL = "Choose routine name";
+    public static final String Add_ROUTINE_BUTTON_LABEL = "Add Routine";
+    public static final String CANCEL_BUTTON_LABEL = "Cancel";
     private AddRoutineState state = new AddRoutineState();
 
     public AddRoutineViewModel(){ super("AddRoutine"); }
