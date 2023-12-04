@@ -6,9 +6,9 @@ public class Routine {
     private String routineName;
     private ArrayList<Exercise> exercisesList;
 
-    public Routine(String routineName, ArrayList<Exercise> exercisesList) {
+    public Routine(String routineName) {
         this.routineName = routineName;
-        this.exercisesList = exercisesList;
+        this.exercisesList = new ArrayList<>();
     }
 
     public String getRoutineName() {

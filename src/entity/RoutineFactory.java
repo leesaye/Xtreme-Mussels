@@ -12,6 +12,6 @@ public class RoutineFactory {
      * @return
      */
     public static Routine create(String routineName) {
-        return new Routine(routineName, new ArrayList<>());
+        return new Routine(routineName);
     }
 }
