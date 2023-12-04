@@ -14,11 +14,11 @@ public class Routine {
     public String getRoutineName() {
         return routineName;
     }
-    public void setName(String routineName) {
-        this.routineName = routineName;
-    }
     public ArrayList<Exercise> getExercisesList() {
         return exercisesList;
+    }
+    public void setName(String routineName) {
+        this.routineName = routineName;
     }
     public void setExercisesList(ArrayList<Exercise> exercisesList) {
         this.exercisesList = exercisesList;

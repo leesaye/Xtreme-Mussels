@@ -14,17 +14,18 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
     private AddExerciseViewModel addExerciseViewModel;
 
 
-    public AddRoutinePresenter(ViewManagerModel viewManagerModel, AddRoutineViewModel addRoutineViewModel, AddExerciseViewModel addExerciseViewModel) {
+    public AddRoutinePresenter(ViewManagerModel viewManagerModel, AddRoutineViewModel addRoutineViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.addRoutineViewModel = addRoutineViewModel;
-        this.addExerciseViewModel = addExerciseViewModel;
     }
 
 
     @Override
     public void prepareSuccessView(AddRoutineOutputData response) {
-//        On success, switch to the <add exercise> view.
-//        TODO: uncomment and modify once AddExercise interface adapter is done / merged
+        // TODO: implement this
+        // On success, switch to the <Single Routine> view.
+
+//        Template:
 //        AddExerciseState addExerciseState = addExerciseViewModel.getState();
 //        addExerciseState.setRoutineName(response.getRoutineName());
 //        this.addExerciseViewModel.setState(addExerciseState);
@@ -36,9 +37,8 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
 
 
     public void prepareFailView(String error) {
-        //        TODO: uncomment and modify once AddExercise interface adapter is done / merged
-        //        AddRoutineState addRoutineState = addRoutineViewModel.getState();
-        //        addRoutineState.setRoutineNameError(error);
-        //        addRoutineViewModel.firePropertyChanged();
+        AddRoutineState addRoutineState = addRoutineViewModel.getState();
+        addRoutineState.setRoutineNameError(error);
+        addRoutineViewModel.firePropertyChanged();
     }
 }
