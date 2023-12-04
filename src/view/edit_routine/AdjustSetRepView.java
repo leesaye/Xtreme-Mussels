@@ -1,3 +1,4 @@
+
 package view.edit_routine;
 
 import interface_adapter.adjust_setrep.AdjustSetRepController;
@@ -68,7 +69,8 @@ public class AdjustSetRepView extends JPanel implements ActionListener, Property
                                 reps.add(parseInt(model.getValueAt(i, 2).toString()));
                             }
 
-                            adjustController.execute(currentState.getId(), sets, reps);
+
+//                            adjustController.execute(currentState.getId(), sets, reps);
                         }
 
                     }

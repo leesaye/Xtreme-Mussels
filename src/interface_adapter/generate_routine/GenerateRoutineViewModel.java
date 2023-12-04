@@ -6,6 +6,8 @@ import java.beans.PropertyChangeSupport;
 public abstract class GenerateRoutineViewModel {
 
     public static final String VIEW_NAME = "Generate Routine";
+    public static final String BACK_TO_MAIN = "Back to main";
+
     public static final String GENERATE_ROUTINE_LABEL = "Generate routine";
     public static final String TARGET_LABEL = "Target body part: ";
     public static final String ROUTINE_NAME = "Routine name: ";

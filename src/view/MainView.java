@@ -3,6 +3,7 @@ package view;
 import interface_adapter.MainViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.lookup.LookUpViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 
 import javax.swing.*;
@@ -21,12 +22,16 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
     private ViewManagerModel viewManagerModel;
     private LookupView lookupView;
     private LookUpRoutinesView lookUpRoutinesView;
+    private LookUpRoutinesController lookUpRoutinesController;
 
-    public MainView(MainViewModel mainViewModel, ViewManagerModel viewManagerModel, LookupView lookupView, LookUpRoutinesView lookUpRoutinesView){
+
+    public MainView(MainViewModel mainViewModel, ViewManagerModel viewManagerModel, LookupView lookupView, LookUpRoutinesView lookUpRoutinesView, LookUpRoutinesController controller){
         this.mainViewModel = mainViewModel;
         this.viewManagerModel = viewManagerModel;
         this.lookupView = lookupView;
         this.lookUpRoutinesView = lookUpRoutinesView;
+        this.lookUpRoutinesController = controller;
+
         mainViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(MainViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -40,6 +45,8 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource().equals(lookUpExercises)) {
+
+                    //TODO: just add the view name
                     viewManagerModel.setActiveView(lookupView.lookUpViewName);
                     viewManagerModel.firePropertyChanged();
                 }
@@ -50,8 +57,16 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource().equals(viewAllRoutines)) {
-                    viewManagerModel.setActiveView(lookUpRoutinesView.getName());
+                    // call the controller for lookUpRoutines
+
+                    System.out.println("works?");
+                    //TODO: uncomment once lookupRoutines is done
+                    lookUpRoutinesController.execute();
+                    viewManagerModel.setActiveView(lookUpRoutinesView.lookUpRoutinesName);
                     viewManagerModel.firePropertyChanged();
+
+
+
                 }
             }
         });

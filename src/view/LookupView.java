@@ -1,8 +1,18 @@
 package view;
 
+import app.LookUpRoutinesUseCaseFactory;
+import com.sun.tools.javac.Main;
+import interface_adapter.MainViewModel;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModel;
 import interface_adapter.lookup.LookUpController;
 import interface_adapter.lookup.LookUpState;
 import interface_adapter.lookup.LookUpViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesController;
+import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
+import use_case.lookup_routines.LookUpRoutinesDataAccessInterface;
+import use_case.lookup_routines.LookUpRoutinesInputBoundary;
+import use_case.lookup_routines.LookUpRoutinesInteractor;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,13 +30,19 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
 
     private final JButton lookUpByNameButton;
     private final JButton lookUpByTargetButton;
+    private final JButton cancelButton;
     // adding the controller and view model
     private final LookUpViewModel lookUpViewModel;
     private final LookUpController controller;
 
-    public LookupView(LookUpViewModel lookUpViewModel, LookUpController controller) {
+    private ViewManagerModel viewManagerModel;
+    private LookUpRoutinesView lookUpRoutinesView;
+    public LookupView(LookUpViewModel lookUpViewModel, LookUpController controller, ViewManagerModel viewManagerModel) {
         this.lookUpViewModel = lookUpViewModel;
         this.controller = controller;
+        this.viewManagerModel = viewManagerModel;
+//        MainView mainView = new MainView(new MainViewModel(""), viewManagerModel, LookupView.this, lookUpRoutinesView);
+//        this.mainView = mainView;
         lookUpViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(LookUpViewModel.TITLE_LABEL);
@@ -34,12 +50,14 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
         String[] items = {"abductors" ,"abs","adductors","biceps","calves","cardiovascular system","delts","forearms","glutes","hamstrings","lats","levator scapulae","pectorals","quads","serratus anterior","spine","traps","triceps","upper back"};
         lookupByTarget = new JComboBox<>(items);
         JPanel buttons = new JPanel();
+        cancelButton = new JButton(LookUpViewModel.CANCEL_BUTTON_LABEL);
         lookUpByNameButton = new JButton(LookUpViewModel.NAME_LOOKUP_BUTTON_LABEL);
         lookUpByTargetButton = new JButton(LookUpViewModel.TARGET_LOOKUP_BUTTON_LABEL);
         LabelComboPanel byTarget = new LabelComboPanel(new JLabel(LookUpViewModel.TARGET_LOOKUP_BUTTON_LABEL), lookupByTarget);
         LabelTextPanel byName = new LabelTextPanel(new JLabel(LookUpViewModel.NAME_LOOKUP_BUTTON_LABEL), lookupByName);
         buttons.add(lookUpByNameButton);
         buttons.add(lookUpByTargetButton);
+        buttons.add(cancelButton);
 
         // the lookUpByName actionlistener:
         lookUpByNameButton.addActionListener(new ActionListener() {
@@ -106,6 +124,17 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
 
 
                     JOptionPane.showMessageDialog(LookupView.this, tableScrollPane, "Exercise Lookup Result", JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource().equals(cancelButton)) {
+                    viewManagerModel.setActiveView("Xtreme Mussels Main View");
+                    viewManagerModel.firePropertyChanged();
+
                 }
             }
         });

@@ -6,7 +6,6 @@ import java.beans.PropertyChangeSupport;
 
 public class LookUpViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Look Up View";
-
     public static final String TARGET_LOOKUP_BUTTON_LABEL = "By target muscle";
 
     public static final String NAME_LOOKUP_BUTTON_LABEL = "By name";
