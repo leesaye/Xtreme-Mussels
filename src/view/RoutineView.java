@@ -1,5 +1,6 @@
 package view;
 
+import entity.Exercise;
 import entity.Routine;
 import interface_adapter.add_exercise.AddExerciseController;
 import interface_adapter.add_exercise.AddExerciseState;
@@ -60,8 +61,6 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
 
     private static DefaultTableModel model;
 
-    private final Routine routine;
-
     private final JButton back;
 
     public RoutineView(LookUpRoutineViewModel lookUpRoutineViewModel,
@@ -84,7 +83,11 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
         this.adjustSetRepController = adjustSetRepController;
         this.adjustSetRepViewModel = adjustSetRepViewModel;
 
-        routine = lookUpRoutineViewModel.getState().getRoutine();
+        lookUpRoutineViewModel.addPropertyChangeListener(this);
+        renameRoutineViewModel.addPropertyChangeListener(this);
+        addExerciseViewModel.addPropertyChangeListener(this);
+        deleteExerciseViewModel.addPropertyChangeListener(this);
+        adjustSetRepViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(LookUpRoutineViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -111,7 +114,8 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
                             String newExercise = JOptionPane.showInputDialog(("Enter a new exercise:"));
-                            addExerciseController.execute(routine.getName(), newExercise);
+                            Routine routine = lookUpRoutineViewModel.getState().getRoutine();
+                            addExerciseController.execute(routine.getRoutineName(), newExercise);
                         }
                     }
                 }
@@ -123,8 +127,9 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)) {
                             if (table.getSelectedRow() != -1) {
+                                Routine routine = lookUpRoutineViewModel.getState().getRoutine();
                                 String exerciseName = table.getValueAt(table.getSelectedRow(), 0).toString();
-                                deleteExerciseController.execute(routine.getName(), exerciseName);
+                                deleteExerciseController.execute(routine.getRoutineName(), exerciseName);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Select a row and try again");
                             }
@@ -138,8 +143,9 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(rename)) {
+                            Routine routine = lookUpRoutineViewModel.getState().getRoutine();
                             String newName = JOptionPane.showInputDialog("Enter a new routine name: ");
-                            renameRoutineController.execute(routine.getName(), newName); // TODO: Doesn't work yet because DAO is yet to exist
+                            renameRoutineController.execute(routine.getRoutineName(), newName);
                         }
                     }
                 }
@@ -150,7 +156,7 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(adjust)) {
-                            AdjustSetRepState currentState = adjustSetRepViewModel.getState();
+                            Routine routine = lookUpRoutineViewModel.getState().getRoutine();
 
                             // Create ArrayLists of integers for the controller
                             ArrayList<Integer> sets = new ArrayList<>();
@@ -161,7 +167,7 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
                                 reps.add(parseInt(model.getValueAt(i, 2).toString()));
                             }
 
-                            adjustSetRepController.execute(routine.getName(), sets, reps);
+                            adjustSetRepController.execute(routine.getRoutineName(), sets, reps);
                         }
                     }
                 }
@@ -190,22 +196,30 @@ public class RoutineView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof AddExerciseState) {
+            model = new DefaultTableModel(addExerciseViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "Exercise added");
         }
 
-        if (evt.getNewValue() instanceof DeleteExerciseState) {
+        else if (evt.getNewValue() instanceof DeleteExerciseState) {
+            model = new DefaultTableModel(deleteExerciseViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "Exercise deleted");
         }
 
-        if (evt.getNewValue() instanceof RenameRoutineState) {
+        else if (evt.getNewValue() instanceof RenameRoutineState) {
             RenameRoutineState state = (RenameRoutineState) evt.getNewValue();
             JOptionPane.showMessageDialog(this, state.getName() + ": rename success");
         }
 
-        if (evt.getNewValue() instanceof AdjustSetRepState) {
+        else if (evt.getNewValue() instanceof AdjustSetRepState) {
+            model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "New sets and reps saved");
         }
 
+        else { // The event was switching into the view
+            model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+        }
 
+        table.setModel(model);
     }
+
 }
