@@ -1,6 +1,7 @@
 package interface_adapter.adjust_setrep;
 
 import entity.Exercise;
+import entity.Routine;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ public class AdjustSetRepState {
     private ArrayList<Integer> sets = null;
 
     private ArrayList<Integer> reps = null;
+
+    private Routine routine;
+
+    private String[][] exercisesDisplay;
 
     private String nameError;
 
@@ -53,21 +58,6 @@ public class AdjustSetRepState {
         return nameError;
     }
 
-    public Object[][] getSetAndRepsArray() {
-        ArrayList<Object[]> tempExercises = new ArrayList<>();
-
-        for (Exercise exercise : this.exercises) {
-            tempExercises.add(new Object[]{exercise.getName(), exercise.getSets(), exercise.getReps()});
-        }
-
-        Object[][] tempArray = new Object[tempExercises.size()][2];
-
-        for (int i = 0; i < tempExercises.size(); i++) {
-            tempArray[i] = tempExercises.get(i);
-        }
-
-        return tempArray;
-    }
 
     public ArrayList<Integer> getSets() {
         return sets;
@@ -77,4 +67,29 @@ public class AdjustSetRepState {
         return reps;
     }
 
+    public void setRoutine(Routine routine) {
+        this.routine = routine;
+    }
+
+    public String[][] getExercisesDisplay() {
+        return exercisesDisplay;
+    }
+
+    public void setExercisesDisplay() {
+        this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
+    }
+
+    public String[][] toStringArray(ArrayList<Exercise> exercise) {
+        if (exercise.isEmpty()) {
+            return new String[][]{{}};
+        }
+
+        String[][] display = new String[exercise.size()][4];
+
+        for (int i = 0; i < exercise.size(); i++) {
+            String [] row = {exercise.get(i).getName(), Integer.toString(exercise.get(i).getSets()), Integer.toString(exercise.get(i).getReps())};
+            display[i] = row;
+        }
+        return display;
+    }
 }

@@ -22,7 +22,7 @@ public class AdjustSetRepInteractor implements AdjustSetRepInputBoundary {
         } else {
             // Update the routine with the new name and exercises/sets
             adjustDataAccessObject.updateRoutine(id, adjustSetRepInputData.getSets(), adjustSetRepInputData.getReps());
-            adjustPresenter.prepareSuccessView(new AdjustSetRepOutputData(id));
+            adjustPresenter.prepareSuccessView(new AdjustSetRepOutputData(id, adjustDataAccessObject.getRoutine(id)));
         }
     }
 }
