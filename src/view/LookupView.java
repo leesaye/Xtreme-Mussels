@@ -5,6 +5,7 @@ import interface_adapter.lookup.LookUpState;
 import interface_adapter.lookup.LookUpViewModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.beans.PropertyChangeListener;
 
 public class LookupView extends JPanel implements ActionListener, PropertyChangeListener {
     // adding the field to enter the name for lookUp
+    public final String lookUpViewName = "Look Up Exervises";
     private final JTextField lookupByName = new JTextField(20);
     private final JComboBox lookupByTarget;
 
@@ -46,6 +48,30 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
                 if (e.getSource().equals(lookUpByNameButton)) {
                     LookUpState currState = lookUpViewModel.getState();
                     controller.execute(lookupByName.getText(), "name");
+                    String[][] output = lookUpViewModel.getState().getExercisesDisplay();
+                    DefaultTableModel model = new DefaultTableModel(new String[0][], new String[]{"Exercise Name", "Target Area/Muscle"})
+
+                    {
+                        @Override
+                        public boolean isCellEditable(int row, int column) {
+                            return false;
+                        }
+                    };
+                    for (String[] row : output) {
+                        String routineName = row[0];
+                        String exercises = row[1];
+
+                        // Add a new row to the model
+                        model.addRow(new Object[]{routineName, exercises});
+                    }
+
+
+                    JTable table = new JTable(model);
+                    JScrollPane tableScrollPane = new JScrollPane(table);
+                    table.getTableHeader().setReorderingAllowed(false);
+
+
+                    JOptionPane.showMessageDialog(LookupView.this, tableScrollPane, "Exercise Lookup Result", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
@@ -56,6 +82,30 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
                 if (e.getSource().equals(lookUpByTargetButton)) {
                     LookUpState currState = lookUpViewModel.getState();
                     controller.execute((String) lookupByTarget.getSelectedItem(), "target");
+                    String[][] output = lookUpViewModel.getState().getExercisesDisplay();
+                    DefaultTableModel model = new DefaultTableModel(new String[0][], new String[]{"Exercise Name", "Target Area/Muscle"})
+
+                    {
+                        @Override
+                        public boolean isCellEditable(int row, int column) {
+                            return false;
+                        }
+                    };
+                    for (String[] row : output) {
+                        String routineName = row[0];
+                        String exercises = row[1];
+
+                        // Add a new row to the model
+                        model.addRow(new Object[]{routineName, exercises});
+                    }
+
+
+                    JTable table = new JTable(model);
+                    JScrollPane tableScrollPane = new JScrollPane(table);
+                    table.getTableHeader().setReorderingAllowed(false);
+
+
+                    JOptionPane.showMessageDialog(LookupView.this, tableScrollPane, "Exercise Lookup Result", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
@@ -68,6 +118,7 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
 
 
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
