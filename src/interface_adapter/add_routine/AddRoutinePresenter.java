@@ -14,7 +14,7 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
     private AddExerciseViewModel addExerciseViewModel;
 
 
-    public AddRoutinePresenter(ViewManagerModel viewManagerModel, AddRoutineViewModel addRoutineViewModel, AddExerciseViewModel addExerciseViewModel) {
+    public AddRoutinePresenter(ViewManagerModel viewManagerModel, AddRoutineViewModel addRoutineViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.addRoutineViewModel = addRoutineViewModel;
     }
@@ -22,8 +22,8 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
 
     @Override
     public void prepareSuccessView(AddRoutineOutputData response) {
-//      On success, switch to the <Single Routine> view.
-//      TODO: modify once everything is merged
+        // TODO: implement this
+        // On success, switch to the <Single Routine> view.
 
 //        Template:
 //        AddExerciseState addExerciseState = addExerciseViewModel.getState();
@@ -37,7 +37,6 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
 
 
     public void prepareFailView(String error) {
-//      TODO: modify once everything is merged
         AddRoutineState addRoutineState = addRoutineViewModel.getState();
         addRoutineState.setRoutineNameError(error);
         addRoutineViewModel.firePropertyChanged();
