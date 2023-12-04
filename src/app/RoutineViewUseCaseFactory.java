@@ -1,6 +1,6 @@
 package app;
 
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_exercise.AddExerciseController;
 import interface_adapter.add_exercise.AddExercisePresenter;
@@ -17,6 +17,7 @@ import use_case.add_exercise.AddExerciseOutputBoundary;
 import use_case.delete_exercise.DeleteExerciseInputBoundary;
 import use_case.delete_exercise.DeleteExerciseInteractor;
 import use_case.delete_exercise.DeleteExerciseOutputBoundary;
+import use_case.rename_routine.RenameRoutineDataAccessInterface;
 import use_case.rename_routine.RenameRoutineInputBoundary;
 import use_case.rename_routine.RenameRoutineInteractor;
 import use_case.rename_routine.RenameRoutineOutputBoundary;
@@ -28,10 +29,10 @@ public class RoutineViewUseCaseFactory {
 
     public static RoutineView create(
             ViewManagerModel viewManagerModel, RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
-            DeleteExerciseViewModel deleteExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+            DeleteExerciseViewModel deleteExerciseViewModel, RoutineDataAccessObject routineDataAccessObject) {
         // TODO: Uncomment when data access has been written
 //        try {
-        RenameRoutineController renameRoutineController = createRenameRoutineRepUseCase(viewManagerModel, renameRoutineRepViewModel, routineDataAccessObject);
+        RenameRoutineController renameRoutineController = createRenameRoutineRepUseCase(viewManagerModel, renameRoutineRepViewModel, (RenameRoutineDataAccessInterface) routineDataAccessObject);
         AddExerciseController addExerciseController = createAddExerciseUseCase(viewManagerModel, addExerciseViewModel, routineDataAccessObject);
         DeleteExerciseController deleteExerciseController = createDeleteExerciseUseCase(viewManagerModel, deleteExerciseViewModel, routineDataAccessObject);
         return new RoutineView(renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel, deleteExerciseController, deleteExerciseViewModel);
@@ -40,7 +41,7 @@ public class RoutineViewUseCaseFactory {
 //        }
     }
 
-    private static DeleteExerciseController createDeleteExerciseUseCase(ViewManagerModel viewManagerModel, DeleteExerciseViewModel deleteExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    private static DeleteExerciseController createDeleteExerciseUseCase(ViewManagerModel viewManagerModel, DeleteExerciseViewModel deleteExerciseViewModel, RoutineDataAccessObject routineDataAccessObject) {
         DeleteExerciseOutputBoundary deleteExerciseOutputBoundary = new DeleteExercisePresenter(viewManagerModel, deleteExerciseViewModel);
 
         DeleteExerciseInputBoundary deleteExerciseInteractor = new DeleteExerciseInteractor(routineDataAccessObject, deleteExerciseOutputBoundary);
@@ -48,7 +49,7 @@ public class RoutineViewUseCaseFactory {
         return new DeleteExerciseController(deleteExerciseInteractor);
     }
 
-    private static AddExerciseController createAddExerciseUseCase(ViewManagerModel viewManagerModel, AddExerciseViewModel addExerciseViewModel, FileRoutineDataAccessObject routineDataAccessObject) {
+    private static AddExerciseController createAddExerciseUseCase(ViewManagerModel viewManagerModel, AddExerciseViewModel addExerciseViewModel, RoutineDataAccessObject routineDataAccessObject) {
         AddExerciseOutputBoundary addExerciseOutputBoundary = new AddExercisePresenter(viewManagerModel, addExerciseViewModel);
 
         AddExerciseInputBoundary addExerciseInteractor = new AddExerciseInteractor(routineDataAccessObject, addExerciseOutputBoundary);
@@ -58,7 +59,7 @@ public class RoutineViewUseCaseFactory {
 
     private static RenameRoutineController createRenameRoutineRepUseCase(ViewManagerModel viewManagerModel,
                                                                          RenameRoutineViewModel renameRoutineRepViewModel,
-                                                                         FileRoutineDataAccessObject routineDataAccessObject) {
+                                                                         RenameRoutineDataAccessInterface routineDataAccessObject) {
         RenameRoutineOutputBoundary renameRoutineOutputBoundary = new RenameRoutinePresenter(viewManagerModel, renameRoutineRepViewModel);
 
         RenameRoutineInputBoundary renameInteractor = new RenameRoutineInteractor(routineDataAccessObject, renameRoutineOutputBoundary);
