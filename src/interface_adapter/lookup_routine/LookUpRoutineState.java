@@ -7,10 +7,8 @@ import java.util.ArrayList;
 
 public class LookUpRoutineState {
     private Routine routine = null;
-//    private ArrayList<String> exercisesDisplay = null;
 
-    // Temporary to test it works
-    private String[][] exercisesDisplay = {{"Exercise 1", "10", "2"}};
+    private String[][] exercisesDisplay;
 
     private String routineError = null;
     private String exercisesDisplayError = null;
@@ -38,7 +36,7 @@ public class LookUpRoutineState {
         return exercisesDisplay;
     }
 
-    public void setExercisesDisplay(Routine routine) {
+    public void setExercisesDisplay() {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 

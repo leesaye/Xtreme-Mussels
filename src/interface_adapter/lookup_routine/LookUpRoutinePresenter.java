@@ -17,7 +17,7 @@ public class LookUpRoutinePresenter implements LookUpRoutineOutputBoundary {
     public void prepareSuccessView(LookUpRoutineOutputData response) {
         LookUpRoutineState lookUpRoutineState = lookUpRoutineViewModel.getState();
         lookUpRoutineState.setRoutine(response.getRoutine());
-        lookUpRoutineState.setExercisesDisplay(response.getRoutine());
+        lookUpRoutineState.setExercisesDisplay();
         lookUpRoutineViewModel.setState(lookUpRoutineState);
         this.lookUpRoutineViewModel.firePropertyChanged();
 
