@@ -1,6 +1,7 @@
 package use_case.delete_exercise;
 
 import entity.Exercise;
+import entity.Routine;
 
 import java.util.ArrayList;
 
@@ -10,10 +11,13 @@ public class DeleteExerciseOutputData {
 
     private final String routine_name;
     private final String exercise_name; // message: Added <name> to routine id
-    public DeleteExerciseOutputData(String routine_name, String name) {
 
+    private final Routine routine;
+
+    public DeleteExerciseOutputData(String routine_name, String name, Routine routine) {
         this.routine_name = routine_name;
         this.exercise_name = name;
+        this.routine = routine;
     }
 
     public String getExerciseName() {
@@ -23,5 +27,7 @@ public class DeleteExerciseOutputData {
     public String getRoutineName() {
         return routine_name;
     }
+
+    public Routine getRoutine() { return routine; }
 
 }

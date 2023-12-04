@@ -132,7 +132,7 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource().equals(cancelButton)) {
-                    viewManagerModel.setActiveView("Xtreme Mussels Main View");
+                    viewManagerModel.setActiveView("Xtreme Mussels Main Viewgit ");
                     viewManagerModel.firePropertyChanged();
 
                 }

@@ -21,6 +21,8 @@ public class LookUpRoutinesPresenter implements LookUpRoutinesOutputBoundary {
         lookUpRoutinesViewModel.setState(lookUpRoutinesState);
         this.lookUpRoutinesViewModel.firePropertyChanged();
 
-
+        // Switch to the single routine view
+        viewManagerModel.setActiveView("single routine");
+        viewManagerModel.firePropertyChanged();
     }
 }

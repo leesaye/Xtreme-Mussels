@@ -34,7 +34,7 @@ public class LookUpRoutinesPresenterTest {
     // NOTE: no fail view, will simply output "empty" success view when no routines
     @Test
     void prepareSuccessTest() {
-        LookUpRoutinesViewModel lookUpRoutinesViewModel = new LookUpRoutinesViewModel("look up routines") {
+        LookUpRoutinesViewModel lookUpRoutinesViewModel = new LookUpRoutinesViewModel() {
             private LookUpRoutinesState state = new LookUpRoutinesState();
 
             public LookUpRoutinesState getState() { return state; }

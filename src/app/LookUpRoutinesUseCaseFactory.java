@@ -21,7 +21,6 @@ import java.io.IOException;
 
 public class LookUpRoutinesUseCaseFactory {
     private LookUpRoutinesUseCaseFactory() {}
-    private MainView mainView;
 
     public static LookUpRoutinesView create(ViewManagerModel viewManagerModel, LookUpRoutinesViewModel lookUpRoutinesViewModel, LookUpRoutinesDataAccessInterface lookUpRoutinesDataAccessInterface, GenerateRoutineView generateRoutineView) {
         try {
@@ -44,5 +43,4 @@ public class LookUpRoutinesUseCaseFactory {
         return new LookUpRoutinesController(lookUpRoutinesInteractor);
         }
     }
-
 

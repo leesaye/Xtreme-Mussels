@@ -29,7 +29,7 @@ public class LookUpRoutinePresenterTest {
 
     @Test
     void prepareSuccessTest() {
-        LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel("look up routine") {
+        LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel() {
             private LookUpRoutineState state = new LookUpRoutineState();
 
             public LookUpRoutineState getState() { return state; }
@@ -49,7 +49,7 @@ public class LookUpRoutinePresenterTest {
 
     @Test
     void prepareFailView() {
-        LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel("look up routine") {
+        LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel() {
             private LookUpRoutineState state = new LookUpRoutineState();
 
             public LookUpRoutineState getState() { return state; }

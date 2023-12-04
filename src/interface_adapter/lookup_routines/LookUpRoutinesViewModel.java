@@ -15,7 +15,7 @@ public class LookUpRoutinesViewModel extends ViewModel {
 
     private LookUpRoutinesState state = new LookUpRoutinesState();
 
-    public LookUpRoutinesViewModel(String viewName) {
+    public LookUpRoutinesViewModel() {
         super("look up all routine");
     }
 

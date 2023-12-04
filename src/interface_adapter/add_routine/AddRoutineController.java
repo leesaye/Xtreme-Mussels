@@ -14,7 +14,11 @@ public class AddRoutineController {
         this.addRoutineUseCaseInteractor = addRoutineUseCaseInteractor;
     }
 
+<<<<<<< HEAD
     public void execute(int id, String routineName, ArrayList<Map<String, Object>> exercisesList) {
+=======
+    public void execute(String routineName) {
+>>>>>>> main
         AddRoutineInputData addRoutineInputData = new AddRoutineInputData(routineName);
 
         addRoutineUseCaseInteractor.execute(addRoutineInputData);

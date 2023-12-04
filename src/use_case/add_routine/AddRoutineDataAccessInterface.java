@@ -6,6 +6,5 @@ import entity.Routine;
 public interface AddRoutineDataAccessInterface {
     boolean existsByName(String identifier);
 
-
     void addRoutine(Routine routine);
 }
