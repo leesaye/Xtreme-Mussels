@@ -1,15 +1,14 @@
 package interface_adapter.add_routine;
 
-
 public class AddRoutineState {
     private String routineName = "";
     private String routineNameError = null;
-
 
     public AddRoutineState(AddRoutineState copy) {
         routineName = copy.routineName;
         routineNameError = copy.routineNameError;
     }
+
 
     public AddRoutineState() {
     }

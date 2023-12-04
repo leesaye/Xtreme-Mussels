@@ -11,7 +11,7 @@ public class RenameRoutineController {
         this.renameRoutineInteractor = renameRoutineInteractor;
     }
 
-    public void execute(int id, String name) {
+    public void execute(String id, String name) {
         RenameRoutineInputData renameRoutineInputData = new RenameRoutineInputData(id, name);
 
         renameRoutineInteractor.execute(renameRoutineInputData);

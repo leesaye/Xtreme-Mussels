@@ -22,7 +22,7 @@ class RenameRoutineInteractorTest {
             }
         };
 
-        RenameRoutineInputData inputData = new RenameRoutineInputData(1, "new");
+        RenameRoutineInputData inputData = new RenameRoutineInputData("1", "new");
         RenameRoutineInteractor interactor = new RenameRoutineInteractor(dataAccess, renamePresenter);
 
         interactor.execute(inputData);
@@ -45,7 +45,7 @@ class RenameRoutineInteractorTest {
             }
         };
 
-        RenameRoutineInputData inputData = new RenameRoutineInputData(2, "new");
+        RenameRoutineInputData inputData = new RenameRoutineInputData("2", "new");
         RenameRoutineInteractor interactor = new RenameRoutineInteractor(dataAccess, renamePresenter);
 
         interactor.execute(inputData);
@@ -55,19 +55,19 @@ class RenameRoutineInteractorTest {
 
 class TestDataAccess implements RenameRoutineDataAccessInterface {
 
-    int id = 1;
+    String id = "1";
     String name = "old";
 
     public TestDataAccess() {
     }
 
     @Override
-    public boolean existsById(int id) {
-        return id == this.id;
+    public boolean existsByName(String id) {
+        return this.id.equals(id);
     }
 
     @Override
-    public void changeName(int id, String name) {
+    public void changeName(String id, String name) {
         this.name = name;
     }
 
