@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 public class LookUpRoutineState {
     private Routine routine = null;
-    private ArrayList<String> exercisesDisplay = null;
-    private String routineError = null;
-    private String exercisesDisplayError = null;
+    private String[][] exercisesDisplay = null;
+    private String routineError;
 
     public LookUpRoutineState() {
     }
@@ -30,29 +29,24 @@ public class LookUpRoutineState {
         this.routineError = routineError;
     }
 
-    public ArrayList<String> getExercisesDisplay() {
+    public String[][] getExercisesDisplay() {
         return exercisesDisplay;
-    }
-
-    public String getExercisesDisplayError() {
-        return exercisesDisplayError;
     }
 
     public void setExercisesDisplay(Routine routine) {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 
-    public void setExercisesDisplayError(String exercisesDisplayError) {
-        this.exercisesDisplayError = exercisesDisplayError;
-    }
+    public String[][] toStringArray(ArrayList<Exercise> exercise) {
+        if (exercise.isEmpty()) {
+            return new String[][]{{}};
+        }
 
-    public ArrayList<String> toStringArray(ArrayList<Exercise> exercise) {
-        ArrayList<String> display = new ArrayList<>();
-        for (Exercise value : exercise) {
-            display.add("Name: " + value.getName() +
-                    "\nEquipment: " + value.getEquipment() +
-                    "\nSets x Reps: " + value.getSets() + "x" + value.getReps() +
-                    "\nInstructions: " + value.getInstructions().toString() + "\n\n");
+        String[][] display = new String[exercise.size()][4];
+
+        for (int i = 0; i < exercise.size(); i++) {
+            String [] row = {exercise.get(i).getName(), Integer.toString(exercise.get(i).getSets()), Integer.toString(exercise.get(i).getReps())};
+            display[i] = row;
         }
         return display;
     }
