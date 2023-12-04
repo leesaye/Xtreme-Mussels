@@ -8,7 +8,7 @@ public class AddExerciseInputData {
     final private String exerciseName;
 
 
-    public AddExerciseInputData(String routineName, String exerciseName {
+    public AddExerciseInputData(String routineName, String exerciseName){
         this.routineName = routineName;
         this.exerciseName = exerciseName;
     }
