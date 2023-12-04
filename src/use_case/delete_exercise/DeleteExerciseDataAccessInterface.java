@@ -1,5 +1,7 @@
 package use_case.delete_exercise;
 
+import entity.Routine;
+
 public interface DeleteExerciseDataAccessInterface {
     boolean existsByName(String routine_name);
 
@@ -10,4 +12,5 @@ public interface DeleteExerciseDataAccessInterface {
     //note: discuss implementation, possible exception/changing to take a name
     void deleteExercise(String identifier, String exerciseName);
 
+    Routine getRoutine(String routineName);
 }

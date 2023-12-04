@@ -9,10 +9,12 @@ public class AddExerciseOutputData {
     private final String routine_name;
     private final String name; // message: Added <name> to routine id
 
-    public AddExerciseOutputData(String routine_name, String name) {
+    private final Routine routine;
 
+    public AddExerciseOutputData(String routine_name, String name, Routine routine) {
         this.routine_name = routine_name;
         this.name = name;
+        this.routine = routine;
     }
 
     public String getName() {
@@ -22,6 +24,8 @@ public class AddExerciseOutputData {
     public String getRoutineName() {
         return routine_name;
     }
+
+    public Routine getRoutine() { return routine; }
 
     // get routine, exercises necessary?
 }

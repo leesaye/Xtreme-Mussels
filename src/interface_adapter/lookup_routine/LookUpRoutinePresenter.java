@@ -20,6 +20,9 @@ public class LookUpRoutinePresenter implements LookUpRoutineOutputBoundary {
         lookUpRoutineState.setExercisesDisplay(response.getRoutine());
         lookUpRoutineViewModel.setState(lookUpRoutineState);
         this.lookUpRoutineViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView("single routine");
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
