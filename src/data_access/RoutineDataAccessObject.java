@@ -81,7 +81,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
                 LinkedHashMap linkedHashMap = (LinkedHashMap) mapping.get(key);
 
                 // Name of routine
-                String name = (String) linkedHashMap.get("name");
+                String name = (String) linkedHashMap.get("routineName");
 
                 // Now exercisesList (arraylist of linked hash maps)
                 ArrayList exercisesList = (ArrayList) linkedHashMap.get("exercisesList");
