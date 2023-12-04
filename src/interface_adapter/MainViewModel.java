@@ -4,9 +4,10 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class MainViewModel extends ViewModel{
-    public static final String TITLE_LABEL = "Main View";
+    public static final String TITLE_LABEL = "Xtreme Mussels";
     public static final String LOOKUP_LABEL = "Look Up Exercises";
     public static final String VIEWALL_LABEL = "View Routines";
+
 
     public MainViewModel(String viewName) {
         super(viewName);
