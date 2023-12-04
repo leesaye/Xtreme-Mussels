@@ -1,9 +1,5 @@
 package use_case.delete_exercise;
 
-import use_case.add_exercise.AddExerciseDataAccessInterface;
-import use_case.add_exercise.AddExerciseInputData;
-import use_case.add_exercise.AddExerciseOutputBoundary;
-
 public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
 
     /**
@@ -21,20 +17,20 @@ public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
 
     @Override
     public void execute(DeleteExerciseInputData deleteExerciseInputData) {
-        String routine_name = deleteExerciseInputData.getRoutineName();
+        String routineName = deleteExerciseInputData.getRoutineName();
         String exercise_name = deleteExerciseInputData.getExerciseName();
 
         // Check routine with id corresponding to id exists
-        if (!deleteExerciseDataAccessObject.existsByName(routine_name )) {
+        if (!deleteExerciseDataAccessObject.existsByName(routineName)) {
             // Use exceptions? instead
-            deleteExercisePresenter.prepareFailView("Routine" + routine_name+ "does not exist");
+            deleteExercisePresenter.prepareFailView("Routine" + routineName + "does not exist");
             // Check exercise with name corresponding to exercise_name exists
-        } else if (!deleteExerciseDataAccessObject.existsById(routine_name, exercise_name)) {
+        } else if (!deleteExerciseDataAccessObject.existsById(routineName, exercise_name)) {
             deleteExercisePresenter.prepareFailView("Exercise" + exercise_name+ "does not exist in specified routine");
         } else {
             // Update the routine named routine_name by adding the exercise corresponding to exercise_name
-            deleteExerciseDataAccessObject.deleteExercise(routine_name, exercise_name);
-            deleteExercisePresenter.prepareSuccessView(new DeleteExerciseOutputData(routine_name, exercise_name));
+            deleteExerciseDataAccessObject.deleteExercise(routineName, exercise_name);
+            deleteExercisePresenter.prepareSuccessView(new DeleteExerciseOutputData(routineName, exercise_name, deleteExerciseDataAccessObject.getRoutine(routineName)));
         }
 
     }

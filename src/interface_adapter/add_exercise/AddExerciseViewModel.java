@@ -7,7 +7,9 @@ import java.beans.PropertyChangeSupport;
 
 public class AddExerciseViewModel extends ViewModel {
 
-    private static AddExerciseState state = new AddExerciseState();
+    public static String ADD_BUTTON_LABEL = "Add exercise";
+
+    private AddExerciseState state = new AddExerciseState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -16,7 +18,7 @@ public class AddExerciseViewModel extends ViewModel {
         super("add");
     }
 
-    public void setState(AddExerciseState state) {this.state = state; }
+    public void setState(AddExerciseState state) { this.state = state; }
 
 
     @Override
@@ -31,7 +33,7 @@ public class AddExerciseViewModel extends ViewModel {
 
     }
 
-    public static AddExerciseState getState() {
+    public AddExerciseState getState() {
         return state;
     }
 }

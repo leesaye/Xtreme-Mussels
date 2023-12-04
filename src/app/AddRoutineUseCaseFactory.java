@@ -1,10 +1,7 @@
 package app;
 
-import interface_adapter.add_routine.AddRoutineController;
 import interface_adapter.add_routine.AddRoutineViewModel;
 import view.AddRoutineView;
-
-import java.io.IOException;
 
 public class AddRoutineUseCaseFactory {
     private AddRoutineUseCaseFactory() {}

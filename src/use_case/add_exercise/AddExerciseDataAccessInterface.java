@@ -1,6 +1,7 @@
 package use_case.add_exercise;
 
 import entity.Exercise;
+import entity.Routine;
 
 import java.util.ArrayList;
 
@@ -11,4 +12,5 @@ public interface AddExerciseDataAccessInterface {
 
     void addExercise(String identifier, ArrayList<Exercise> exercises);
 
+    Routine getRoutine(String routineName);
 }

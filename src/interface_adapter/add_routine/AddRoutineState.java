@@ -1,2 +1,3 @@
-package interface_adapter.add_routine;public class AddRoutineState {
+package interface_adapter.add_routine;
+public class AddRoutineState {
 }

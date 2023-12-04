@@ -19,6 +19,8 @@ public class AdjustSetRepPresenter implements AdjustSetRepOutputBoundary {
     public void prepareSuccessView(AdjustSetRepOutputData data) {
         AdjustSetRepState adjustState = adjustSetRepViewModel.getState();
         adjustState.setRoutineName(data.getName());
+        adjustState.setRoutine(data.getRoutine());
+        adjustState.setExercisesDisplay();
         adjustSetRepViewModel.firePropertyChanged();
     }
 
