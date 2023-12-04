@@ -29,41 +29,31 @@ public class GenerateRoutineInteractor implements GenerateRoutineInputBoundary {
 
     @Override
     public void execute (GenerateRoutineInputData generateRoutineInputData){
-        try {
-            String target = generateRoutineInputData.getTargetBodyPart();
-            int numberOfExercises = generateRoutineInputData.getNumberOfExercises();
-            ArrayList<Exercise> listOfExercises = generateRoutineDataAccessObject.getExercisesByTarget(target, numberOfExercises);
-            String name = generateRoutineInputData.getName();
+        String target = generateRoutineInputData.getTargetBodyPart();
+        int numberOfExercises = generateRoutineInputData.getNumberOfExercises();
+        ArrayList<Exercise> listOfExercises = generateRoutineDataAccessObject.getExercisesByTarget(target, numberOfExercises);
+        if (listOfExercises.isEmpty()) {
+            generateRoutinePresenter.prepareFailedView("Routine could not created due to insufficient number of exercises");
+        }
 
-//                // Checking to see if the listOfExercises is not empty, because of invalid input:
-//                if (listOfExercises.isEmpty()) {
-//                    throw new IllegalArgumentException("Inputted invalid target");
-//                }
-//
-//                // Checking to see if the name is duplicated:
-////                if (name in ___) {
-////                    throw new IllegalArgumentException("Choose another name!");
-////                }
-//                //TODO: go through the list of exercises to change the reps and sets
+        String name = generateRoutineInputData.getName();
 
-            int randomSets = randomGenerator(1,5);
-            int randomReps = randomGenerator(10,20);
-            for (int i = 0; i < listOfExercises.size(); i++) {
-                Exercise curr = listOfExercises.get(i);
-                curr.setReps(randomReps);
-                curr.setSets(randomSets);
-            }
-            //TODO: add the create workout method with param RoutineFactory.create(name, arraylist)
-//            Routine generatedRoutine = RoutineFactory.create(name);
-//            generatedRoutine.setExercisesList(listOfExercises);
-//            generateRoutineDataAccessObject.addRoutine(generatedRoutine);
+        int randomSets = randomGenerator(1,5);
+        int randomReps = randomGenerator(10,20);
 
+        for (int i = 0; i < listOfExercises.size(); i++) {
+            Exercise curr = listOfExercises.get(i);
+            curr.setReps(randomReps);
+            curr.setSets(randomSets);
+        }
+
+
+        Routine generatedRoutine = RoutineFactory.create(name);
+            generatedRoutine.setExercisesList(listOfExercises);
+            generateRoutineDataAccessObject.addRoutine(generatedRoutine);
 
             GenerateRoutineOutputData generateRoutineOutputData = new GenerateRoutineOutputData(listOfExercises, name);
             generateRoutinePresenter.prepareSuccessView(generateRoutineOutputData);
-        } catch (Exception e) {
-            generateRoutinePresenter.prepareFailedView("Routine could not be created"); //TODO: add a more specific error message
-        }
     }
 
 
