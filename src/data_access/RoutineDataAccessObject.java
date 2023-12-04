@@ -31,14 +31,17 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
 
     public RoutineDataAccessObject() {
         routineList = new HashMap<>();
-        path = "..\\Xtreme-Mussels\\RoutineFile.json";
-    }
+        path = "RoutineFile.json";
 
-//    public RoutineDataAccessObject(Routine routine, HashMap<String, Routine> routineList, String path) {
-//        this.routine = routine;
-//        this.routineList = routineList;
-//        this.path = path;
-//    }
+        // Used for testing - uncomment out if needed
+//        Routine routine = new Routine("test 2");
+//        Exercise exercise1 = new Exercise("Bicep curls", "bicep", "none", null, "100", 4, 12);
+//        ArrayList<Exercise> list = new ArrayList<>();
+//        list.add(exercise1);
+//        routine.setExercisesList(list);
+//        routineList.put(routine.getRoutineName(), routine);
+//        this.save();
+    }
 
     public RoutineDataAccessObject(HashMap<String, Routine> routineList, String path) {
         this.routineList = routineList;
@@ -179,7 +182,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         ArrayList<Exercise> exercises = routineList.get(identifier).getExercisesList();
 
         for (int i = 0; i < exercises.size(); i++) {
-            if (exercises.get(i).getId().equals(id)) {
+            if (exercises.get(i).getName().equals(id)) {
                 return true;
             }
         }
