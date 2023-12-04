@@ -11,6 +11,7 @@ import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExerciseState;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.rename_routine.RenameRoutineController;
 import interface_adapter.rename_routine.RenameRoutineState;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
@@ -31,6 +32,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
     public final String viewName = "single routine";
 
     private final LookUpRoutineViewModel lookUpRoutineViewModel;
+
+    private final LookUpRoutinesController lookUpRoutinesController;
 
     private final RenameRoutineViewModel renameRoutineViewModel;
 
@@ -62,13 +65,14 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     private final JButton back;
 
-    public LookUpRoutineView(LookUpRoutineViewModel lookUpRoutineViewModel,
+    public LookUpRoutineView(LookUpRoutineViewModel lookUpRoutineViewModel, LookUpRoutinesController lookUpRoutinesController,
                              RenameRoutineController renameRoutineController, RenameRoutineViewModel renameRoutineViewModel,
                              AddExerciseController addExerciseController, AddExerciseViewModel addExerciseViewModel,
                              DeleteExerciseController deleteExerciseController, DeleteExerciseViewModel deleteExerciseViewModel,
                              AdjustSetRepController adjustSetRepController, AdjustSetRepViewModel adjustSetRepViewModel) {
 
         this.lookUpRoutineViewModel = lookUpRoutineViewModel;
+        this.lookUpRoutinesController = lookUpRoutinesController;
 
         this.renameRoutineController = renameRoutineController;
         this.renameRoutineViewModel = renameRoutineViewModel;
@@ -176,7 +180,7 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: call controller to multiple routines view
+                        lookUpRoutinesController.execute();
                     }
                 }
         );

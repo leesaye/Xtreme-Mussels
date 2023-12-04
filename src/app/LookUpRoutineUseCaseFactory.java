@@ -9,31 +9,35 @@ import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesController;
+import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 import interface_adapter.rename_routine.RenameRoutineController;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
 import view.LookUpRoutineView;
 
+import static app.LookUpRoutinesUseCaseFactory.createLookUpRoutinesUseCase;
 import static app.edit_routine.AddExerciseUseCaseFactory.createAddExerciseUseCase;
 import static app.edit_routine.AdjustSetRepUseCaseFactory.createAdjustSetRepUseCase;
 import static app.edit_routine.DeleteExerciseUseCaseFactory.createDeleteExerciseUseCase;
 import static app.edit_routine.RenameRoutineUseCaseFactory.createRenameRoutineRepUseCase;
 
-public class LookUpRoutineViewUseCaseFactory {
+public class LookUpRoutineUseCaseFactory {
 
-    private LookUpRoutineViewUseCaseFactory() {}
+    private LookUpRoutineUseCaseFactory() {}
 
     public static LookUpRoutineView create(
-            ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
+            ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, LookUpRoutinesViewModel lookUpRoutinesViewModel,
+            RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
             DeleteExerciseViewModel deleteExerciseViewModel, AdjustSetRepViewModel adjustViewModel, RoutineDataAccessObject routineDataAccessObject) {
 
-//        LookUpRoutineController controller = createLookUpRoutineUseCase(viewManagerModel, lookUpRoutineViewModel, routineDataAccessObject);
+        LookUpRoutinesController lookUpRoutinesController = createLookUpRoutinesUseCase(viewManagerModel, lookUpRoutinesViewModel, routineDataAccessObject);
 
         RenameRoutineController renameRoutineController = createRenameRoutineRepUseCase(viewManagerModel, renameRoutineRepViewModel, routineDataAccessObject);
         AddExerciseController addExerciseController = createAddExerciseUseCase(viewManagerModel, addExerciseViewModel, routineDataAccessObject);
         DeleteExerciseController deleteExerciseController = createDeleteExerciseUseCase(viewManagerModel, deleteExerciseViewModel, routineDataAccessObject);
         AdjustSetRepController adjustSetRepController = createAdjustSetRepUseCase(viewManagerModel, adjustViewModel, routineDataAccessObject);
 
-        return new LookUpRoutineView(lookUpRoutineViewModel, renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
+        return new LookUpRoutineView(lookUpRoutineViewModel, lookUpRoutinesController,renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
                 deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel);
     }
 

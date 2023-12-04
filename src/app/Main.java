@@ -6,6 +6,7 @@ import interface_adapter.add_exercise.AddExerciseViewModel;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
 import view.LookUpRoutineView;
 import view.ViewManager;
@@ -36,6 +37,7 @@ class Main {
         // be observed by the Views.
 
         LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel();
+        LookUpRoutinesViewModel lookUpRoutinesViewModel = new LookUpRoutinesViewModel();
         AdjustSetRepViewModel adjustSetRepViewModel = new AdjustSetRepViewModel();
         RenameRoutineViewModel renameRoutineViewModel = new RenameRoutineViewModel();
         AddExerciseViewModel addExerciseViewModel = new AddExerciseViewModel();
@@ -44,8 +46,9 @@ class Main {
         RoutineDataAccessObject routineDataAccessObject;
         routineDataAccessObject = new RoutineDataAccessObject();
 
-        LookUpRoutineView lookUpRoutineView = LookUpRoutineViewUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel, renameRoutineViewModel,
-                addExerciseViewModel, deleteExerciseViewModel, adjustSetRepViewModel, routineDataAccessObject);
+        LookUpRoutineView lookUpRoutineView = LookUpRoutineUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel,
+                lookUpRoutinesViewModel, renameRoutineViewModel, addExerciseViewModel, deleteExerciseViewModel,
+                adjustSetRepViewModel, routineDataAccessObject);
         views.add(lookUpRoutineView, lookUpRoutineView.viewName);
 
         viewManagerModel.setActiveView(lookUpRoutineView.viewName);
