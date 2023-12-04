@@ -19,7 +19,7 @@ public class GenerateRoutineUseCaseFactory {
     public static GenerateRoutineView create(ViewManagerModel viewManagerModel, GenerateRoutineViewModel generateRoutineViewModel, GenerateRoutineDataAccessInterface dataAccessInterface) {
         try {
             GenerateRoutineController generateRoutineController = createGenerateRoutineCase(viewManagerModel, generateRoutineViewModel, dataAccessInterface);
-            return new GenerateRoutineView(generateRoutineController, generateRoutineViewModel);
+            return new GenerateRoutineView(generateRoutineController, generateRoutineViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not");
         }
