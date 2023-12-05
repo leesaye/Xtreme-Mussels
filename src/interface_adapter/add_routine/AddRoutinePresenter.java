@@ -6,10 +6,7 @@ import interface_adapter.add_exercise.AddExerciseState;
 import interface_adapter.add_exercise.AddExerciseViewModel;
 import use_case.add_routine.AddRoutineOutputBoundary;
 import use_case.add_routine.AddRoutineOutputData;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 
 public class AddRoutinePresenter implements AddRoutineOutputBoundary {
     private final AddRoutineViewModel addRoutineViewModel;
