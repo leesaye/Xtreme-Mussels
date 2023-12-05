@@ -112,7 +112,6 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(generateWorkoutButton)) {
-                    System.out.println("pressed");
                     viewManagerModel.setActiveView(generateRoutineView.generateRoutineViewName);
                     viewManagerModel.firePropertyChanged();
 
