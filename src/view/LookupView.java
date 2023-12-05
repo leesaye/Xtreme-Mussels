@@ -41,8 +41,6 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
         this.lookUpViewModel = lookUpViewModel;
         this.controller = controller;
         this.viewManagerModel = viewManagerModel;
-//        MainView mainView = new MainView(new MainViewModel(""), viewManagerModel, LookupView.this, lookUpRoutinesView);
-//        this.mainView = mainView;
         lookUpViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(LookUpViewModel.TITLE_LABEL);

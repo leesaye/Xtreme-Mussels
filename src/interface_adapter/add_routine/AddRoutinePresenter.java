@@ -21,27 +21,16 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
 
         AddRoutineState addRoutineState = addRoutineViewModel.getState();
         addRoutineState.setRoutineName(response.getRoutineName());
-        addRoutineState.setExercisesDisplay();
+        addRoutineState.setRoutines(response.getAllRoutines());
+
+        addRoutineState.setRoutinesDisplay();
         addRoutineViewModel.setState(addRoutineState);
         this.addRoutineViewModel.firePropertyChanged();
-
-        viewManagerModel.setActiveView("single routine");
-        viewManagerModel.firePropertyChanged();
     }
 
     public void prepareFailView(String error) {
         AddRoutineState addRoutineState = addRoutineViewModel.getState();
         addRoutineState.setRoutineNameError(error);
         addRoutineViewModel.firePropertyChanged();
-    }
-
-    @Override
-    public void prepareSuccessView(AddRoutineOutputData addRoutineOutputData) {
-
-    }
-
-    @Override
-    public void prepareFailView(String error) {
-
     }
 }

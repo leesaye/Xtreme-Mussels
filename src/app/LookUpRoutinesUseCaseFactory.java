@@ -29,21 +29,21 @@ import javax.swing.*;
 import java.io.IOException;
 
 //import static app.AddRoutineUseCaseFactory.createAddRoutineUseCase;
+import static app.AddRoutineUseCaseFactory.createAddRoutineUseCase;
 import static app.LookUpRoutineUseCaseFactory.createLookUpRoutineUseCase;
 
 public class LookUpRoutinesUseCaseFactory {
     private LookUpRoutinesUseCaseFactory() {}
 
     public static LookUpRoutinesView create(ViewManagerModel viewManagerModel, LookUpRoutinesViewModel lookUpRoutinesViewModel, RoutineDataAccessObject routineDataAccessObject, GenerateRoutineView generateRoutineView, LookUpRoutineViewModel lookUpRoutineViewModel
-//            , AddRoutineViewModel addRoutineViewModel
+            , AddRoutineViewModel addRoutineViewModel
     ) {
         try {
             LookUpRoutinesController lookUpRoutinesController = createLookUpRoutinesCase(viewManagerModel, lookUpRoutinesViewModel, routineDataAccessObject);
             LookUpRoutineController lookUpRoutineController = createLookUpRoutineUseCase(viewManagerModel, lookUpRoutineViewModel, routineDataAccessObject);
-//            AddRoutineController addRoutineController = createAddRoutineUseCase(viewManagerModel, addRoutineViewModel, routineDataAccessObject);
+           AddRoutineController addRoutineController = createAddRoutineUseCase(viewManagerModel, addRoutineViewModel, routineDataAccessObject);
             return new LookUpRoutinesView(lookUpRoutinesViewModel, lookUpRoutinesController, viewManagerModel, generateRoutineView, lookUpRoutineController
-//                    , addRoutineController
-            );
+                    , addRoutineController, addRoutineViewModel);
 
 
         } catch (IOException e) {

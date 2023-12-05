@@ -54,6 +54,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     private final ViewManagerModel viewManagerModel;
 
+    private final JLabel title;
+
     private final JButton add;
 
     private final JButton delete;
@@ -98,7 +100,9 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         deleteExerciseViewModel.addPropertyChangeListener(this);
         adjustSetRepViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(LookUpRoutineViewModel.TITLE_LABEL);
+
+
+        title = new JLabel(LookUpRoutineViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
@@ -194,6 +198,7 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         );
 
         this.add(title);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(tableScrlPane);
         this.add(buttons);
     }
@@ -208,29 +213,33 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof AddExerciseState) {
             model = new DefaultTableModel(addExerciseViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
+            table.setModel(model);
             JOptionPane.showMessageDialog(this, "Exercise added");
         }
 
         else if (evt.getNewValue() instanceof DeleteExerciseState) {
             model = new DefaultTableModel(deleteExerciseViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
+            table.setModel(model);
             JOptionPane.showMessageDialog(this, "Exercise deleted");
         }
 
         else if (evt.getNewValue() instanceof RenameRoutineState) {
             RenameRoutineState state = (RenameRoutineState) evt.getNewValue();
-            JOptionPane.showMessageDialog(this, state.getName() + ": rename success");
+            JOptionPane.showMessageDialog(this, "Routine renamed to " + state.getName());
+            title.setText(state.getName() + " view");
         }
 
         else if (evt.getNewValue() instanceof AdjustSetRepState) {
             model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
+            table.setModel(model);
             JOptionPane.showMessageDialog(this, "New sets and reps saved");
         }
 
         else { // The event was switching into the view
             model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
+            table.setModel(model);
+            title.setText(lookUpRoutineViewModel.getState().getRoutine().getRoutineName() + " view");
         }
-
-        table.setModel(model);
     }
 
 }
