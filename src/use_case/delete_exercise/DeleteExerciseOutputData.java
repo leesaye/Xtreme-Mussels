@@ -8,26 +8,24 @@ import java.util.ArrayList;
 public class DeleteExerciseOutputData {
     /* is output data for this use case the updated routine or something more like
      * a success message like the other edit-related use case? **/
-
-    private final String routine_name;
-    private final String exercise_name; // message: Added <name> to routine id
-
+    private final String routineName;
+    private final String exerciseName; // message: Added <name> to routine id
     private final Routine routine;
 
-    public DeleteExerciseOutputData(String routine_name, String name, Routine routine) {
-        this.routine_name = routine_name;
-        this.exercise_name = name;
+    public DeleteExerciseOutputData(String routineName, String exerciseName, Routine routine) {
+        this.routineName = routineName;
+        this.exerciseName = exerciseName;
         this.routine = routine;
     }
 
     public String getExerciseName() {
-        return exercise_name;
+        return exerciseName;
     }
 
     public String getRoutineName() {
-        return routine_name;
+        return routineName;
     }
 
-    public Routine getRoutine() { return routine; }
+    public Routine getRoutine() {return routine;}
 
 }

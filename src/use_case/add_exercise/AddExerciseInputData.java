@@ -3,22 +3,22 @@ package use_case.add_exercise;
 import java.util.ArrayList;
 
 public class AddExerciseInputData {
-    final private String routine_name;
+    final private String routineName;
 
-    final private String exercise_name;
+    final private String exerciseName;
 
 
-    public AddExerciseInputData(String routine_name, String name) {
-        this.routine_name = routine_name;
-        this.exercise_name = name;
+    public AddExerciseInputData(String routineName, String exerciseName){
+        this.routineName = routineName;
+        this.exerciseName = exerciseName;
     }
 
     public String getRoutineName() {
-        return routine_name;
+        return routineName;
     }
 
     public String getExerciseName() {
-        return exercise_name;
+        return exerciseName;
     }
 
 
