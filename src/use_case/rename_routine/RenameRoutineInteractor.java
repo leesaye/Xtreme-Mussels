@@ -14,9 +14,9 @@ public class RenameRoutineInteractor implements RenameRoutineInputBoundary {
 
     @Override
     public void execute(RenameRoutineInputData renameRoutineInputData) {
-        int id = renameRoutineInputData.getId();
+        String id = renameRoutineInputData.getId();
 
-        if (!renameRoutineDataAccessObject.existsById(id)) {
+        if (!renameRoutineDataAccessObject.existsByName(id)) {
             renameRoutinePresenter.prepareFailView(id + ": Routine does not exist");
         } else {
             renameRoutineDataAccessObject.changeName(id, renameRoutineInputData.getName());

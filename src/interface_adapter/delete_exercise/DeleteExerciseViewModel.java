@@ -7,7 +7,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class DeleteExerciseViewModel extends ViewModel{
-    private static DeleteExerciseState state = new DeleteExerciseState();
+
+    public static String DELETE_BUTTON_LABEL = "Delete exercise";
+    private DeleteExerciseState state = new DeleteExerciseState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -35,7 +37,7 @@ public class DeleteExerciseViewModel extends ViewModel{
 
     }
 
-    public static DeleteExerciseState getState() {
+    public DeleteExerciseState getState() {
         return state;
     }
 }

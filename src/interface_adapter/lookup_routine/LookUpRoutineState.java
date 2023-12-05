@@ -7,8 +7,11 @@ import java.util.ArrayList;
 
 public class LookUpRoutineState {
     private Routine routine = null;
-    private String[][] exercisesDisplay = null;
-    private String routineError;
+
+    private String[][] exercisesDisplay;
+
+    private String routineError = null;
+    private String exercisesDisplayError = null;
 
     public LookUpRoutineState() {
     }
@@ -33,7 +36,7 @@ public class LookUpRoutineState {
         return exercisesDisplay;
     }
 
-    public void setExercisesDisplay(Routine routine) {
+    public void setExercisesDisplay() {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
 
@@ -50,5 +53,4 @@ public class LookUpRoutineState {
         }
         return display;
     }
-
 }

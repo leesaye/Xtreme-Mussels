@@ -13,13 +13,13 @@ class RenameRoutineControllerTest {
 
             @Override
             public void execute(RenameRoutineInputData renameRoutineInputData) {
-                assertEquals(1, renameRoutineInputData.getId());
+                assertEquals("1", renameRoutineInputData.getId());
                 assertEquals("old", renameRoutineInputData.getName());
             }
         };
 
         RenameRoutineController controller = new RenameRoutineController(renameInteractor);
 
-        controller.execute(1, "old");
+        controller.execute("1", "old");
     }
 }
