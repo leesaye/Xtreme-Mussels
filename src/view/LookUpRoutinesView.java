@@ -3,6 +3,7 @@ package view;
 
 import interface_adapter.MainViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.lookup_routine.LookUpRoutineController;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.lookup_routines.LookUpRoutinesState;
 import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
@@ -34,12 +35,13 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
     private LookupView lookupView;
     private GenerateRoutineView generateRoutineView;
     // Add Routine button
-
-    public LookUpRoutinesView(LookUpRoutinesViewModel lookUpRoutinesViewModel, LookUpRoutinesController lookUpRoutinesController, ViewManagerModel viewManagerModel, GenerateRoutineView generateRoutineView) {
+    private LookUpRoutineController lookUpRoutineController;
+    public LookUpRoutinesView(LookUpRoutinesViewModel lookUpRoutinesViewModel, LookUpRoutinesController lookUpRoutinesController, ViewManagerModel viewManagerModel, GenerateRoutineView generateRoutineView, LookUpRoutineController lookUpRoutineController) {
         this.lookUpRoutinesViewModel = lookUpRoutinesViewModel;
         this.lookUpRoutinesController = lookUpRoutinesController;
         this.viewManagerModel = viewManagerModel;
         this.generateRoutineView = generateRoutineView;
+        this.lookUpRoutineController = lookUpRoutineController;
         JLabel title = new JLabel(LookUpRoutinesViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         LookUpRoutinesState currState = lookUpRoutinesViewModel.getState();
@@ -62,11 +64,8 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
                 int row = table.rowAtPoint(e.getPoint());
                 int col = table.columnAtPoint(e.getPoint());
                 if (col == 0) {
-                    //TODO: need to link this to single workout view
                     String routineName = (String) table.getValueAt(row, col);
-                    //TODO: call lookUpRoutineController
-                    System.out.println(routineName);
-
+                    lookUpRoutineController.execute(routineName);
                 }
 
             }
@@ -129,8 +128,6 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //TODO: takes the ViewModel Look up routines get state and het
-        System.out.println(Arrays.deepToString(lookUpRoutinesViewModel.getState().getRoutinesDisplay()));
         model = new DefaultTableModel(lookUpRoutinesViewModel.getState().getRoutinesDisplay(), LookUpRoutinesViewModel.COLUMN_HEADERS) {
 
             @Override
