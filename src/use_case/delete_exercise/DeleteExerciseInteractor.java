@@ -1,9 +1,5 @@
 package use_case.delete_exercise;
 
-import use_case.add_exercise.AddExerciseDataAccessInterface;
-import use_case.add_exercise.AddExerciseInputData;
-import use_case.add_exercise.AddExerciseOutputBoundary;
-
 public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
 
     /**
@@ -25,16 +21,16 @@ public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
         String exerciseName = deleteExerciseInputData.getExerciseName();
 
         // Check routine with id corresponding to id exists
-        if (!deleteExerciseDataAccessObject.existsByName(routineName )) {
+        if (!deleteExerciseDataAccessObject.existsByName(routineName)) {
             // Use exceptions? instead
-            deleteExercisePresenter.prepareFailView("Routine" + routineName+ "does not exist");
-            // Check exercise with name corresponding to exerciseName exists
+            deleteExercisePresenter.prepareFailView("Routine" + routineName + "does not exist");
+            // Check exercise with name corresponding to exercise_name exists
         } else if (!deleteExerciseDataAccessObject.existsById(routineName, exerciseName)) {
             deleteExercisePresenter.prepareFailView("Exercise" + exerciseName+ "does not exist in specified routine");
         } else {
             // Update the routine named routine_name by adding the exercise corresponding to exercise_name
             deleteExerciseDataAccessObject.deleteExercise(routineName, exerciseName);
-            deleteExercisePresenter.prepareSuccessView(new DeleteExerciseOutputData(routineName, exerciseName));
+            deleteExercisePresenter.prepareSuccessView(new DeleteExerciseOutputData(routineName, exerciseName, deleteExerciseDataAccessObject.getRoutine(routineName)));
         }
 
     }

@@ -1,15 +1,15 @@
 package app;
 
-import app.edit_routine.AdjustSetRepUseCaseFactory;
-import data_access.FileRoutineDataAccessObject;
+import data_access.RoutineDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_exercise.AddExerciseViewModel;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
+import interface_adapter.lookup_routine.LookUpRoutineViewModel;
+import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 import interface_adapter.rename_routine.RenameRoutineViewModel;
-import view.RoutineView;
+import view.LookUpRoutineView;
 import view.ViewManager;
-import view.edit_routine.AdjustSetRepView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,27 +36,22 @@ class Main {
         // results from the use case. The ViewModels are observable, and will
         // be observed by the Views.
 
+        LookUpRoutineViewModel lookUpRoutineViewModel = new LookUpRoutineViewModel();
+        LookUpRoutinesViewModel lookUpRoutinesViewModel = new LookUpRoutinesViewModel();
         AdjustSetRepViewModel adjustSetRepViewModel = new AdjustSetRepViewModel();
         RenameRoutineViewModel renameRoutineViewModel = new RenameRoutineViewModel();
         AddExerciseViewModel addExerciseViewModel = new AddExerciseViewModel();
         DeleteExerciseViewModel deleteExerciseViewModel = new DeleteExerciseViewModel();
 
-        // TODO: uncomment the try/catch block when DAO has been written
-        FileRoutineDataAccessObject routineDataAccessObject;
-//        try {
-            routineDataAccessObject = new FileRoutineDataAccessObject();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        RoutineDataAccessObject routineDataAccessObject;
+        routineDataAccessObject = new RoutineDataAccessObject();
 
-        RoutineView routineView = RoutineViewUseCaseFactory.create(viewManagerModel, renameRoutineViewModel,
-                addExerciseViewModel, deleteExerciseViewModel, routineDataAccessObject);
-        views.add(routineView, routineView.viewName);
+        LookUpRoutineView lookUpRoutineView = LookUpRoutineUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel,
+                lookUpRoutinesViewModel, renameRoutineViewModel, addExerciseViewModel, deleteExerciseViewModel,
+                adjustSetRepViewModel, routineDataAccessObject);
+        views.add(lookUpRoutineView, lookUpRoutineView.viewName);
 
-        AdjustSetRepView adjustView = AdjustSetRepUseCaseFactory.create(viewManagerModel, adjustSetRepViewModel, routineDataAccessObject);
-        views.add(adjustView, adjustView.viewName);
-
-        viewManagerModel.setActiveView(adjustView.viewName);
+        viewManagerModel.setActiveView(lookUpRoutineView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

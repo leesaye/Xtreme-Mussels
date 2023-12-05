@@ -34,7 +34,7 @@ class AdjustSetRepControllerTest {
 
             @Override
             public void execute(AdjustSetRepInputData adjustInputData) {
-                assertEquals(1, adjustInputData.getId());
+                assertEquals("1", adjustInputData.getId());
                 assertEquals(sets, adjustInputData.getSets());
                 assertEquals(reps, adjustInputData.getReps());
             }
@@ -42,6 +42,6 @@ class AdjustSetRepControllerTest {
 
         AdjustSetRepController controller = new AdjustSetRepController(interactor);
 
-        controller.execute(1, sets, reps);
+        controller.execute("1", sets, reps);
     }
 }

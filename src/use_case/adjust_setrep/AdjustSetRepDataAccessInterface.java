@@ -1,11 +1,13 @@
 package use_case.adjust_setrep;
 
-import entity.Exercise;
+import entity.Routine;
 
 import java.util.ArrayList;
 
 public interface AdjustSetRepDataAccessInterface {
-    boolean existsById(int id);
+    boolean existsByName(String id);
 
-    void updateRoutine(int id, ArrayList<Integer> sets, ArrayList<Integer> reps);
+    void updateRoutine(String id, ArrayList<Integer> sets, ArrayList<Integer> reps);
+
+    Routine getRoutine(String id);
 }

@@ -8,20 +8,18 @@ public class AddExerciseOutputData {
 
     private final String routineName;
     private final String exerciseName; // message: Added <name> to routine id
+    private final Routine routine;
 
-    public AddExerciseOutputData(String routineName, String exerciseName) {
-
-        this.routineName= routineName;
-        this.exerciseName =  exerciseName;
+    public AddExerciseOutputData((String routineName, String exerciseName, Routine routine) {
+        this.routineName = routineName;
+        this.exerciseName = exerciseName;
+        this.routine = routine;
     }
 
-    public String getExerciseName() {
-        return exerciseName;
-    }
+    public String getExerciseName() {return exerciseName;}
 
-    public String getRoutineName() {
-        return routineName;
-    }
+    public String getRoutineName() {return routineName;}
 
-    // get routine, exercises necessary?
+    public Routine getRoutine() {return routine;}
+
 }

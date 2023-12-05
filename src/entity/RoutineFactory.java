@@ -1,9 +1,17 @@
 package entity;
 
+
+import java.awt.*;
 import java.util.ArrayList;
 
 public class RoutineFactory {
-    public Routine create(String name, ArrayList<Exercise> exercises) {
-        return new Routine(name, exercises);
+    /**
+     * Requires: routine name is valid.
+     *
+     * @param routineName
+     * @return
+     */
+    public static Routine create(String routineName) {
+        return new Routine(routineName);
     }
 }
