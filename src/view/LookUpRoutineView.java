@@ -101,7 +101,7 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         JLabel title = new JLabel(LookUpRoutineViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+        model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
         table = new JTable(model);
         JScrollPane tableScrlPane = new JScrollPane(table);
 
@@ -207,12 +207,12 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof AddExerciseState) {
-            model = new DefaultTableModel(addExerciseViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+            model = new DefaultTableModel(addExerciseViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "Exercise added");
         }
 
         else if (evt.getNewValue() instanceof DeleteExerciseState) {
-            model = new DefaultTableModel(deleteExerciseViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+            model = new DefaultTableModel(deleteExerciseViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "Exercise deleted");
         }
 
@@ -222,12 +222,12 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         }
 
         else if (evt.getNewValue() instanceof AdjustSetRepState) {
-            model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+            model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
             JOptionPane.showMessageDialog(this, "New sets and reps saved");
         }
 
         else { // The event was switching into the view
-            model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), AdjustSetRepViewModel.COLUMN_HEADERS);
+            model = new DefaultTableModel(lookUpRoutineViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
         }
 
         table.setModel(model);
