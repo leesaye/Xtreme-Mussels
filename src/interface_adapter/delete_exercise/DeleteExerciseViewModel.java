@@ -20,17 +20,11 @@ public class DeleteExerciseViewModel extends ViewModel{
 
     public void setState(DeleteExerciseState state) {this.state = state; }
 
-    /**
-     *
-     */
     @Override
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
 
-    /**
-     * @param listener
-     */
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);

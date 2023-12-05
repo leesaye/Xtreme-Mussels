@@ -3,10 +3,12 @@ package use_case.generate_routine;
 public class GenerateRoutineInputData {
     private String targetBodyPart;
     private int numberOfExercises;
+    private String name;
 
-    public GenerateRoutineInputData(String targetBodyPart, int numberOfExercises) {
+    public GenerateRoutineInputData(String targetBodyPart, int numberOfExercises, String name) {
         this.targetBodyPart = targetBodyPart;
         this.numberOfExercises = numberOfExercises;
+        this.name = name;
     }
 
     public String getTargetBodyPart() {
@@ -16,4 +18,8 @@ public class GenerateRoutineInputData {
     public int getNumberOfExercises() {
         return numberOfExercises;
     }
+
+    public String getName() {
+        return name;}
 }
+

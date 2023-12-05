@@ -1,6 +1,5 @@
 package interface_adapter.add_routine;
 
-
 import interface_adapter.ViewManagerModel;
 import use_case.add_routine.AddRoutineOutputBoundary;
 import use_case.add_routine.AddRoutineOutputData;
@@ -22,13 +21,11 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
 
         AddRoutineState addRoutineState = addRoutineViewModel.getState();
         addRoutineState.setRoutineName(response.getRoutineName());
-        addRoutineState.setExercisesDisplay();
+        addRoutineState.setRoutines(response.getAllRoutines());
+
+        addRoutineState.setRoutinesDisplay();
         addRoutineViewModel.setState(addRoutineState);
         this.addRoutineViewModel.firePropertyChanged();
-
-
-        viewManagerModel.setActiveView("single routine");
-        viewManagerModel.firePropertyChanged();
     }
 
     public void prepareFailView(String error) {

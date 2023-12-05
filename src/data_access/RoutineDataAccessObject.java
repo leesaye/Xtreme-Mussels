@@ -32,15 +32,6 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     public RoutineDataAccessObject() {
         routineList = new HashMap<>();
         path = "RoutineFile.json";
-
-        // Used for testing - uncomment out if needed
-//        Routine routine = new Routine("test 2");
-//        Exercise exercise1 = new Exercise("Bicep curls", "bicep", "none", null, "100", 4, 12);
-//        ArrayList<Exercise> list = new ArrayList<>();
-//        list.add(exercise1);
-//        routine.setExercisesList(list);
-//        routineList.put(routine.getRoutineName(), routine);
-//        this.save();
     }
 
     public RoutineDataAccessObject(HashMap<String, Routine> routineList, String path) {
@@ -52,17 +43,6 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
      * Methods for saving and for reading json file
      *
      */
-
-    public static void main(String[] args) {
-        HashMap<String, Routine> routineList = new HashMap<>();
-        RoutineDataAccessObject dao = new RoutineDataAccessObject(routineList, "TestRoutineFile.json");
-        HashMap<String, Routine> hash = dao.read();
-
-        for (String name : hash.keySet()) {
-            System.out.println("name: " + name + "\nroutine exercise first: " + hash.get(name).getExercisesList().get(0).getName());
-        }
-
-    }
 
     // Converts json of routines into hashmap
     public HashMap<String, Routine> read() {
@@ -93,7 +73,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
                 LinkedHashMap linkedHashMap = (LinkedHashMap) mapping.get(key);
 
                 // Name of routine
-                String name = (String) linkedHashMap.get("name");
+                String name = (String) linkedHashMap.get("routineName");
 
                 // Now exercisesList (arraylist of linked hash maps)
                 ArrayList exercisesList = (ArrayList) linkedHashMap.get("exercisesList");

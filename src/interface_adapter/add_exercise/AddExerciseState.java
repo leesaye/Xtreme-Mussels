@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class AddExerciseState {
     private String name;
 
-    private String routine_name;
+    private String routineName;
 
     private ArrayList<Exercise> exercises = null;
 
@@ -21,11 +21,9 @@ public class AddExerciseState {
     public AddExerciseState() {
     }
 
-    public String getRoutineName() {return routine_name;}
+    public String getRoutineName() {return routineName;}
 
-    public void setRoutineName(String routine_name) {
-        this.routine_name= routine_name;
-    }
+    public void setRoutineName(String routineName) {this.routineName= routineName;}
 
     public void setExercises(ArrayList<Exercise> exercises) {
         this.exercises = exercises;
