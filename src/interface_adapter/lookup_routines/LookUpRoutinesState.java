@@ -6,7 +6,7 @@ import entity.Routine;
 import java.util.ArrayList;
 
 public class LookUpRoutinesState {
-    private ArrayList<Routine> routines = null;
+    private ArrayList<Routine> routines = new ArrayList<>();
     private String[][] routinesDisplay = null;
     private String routinesError;
 
@@ -34,7 +34,7 @@ public class LookUpRoutinesState {
     }
 
     public void setRoutinesDisplay(ArrayList<Routine> routines) {
-        this.routinesDisplay = this.toRoutineStringArray(routines);
+        this.routinesDisplay = this.toRoutineStringArray();
     }
 
     public String toExerciseStringArray(ArrayList<Exercise> exercise) {
@@ -47,15 +47,15 @@ public class LookUpRoutinesState {
         return String.join(", ", display);
     }
 
-    public String[][] toRoutineStringArray(ArrayList<Routine> routine) {
-        if (routine.isEmpty()) {
+    public String[][] toRoutineStringArray() {
+        if (routines.isEmpty()) {
             return new String[][]{{}};
         }
 
-        String[][] display = new String[routine.size()][2];
+        String[][] display = new String[routines.size()][2];
 
-        for (int i = 0; i < routine.size(); i++) {
-            String [] row = {routine.get(i).getRoutineName(), toExerciseStringArray(routine.get(i).getExercisesList())};
+        for (int i = 0; i < routines.size(); i++) {
+            String [] row = {routines.get(i).getRoutineName(), toExerciseStringArray(routines.get(i).getExercisesList())};
             display[i] = row;
         }
         return display;

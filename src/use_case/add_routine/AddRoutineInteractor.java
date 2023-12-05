@@ -28,7 +28,7 @@ public class AddRoutineInteractor implements AddRoutineInputBoundary {
             Routine routine = RoutineFactory.create(addRoutineInputData.getRoutineName());
             addRoutineDataAccessObject.addRoutine(routine);
 
-            AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false);
+            AddRoutineOutputData addRoutineOutputData = new AddRoutineOutputData(routine.getRoutineName(), false, addRoutineDataAccessObject.getRoutines());
             addRoutinePresenter.prepareSuccessView(addRoutineOutputData);
         }
     }

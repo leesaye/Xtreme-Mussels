@@ -13,10 +13,6 @@ public class AdjustSetRepState {
 
     private ArrayList<Exercise> exercises = null;
 
-    private ArrayList<Integer> sets = null;
-
-    private ArrayList<Integer> reps = null;
-
     private Routine routine;
 
     private String[][] exercisesDisplay;
@@ -34,14 +30,6 @@ public class AdjustSetRepState {
         this.exercises = exercises;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setRoutineName(String name) {
         this.name = name;
     }
@@ -56,15 +44,6 @@ public class AdjustSetRepState {
 
     public String getRoutineNameError() {
         return nameError;
-    }
-
-
-    public ArrayList<Integer> getSets() {
-        return sets;
-    }
-
-    public ArrayList<Integer> getReps() {
-        return reps;
     }
 
     public void setRoutine(Routine routine) {
@@ -85,7 +64,6 @@ public class AdjustSetRepState {
         }
 
         String[][] display = new String[exercise.size()][4];
-
         for (int i = 0; i < exercise.size(); i++) {
             String [] row = {exercise.get(i).getName(), Integer.toString(exercise.get(i).getSets()), Integer.toString(exercise.get(i).getReps())};
             display[i] = row;
