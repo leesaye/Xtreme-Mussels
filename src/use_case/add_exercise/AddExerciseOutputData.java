@@ -10,7 +10,7 @@ public class AddExerciseOutputData {
     private final String exerciseName; // message: Added <name> to routine id
     private final Routine routine;
 
-    public AddExerciseOutputData((String routineName, String exerciseName, Routine routine) {
+    public AddExerciseOutputData(String routineName, String exerciseName, Routine routine) {
         this.routineName = routineName;
         this.exerciseName = exerciseName;
         this.routine = routine;
