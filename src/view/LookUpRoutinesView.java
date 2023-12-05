@@ -3,11 +3,13 @@ package view;
 
 import interface_adapter.MainViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.add_routine.AddRoutineController;
 import interface_adapter.lookup_routine.LookUpRoutineController;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.lookup_routines.LookUpRoutinesState;
 import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 import use_case.lookup_routine.LookUpRoutineInteractor;
+//import app.AddRoutineUseCaseFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -36,12 +38,19 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
     private GenerateRoutineView generateRoutineView;
     // Add Routine button
     private LookUpRoutineController lookUpRoutineController;
-    public LookUpRoutinesView(LookUpRoutinesViewModel lookUpRoutinesViewModel, LookUpRoutinesController lookUpRoutinesController, ViewManagerModel viewManagerModel, GenerateRoutineView generateRoutineView, LookUpRoutineController lookUpRoutineController) {
+    private AddRoutineController addRoutineController;
+    public LookUpRoutinesView(LookUpRoutinesViewModel lookUpRoutinesViewModel,
+                              LookUpRoutinesController lookUpRoutinesController,
+                              ViewManagerModel viewManagerModel, GenerateRoutineView generateRoutineView,
+                              LookUpRoutineController lookUpRoutineController
+//           , AddRoutineController addRoutineController
+    ) {
         this.lookUpRoutinesViewModel = lookUpRoutinesViewModel;
         this.lookUpRoutinesController = lookUpRoutinesController;
         this.viewManagerModel = viewManagerModel;
         this.generateRoutineView = generateRoutineView;
         this.lookUpRoutineController = lookUpRoutineController;
+        this.addRoutineController = addRoutineController;
         JLabel title = new JLabel(LookUpRoutinesViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         LookUpRoutinesState currState = lookUpRoutinesViewModel.getState();
@@ -80,7 +89,9 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            System.out.println("clicked");
+                            String newName = JOptionPane.showInputDialog("Enter a new routine name: ");
+                            addRoutineController.execute(newName);
+
                         }
                     }
                 }

@@ -24,7 +24,7 @@ import java.beans.PropertyChangeListener;
 
 public class LookupView extends JPanel implements ActionListener, PropertyChangeListener {
     // adding the field to enter the name for lookUp
-    public final String lookUpViewName = "Look Up Exervises";
+    public final String lookUpViewName = "Look Up Exercises";
     private final JTextField lookupByName = new JTextField(20);
     private final JComboBox lookupByTarget;
 
@@ -132,7 +132,7 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource().equals(cancelButton)) {
-                    viewManagerModel.setActiveView("Xtreme Mussels Main Viewgit ");
+                    viewManagerModel.setActiveView("Xtreme Mussels Main View");
                     viewManagerModel.firePropertyChanged();
 
                 }
