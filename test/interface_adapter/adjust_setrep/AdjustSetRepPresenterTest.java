@@ -1,5 +1,7 @@
 package interface_adapter.adjust_setrep;
 
+import entity.Exercise;
+import entity.Routine;
 import interface_adapter.ViewManagerModel;
 import org.junit.jupiter.api.Test;
 import use_case.adjust_setrep.AdjustSetRepOutputBoundary;
@@ -18,13 +20,20 @@ class AdjustSetRepPresenterTest {
 
             public void firePropertyChanged() {
                 assertEquals("updated", state.getRoutineName());
+                String[][] expected = {{"Bicep curls", "4", "12"}};
+                assertEquals(expected[0][0], state.getExercisesDisplay()[0][0]);
             }
         };
 
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         AdjustSetRepOutputBoundary presenter = new AdjustSetRepPresenter(viewManagerModel, adjustViewModel);
 
-        presenter.prepareSuccessView(new AdjustSetRepOutputData("updated"));
+        Routine routine = new Routine("Routine");
+        routine.setName("Routine");
+        Exercise bicep = new Exercise("Bicep curls", "bicep", "Dumbbells", null, "bicep curls", 3, 15);
+        routine.getExercisesList().add(bicep);
+
+        presenter.prepareSuccessView(new AdjustSetRepOutputData("updated", routine));
     }
 
     @Test
