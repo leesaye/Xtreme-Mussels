@@ -24,10 +24,11 @@ import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // The main application window.
         JFrame application = new JFrame("Xtreme Mussels");
@@ -67,28 +68,23 @@ class Main {
 
             }
         };
+        LookUpRoutineView lookUpRoutineView = LookUpRoutineUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel,
+                lookUpRoutinesViewModel, renameRoutineViewModel, addExerciseViewModel, deleteExerciseViewModel,
+                adjustSetRepViewModel, routineDataAccessObject);
+        views.add(lookUpRoutineView, lookUpRoutineView.viewName);
 
         GenerateRoutineView generateRoutineView = GenerateRoutineUseCaseFactory.create(viewManagerModel, generateRoutineViewModel, routineDataAccessObject);
         views.add(generateRoutineView, generateRoutineView.generateRoutineViewName);
         LookupView lookupView = LookUpUseCaseFactory.create(viewManagerModel, lookUpViewModel, exerciseDataAccessObject);
         views.add(lookupView, lookupView.lookUpViewName);
 
-        LookUpRoutinesView lookUpRoutinesView = LookUpRoutinesUseCaseFactory.create(viewManagerModel, lookUpRoutinesViewModel, routineDataAccessObject, generateRoutineView);
+        LookUpRoutinesView lookUpRoutinesView = LookUpRoutinesUseCaseFactory.create(viewManagerModel, lookUpRoutinesViewModel, routineDataAccessObject, generateRoutineView, lookUpRoutineViewModel);
         views.add(lookUpRoutinesView, lookUpRoutinesView.lookUpRoutinesName);
 
         MainView mainView = MainUseCaseFactory.create(viewManagerModel, mainViewModel, lookUpRoutinesViewModel, lookupView, lookUpRoutinesView, routineDataAccessObject);
         views.add(mainView, mainView.mainViewName);
 
-
         viewManagerModel.setActiveView(mainView.mainViewName);
-        routineDataAccessObject = new RoutineDataAccessObject();
-
-        LookUpRoutineView lookUpRoutineView = LookUpRoutineUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel,
-                lookUpRoutinesViewModel, renameRoutineViewModel, addExerciseViewModel, deleteExerciseViewModel,
-                adjustSetRepViewModel, routineDataAccessObject);
-        views.add(lookUpRoutineView, lookUpRoutineView.viewName);
-
-        viewManagerModel.setActiveView(lookUpRoutineView.viewName);
 
         viewManagerModel.firePropertyChanged();
 
