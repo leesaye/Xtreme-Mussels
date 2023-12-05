@@ -11,6 +11,8 @@ public class LookUpRoutineViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Routine View";
 
+    public static final String[] COLUMN_HEADERS = {"Exercises", "Sets", "Reps"};
+
     public static final String BACK_BUTTON_LABEL = "Back";
 
     private LookUpRoutineState state = new LookUpRoutineState();

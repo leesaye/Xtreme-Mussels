@@ -1,8 +1,11 @@
 package use_case.adjust_setrep;
 
+import data_access.RoutineDataAccessObject;
+import entity.Exercise;
 import entity.Routine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import use_case.add_routine.AddRoutineDataAccessInterface;
 
 import java.util.ArrayList;
 
@@ -17,23 +20,27 @@ class AdjustSetRepInteractorTest {
     void init() {
         sets = new ArrayList<>();
         sets.add(3);
-        sets.add(4);
-        sets.add(5);
 
         reps = new ArrayList<>();
         reps.add(12);
-        reps.add(13);
-        reps.add(14);
     }
 
     @Test
     void successTest() {
-        AdjustSetRepDataAccessInterface dataAccess = new TestDataAccess();
+//        AdjustSetRepDataAccessInterface dataAccess = new TestDataAccess();
+        Routine routine = new Routine("1");
+        ArrayList<Exercise> exercise = new ArrayList<>();
+        Exercise bicep = new Exercise("Bicep curls", "bicep", "Dumbbells", null, "bicep curls", 0, 0);
+        exercise.add(bicep);
+        routine.setExercisesList(exercise);
+
+        RoutineDataAccessObject dataAccess = new RoutineDataAccessObject();
+        dataAccess.addRoutine(routine);
 
         AdjustSetRepOutputBoundary adjustPresenter = new AdjustSetRepOutputBoundary() {
             @Override
             public void prepareSuccessView(AdjustSetRepOutputData data) {
-                assertEquals("temp", data.getName());
+                assertEquals("1", data.getName());
             }
 
             @Override
@@ -41,8 +48,6 @@ class AdjustSetRepInteractorTest {
                 fail("failure unexpected");
             }
         };
-
-
 
         AdjustSetRepInputData inputData = new AdjustSetRepInputData("1", sets, reps);
         AdjustSetRepInteractor interactor = new AdjustSetRepInteractor(dataAccess, adjustPresenter);
