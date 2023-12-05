@@ -12,8 +12,8 @@ public class DeleteExerciseController{
 
     public void execute(String routine_name, String exercise_name) {
         //pass in data / exercise name?
-        DeleteExerciseInputData addExerciseInputData = new DeleteExerciseInputData(routine_name, exercise_name);
-        deleteExerciseUseCaseInteractor.execute(addExerciseInputData);
+        DeleteExerciseInputData deleteExerciseInputData = new DeleteExerciseInputData(routine_name, exercise_name);
+        deleteExerciseUseCaseInteractor.execute(deleteExerciseInputData);
     }
 
 }

@@ -1,5 +1,6 @@
 package use_case.adjust_setrep;
 
+import entity.Routine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,8 +66,6 @@ class AdjustSetRepInteractorTest {
             }
         };
 
-
-
         AdjustSetRepInputData inputData = new AdjustSetRepInputData("2", sets, reps);
         AdjustSetRepInteractor interactor = new AdjustSetRepInteractor(dataAccess, adjustPresenter);
 
@@ -100,5 +99,10 @@ class TestDataAccess implements AdjustSetRepDataAccessInterface {
     public void updateRoutine(String id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
         this.sets = sets;
         this.reps = reps;
+    }
+
+    @Override
+    public Routine getRoutine(String id) {
+        return null;
     }
 }
