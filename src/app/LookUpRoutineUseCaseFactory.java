@@ -45,7 +45,7 @@ public class LookUpRoutineUseCaseFactory {
         AdjustSetRepController adjustSetRepController = createAdjustSetRepUseCase(viewManagerModel, adjustViewModel, routineDataAccessObject);
 
         return new LookUpRoutineView(lookUpRoutineViewModel, lookUpRoutinesController,renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
-                deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel);
+                deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel, viewManagerModel);
     }
 
     // May not need these create use case methods, keeping them here just in case
