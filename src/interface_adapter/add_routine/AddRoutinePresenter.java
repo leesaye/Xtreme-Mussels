@@ -41,4 +41,14 @@ public class AddRoutinePresenter implements AddRoutineOutputBoundary {
         addRoutineState.setRoutineNameError(error);
         addRoutineViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void prepareSuccessView(AddRoutineOutputData addRoutineOutputData) {
+
+    }
+
+    @Override
+    public void prepareFailView(String error) {
+
+    }
 }

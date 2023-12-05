@@ -1,6 +1,7 @@
 package view;
 
 import entity.Routine;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.add_exercise.AddExerciseController;
 import interface_adapter.add_exercise.AddExerciseState;
 import interface_adapter.add_exercise.AddExerciseViewModel;
@@ -51,6 +52,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     private final AdjustSetRepController adjustSetRepController;
 
+    private final ViewManagerModel viewManagerModel;
+
     private final JButton add;
 
     private final JButton delete;
@@ -69,7 +72,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                              RenameRoutineController renameRoutineController, RenameRoutineViewModel renameRoutineViewModel,
                              AddExerciseController addExerciseController, AddExerciseViewModel addExerciseViewModel,
                              DeleteExerciseController deleteExerciseController, DeleteExerciseViewModel deleteExerciseViewModel,
-                             AdjustSetRepController adjustSetRepController, AdjustSetRepViewModel adjustSetRepViewModel) {
+                             AdjustSetRepController adjustSetRepController, AdjustSetRepViewModel adjustSetRepViewModel,
+                             ViewManagerModel viewManagerModel) {
 
         this.lookUpRoutineViewModel = lookUpRoutineViewModel;
         this.lookUpRoutinesController = lookUpRoutinesController;
@@ -85,6 +89,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
         this.adjustSetRepController = adjustSetRepController;
         this.adjustSetRepViewModel = adjustSetRepViewModel;
+
+        this.viewManagerModel = viewManagerModel;
 
         lookUpRoutineViewModel.addPropertyChangeListener(this);
         renameRoutineViewModel.addPropertyChangeListener(this);
@@ -181,6 +187,8 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         lookUpRoutinesController.execute();
+                        viewManagerModel.setActiveView("All Routines");
+                        viewManagerModel.firePropertyChanged();
                     }
                 }
         );
