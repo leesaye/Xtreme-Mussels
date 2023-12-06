@@ -10,6 +10,8 @@ import use_case.add_routine.AddRoutineDataAccessInterface;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class AdjustSetRepInteractorTest {
 
     ArrayList<Integer> sets;
@@ -27,7 +29,6 @@ class AdjustSetRepInteractorTest {
 
     @Test
     void successTest() {
-//        AdjustSetRepDataAccessInterface dataAccess = new TestDataAccess();
         Routine routine = new Routine("1");
         ArrayList<Exercise> exercise = new ArrayList<>();
         Exercise bicep = new Exercise("Bicep curls", "bicep", "Dumbbells", null, "bicep curls", 0, 0);
@@ -57,7 +58,7 @@ class AdjustSetRepInteractorTest {
 
     @Test
     void failureTest() {
-        AdjustSetRepDataAccessInterface dataAccess = new TestDataAccess();
+        RoutineDataAccessObject dataAccess = new RoutineDataAccessObject();
 
         AdjustSetRepOutputBoundary adjustPresenter = new AdjustSetRepOutputBoundary() {
             @Override
@@ -78,36 +79,37 @@ class AdjustSetRepInteractorTest {
     }
 }
 
-class TestDataAccess implements AdjustSetRepDataAccessInterface {
+class TestAdjustSetRepDataAccess {
 
-    String id = "1";
+    RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
 
-    ArrayList<Integer> sets = new ArrayList<>();
-
-    ArrayList<Integer> reps = new ArrayList<>();
-
-    public TestDataAccess() {
-        sets.add(0);
-        sets.add(1);
-        sets.add(2);
-        reps.add(9);
-        reps.add(10);
-        reps.add(11);
+    @BeforeEach
+    void init() {
+        routineDataAccessObject.setPath("TestRoutineFile.json");
+        routineDataAccessObject.setRoutineList(routineDataAccessObject.read());
     }
 
-    @Override
-    public boolean existsByName(String id) {
-        return this.id.equals(id);
+    @Test
+    void existsByNameTest() {
+        assertTrue(routineDataAccessObject.existsByName("test1"));
     }
 
-    @Override
-    public void updateRoutine(String id, ArrayList<Integer> sets, ArrayList<Integer> reps) {
-        this.sets = sets;
-        this.reps = reps;
+    @Test
+    void updateRoutineTest() {
+        ArrayList<Integer> sets = new ArrayList<>();
+        ArrayList<Integer> reps = new ArrayList<>();
+        for  (int i = 0; i < routineDataAccessObject.getRoutine("test1").getExercisesList().size(); i++) {
+            sets.add(1);
+            reps.add(2);
+        }
+        routineDataAccessObject.updateRoutine("test1", sets, reps);
+        assertEquals(routineDataAccessObject.getRoutine("test1").getExercisesList().get(0).getSets(), 1);
+        assertEquals(routineDataAccessObject.getRoutine("test1").getExercisesList().get(0).getReps(), 2);
     }
 
-    @Override
-    public Routine getRoutine(String id) {
-        return null;
+    @Test
+    void getRoutineTest() {
+        assertEquals(routineDataAccessObject.getRoutine("test1").getRoutineName(), "test1");
+        assertEquals(routineDataAccessObject.getRoutine("test1").getExercisesList().get(0).getName(), "astride jumps (male)");
     }
 }
