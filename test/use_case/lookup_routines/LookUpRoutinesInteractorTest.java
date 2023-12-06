@@ -40,6 +40,9 @@ public class LookUpRoutinesInteractorTest {
     }
 }
 
+/**
+ * Class for testing the data access methods for this use case.
+ */
 class TestRoutinesDataAccess {
     RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
 
