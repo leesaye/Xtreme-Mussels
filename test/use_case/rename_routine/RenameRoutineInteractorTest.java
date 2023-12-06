@@ -1,5 +1,7 @@
 package use_case.rename_routine;
 
+import data_access.RoutineDataAccessObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,7 +52,34 @@ class RenameRoutineInteractorTest {
 
         interactor.execute(inputData);
     }
+}
 
+/**
+ * Class for testing the data access methods for this use case.
+ */
+class TestRenameRoutineDataAccess {
+
+    RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
+
+    @BeforeEach
+    void init() {
+        routineDataAccessObject.setPath("TestRoutineFile.json");
+        routineDataAccessObject.setRoutineList(routineDataAccessObject.read());
+    }
+
+    @Test
+    void existsByNameTest() {
+        assertTrue(routineDataAccessObject.existsByName("test1"));
+    }
+
+    @Test
+    void changeNameTest() {
+        routineDataAccessObject.changeName("test3", "test333");
+        assertTrue(routineDataAccessObject.existsByName("test333"));
+
+        // Restoring to original state
+        routineDataAccessObject.changeName("test333", "test3");
+    }
 }
 
 class TestDataAccess implements RenameRoutineDataAccessInterface {
@@ -70,5 +99,4 @@ class TestDataAccess implements RenameRoutineDataAccessInterface {
     public void changeName(String id, String name) {
         this.name = name;
     }
-
 }

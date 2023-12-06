@@ -1,5 +1,6 @@
 package use_case.generate_routine;
 
+import data_access.RoutineDataAccessObject;
 import entity.Exercise;
 import entity.Routine;
 import interface_adapter.generate_routine.GenerateRoutinePresenter;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import use_case.generate_routine.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -88,10 +90,37 @@ public class GenerateRoutineInteractorTest {
         GenerateRoutineInteractor interactor = new GenerateRoutineInteractor(failDataAccess, presenter);
         interactor.execute(input);
     };
-
-
 }
 
+/**
+ * Class for testing the data access methods for this use case.
+ */
+class TestGenerateRoutineDataAccess {
+
+    RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
+
+    @BeforeEach
+    void init() {
+        routineDataAccessObject.setPath("TestRoutineFile.json");
+        routineDataAccessObject.setRoutineList(routineDataAccessObject.read());
+    }
+
+    @Test
+    void getExercisesByTargetTest() {
+        assertEquals(routineDataAccessObject.getExercisesByTarget("abs", 2).get(0).getTarget(), "abs");
+    }
+
+    @Test
+    void addRoutineTest() {
+        Routine routine = new Routine("dao test generate routine");
+        routine.setExercisesList(routineDataAccessObject.getExercisesByTarget("abs", 2));
+        routineDataAccessObject.addRoutine(routine);
+        assertTrue(routineDataAccessObject.existsByName("dao test generate routine"));
+
+        // Restoring to original state
+        routineDataAccessObject.removeRoutine("dao test generate routine");
+    }
+}
 
 
 class TestDataAccess implements GenerateRoutineDataAccessInterface {
@@ -117,7 +146,6 @@ class TestDataAccess implements GenerateRoutineDataAccessInterface {
     public void addRoutine(Routine routine) {
 
     }
-
 }
 
 class TestDataAccessNoExercises implements GenerateRoutineDataAccessInterface {
