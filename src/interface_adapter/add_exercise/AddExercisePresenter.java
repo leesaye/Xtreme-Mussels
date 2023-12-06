@@ -19,9 +19,10 @@ public class AddExercisePresenter implements AddExerciseOutputBoundary {
     @Override
     public void prepareSuccessView(AddExerciseOutputData data) {
         AddExerciseState addExerciseState = addExerciseViewModel.getState();
-        addExerciseState.setRoutineName(data.getRoutineName());
+        addExerciseState.setName(data.getExerciseName());
         addExerciseState.setRoutine(data.getRoutine());
         addExerciseState.setExercisesDisplay();
+        addExerciseState.setUseCaseSuccess(true);
         addExerciseViewModel.firePropertyChanged();
     }
 
@@ -29,6 +30,7 @@ public class AddExercisePresenter implements AddExerciseOutputBoundary {
     public void prepareFailView(String error) {
         AddExerciseState addExerciseState = addExerciseViewModel.getState();
         addExerciseState.addExerciseNameError(error);
+        addExerciseState.setUseCaseSuccess(false);
         addExerciseViewModel.firePropertyChanged();
     }
 

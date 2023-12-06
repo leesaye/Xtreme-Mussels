@@ -91,6 +91,7 @@ class Main {
         viewManagerModel.firePropertyChanged();
 
         application.pack();
+        application.setLocationRelativeTo(null);
         application.setVisible(true);
 
     }

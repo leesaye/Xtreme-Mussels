@@ -127,8 +127,12 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
                             String newExercise = JOptionPane.showInputDialog(("Enter a new exercise:"));
-                            Routine routine = lookUpRoutineViewModel.getState().getRoutine();
-                            addExerciseController.execute(routine.getRoutineName(), newExercise);
+                            if (newExercise != null && !newExercise.isEmpty()) { // User entered info and clicked OK
+                                Routine routine = lookUpRoutineViewModel.getState().getRoutine();
+                                addExerciseController.execute(routine.getRoutineName(), newExercise);
+                            } else if (newExercise != null) { // User did not cancel, but did not enter any information
+                                JOptionPane.showMessageDialog(null, "Please enter an exercise");
+                            }
                         }
                     }
                 }
@@ -158,7 +162,11 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                         if (e.getSource().equals(rename)) {
                             Routine routine = lookUpRoutineViewModel.getState().getRoutine();
                             String newName = JOptionPane.showInputDialog("Enter a new routine name: ");
-                            renameRoutineController.execute(routine.getRoutineName(), newName);
+                            if (newName != null && !newName.isEmpty()) { // User did not click cancel and entered text
+                                renameRoutineController.execute(routine.getRoutineName(), newName);
+                            } else if (newName != null) { // User did not click cancel and did not enter any text
+                                JOptionPane.showMessageDialog(null, "Please enter a name");
+                            }
                         }
                     }
                 }
@@ -206,15 +214,19 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showConfirmDialog(this, "Button not implemented yet");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof AddExerciseState) {
+            AddExerciseState state = (AddExerciseState) evt.getNewValue();
+            if (state.getUseCaseSuccess()) {// Exercise added successfully
             model = new DefaultTableModel(addExerciseViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
             table.setModel(model);
-            JOptionPane.showMessageDialog(this, "Exercise added");
+            JOptionPane.showMessageDialog(this, "Added " + state.getName());
+            } else{
+                JOptionPane.showMessageDialog(this, state.getRoutineNameError());
+            }
         }
 
         else if (evt.getNewValue() instanceof DeleteExerciseState) {
