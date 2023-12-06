@@ -22,7 +22,7 @@ public class ApiAdapter implements ApiToDaoInterface {
         Request request = new Request.Builder()
                 .url("https://exercisedb.p.rapidapi.com/exercises/target/" + target + "?limit=" + numberOfExercises)
                 .get()
-                .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                .addHeader("X-RapidAPI-Key", "3f28abcb4emsh9601ea469b5e575p1d2909jsn0db943c2bf18")
                 .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                 .build();
         try {
@@ -38,7 +38,7 @@ public class ApiAdapter implements ApiToDaoInterface {
         Request request = new Request.Builder()
                 .url("https://exercisedb.p.rapidapi.com/exercises/name/" + name + "?limit=" + numberOfExercises)
                 .get()
-                .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                .addHeader("X-RapidAPI-Key", "3f28abcb4emsh9601ea469b5e575p1d2909jsn0db943c2bf18")
                 .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                 .build();
         try {
@@ -56,14 +56,14 @@ public class ApiAdapter implements ApiToDaoInterface {
             request = new Request.Builder()
                     .url("https://exercisedb.p.rapidapi.com/exercises/target/" + value)
                     .get()
-                    .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                    .addHeader("X-RapidAPI-Key", "3f28abcb4emsh9601ea469b5e575p1d2909jsn0db943c2bf18")
                     .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                     .build();
         } else {    // query is either "target" or "name"
             request = new Request.Builder()
                     .url("https://exercisedb.p.rapidapi.com/exercises/name/" + value.replaceAll("\\s","%20"))
                     .get()
-                    .addHeader("X-RapidAPI-Key", "daf37a4550mshe8558bf065f22bep108a09jsnb2e44cc78573")
+                    .addHeader("X-RapidAPI-Key", "3f28abcb4emsh9601ea469b5e575p1d2909jsn0db943c2bf18")
                     .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com")
                     .build();
         }
