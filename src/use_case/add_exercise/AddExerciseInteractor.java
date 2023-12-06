@@ -36,7 +36,7 @@ AddExerciseInteractor implements AddExerciseInputBoundary{
                 addExercisePresenter.prepareSuccessView(new AddExerciseOutputData(routineName, exerciseName, addExerciseDataAccessObject.getRoutine(routineName)));
             }
             catch(RuntimeException e){
-                addExercisePresenter.prepareFailView("Exercise" + exerciseName + "does not exist");
+                addExercisePresenter.prepareFailView("Exercise " + exerciseName + " does not exist");
             }
         }
 
