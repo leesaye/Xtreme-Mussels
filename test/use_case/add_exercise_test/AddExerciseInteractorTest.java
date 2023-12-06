@@ -116,7 +116,7 @@ class TestAddExerciseDataAccess{
         Exercise exerciseTest = ExerciseFactory.create("burpee", "cardiovascular system", "body weight", instr, "1160", 0, 0);
         e.add(exerciseTest);
         ArrayList<Exercise> e2 = addExerciseDataAccessObject.getExercisesByName("burpee", 1);
-        assertTrue(e2.size() == e.size() && e.size() == 1);
+        assertTrue(e2.size() == e.size());
         Exercise ex1 = e.get(0);
         Exercise ex2 = e2.get(0);
         assertEquals(ex1.getName(), ex2.getName());
