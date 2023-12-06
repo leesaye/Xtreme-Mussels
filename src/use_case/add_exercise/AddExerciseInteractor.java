@@ -22,7 +22,6 @@ AddExerciseInteractor implements AddExerciseInputBoundary{
         String routineName = addExerciseInputData.getRoutineName();
         String exerciseName = addExerciseInputData.getExerciseName();
 
-
         // Check routine with id corresponding to id exists
         if (!addExerciseDataAccessObject.existsByName(routineName)) {
             //Use exceptions? instead
@@ -33,7 +32,7 @@ AddExerciseInteractor implements AddExerciseInputBoundary{
                 ArrayList<Exercise> exerciseToAdd = addExerciseDataAccessObject.getExercisesByName(exerciseName, 1);
                 // Update the routine named routine_name by adding the exercise entity corresponding to exercise_name
                 addExerciseDataAccessObject.addExercise(routineName, exerciseToAdd);
-                addExercisePresenter.prepareSuccessView(new AddExerciseOutputData(routineName, exerciseName, addExerciseDataAccessObject.getRoutine(routineName)));
+                addExercisePresenter.prepareSuccessView(new AddExerciseOutputData(routineName, exerciseToAdd.get(0).getName(), addExerciseDataAccessObject.getRoutine(routineName)));
             }
             catch(RuntimeException e){
                 addExercisePresenter.prepareFailView("Exercise " + exerciseName + " does not exist");
