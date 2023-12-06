@@ -83,6 +83,9 @@ class LookUpInteractorTest {
     }
 }
 
+/**
+ * Class for testing the data access methods for this use case.
+ */
 class TestLookUpExercisesDataAccess {
     ExerciseDataAccessObject exerciseDataAccessObject = new ExerciseDataAccessObject();
 
