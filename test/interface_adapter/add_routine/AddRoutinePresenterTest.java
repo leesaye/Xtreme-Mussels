@@ -8,8 +8,6 @@ import use_case.add_routine.AddRoutineOutputData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddRoutinePresenterTest {
-
-    // TODO: Test this!!!
     @Test
     void prepareSuccessTest() {
         AddRoutineViewModel addRoutineViewModel = new AddRoutineViewModel() {
