@@ -52,7 +52,8 @@ public class AddRoutineState {
         return String.join(", ", display);
     }
     public String[][] toRoutineStringArray() {
-        if (routines.isEmpty()) {
+        // if (routines.isEmpty()) {
+        if (routines == null) {
             return new String[][]{{}};
         }
 
