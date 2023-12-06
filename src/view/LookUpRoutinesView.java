@@ -4,6 +4,8 @@ package view;
 import interface_adapter.MainViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_routine.AddRoutineController;
+import interface_adapter.add_routine.AddRoutineState;
+import interface_adapter.add_routine.AddRoutineViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineController;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.lookup_routines.LookUpRoutinesState;
@@ -34,6 +36,7 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
     private final LookUpRoutinesController lookUpRoutinesController;
     private final LookUpRoutinesViewModel lookUpRoutinesViewModel;
     private ViewManagerModel viewManagerModel;
+    private AddRoutineViewModel addRoutineViewModel;
     private LookupView lookupView;
     private GenerateRoutineView generateRoutineView;
     // Add Routine button
@@ -42,9 +45,7 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
     public LookUpRoutinesView(LookUpRoutinesViewModel lookUpRoutinesViewModel,
                               LookUpRoutinesController lookUpRoutinesController,
                               ViewManagerModel viewManagerModel, GenerateRoutineView generateRoutineView,
-                              LookUpRoutineController lookUpRoutineController
-//           , AddRoutineController addRoutineController
-    ) {
+                              LookUpRoutineController lookUpRoutineController, AddRoutineController addRoutineController, AddRoutineViewModel addRoutineViewModel) {
         this.lookUpRoutinesViewModel = lookUpRoutinesViewModel;
         this.lookUpRoutinesController = lookUpRoutinesController;
         this.viewManagerModel = viewManagerModel;
@@ -54,6 +55,7 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
         JLabel title = new JLabel(LookUpRoutinesViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         LookUpRoutinesState currState = lookUpRoutinesViewModel.getState();
+        this.addRoutineViewModel = addRoutineViewModel;
 
        model = new DefaultTableModel(new String[0][],LookUpRoutinesViewModel.COLUMN_HEADERS)
         {
@@ -112,7 +114,6 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(generateWorkoutButton)) {
-                    System.out.println("pressed");
                     viewManagerModel.setActiveView(generateRoutineView.generateRoutineViewName);
                     viewManagerModel.firePropertyChanged();
 
@@ -123,6 +124,7 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
         buttons.add(generateWorkoutButton);
         buttons.add(cancel);
         lookUpRoutinesViewModel.addPropertyChangeListener(this);
+        addRoutineViewModel.addPropertyChangeListener(this);
 
 
 
@@ -139,14 +141,23 @@ public class LookUpRoutinesView extends JPanel implements ActionListener, Proper
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        model = new DefaultTableModel(lookUpRoutinesViewModel.getState().getRoutinesDisplay(), LookUpRoutinesViewModel.COLUMN_HEADERS) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //all cells false
-                return false;
-            }
-        };
+        if (evt.getNewValue() instanceof AddRoutineState) {
+            model = new DefaultTableModel(addRoutineViewModel.getState().getRoutinesDisplay(), LookUpRoutinesViewModel.COLUMN_HEADERS) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+        } else {
+            model = new DefaultTableModel(lookUpRoutinesViewModel.getState().getRoutinesDisplay(), LookUpRoutinesViewModel.COLUMN_HEADERS) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+        }
 
 
         table.setModel(model);

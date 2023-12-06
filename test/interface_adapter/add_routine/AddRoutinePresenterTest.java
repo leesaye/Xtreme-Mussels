@@ -26,7 +26,7 @@ public class AddRoutinePresenterTest {
 
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         AddRoutineOutputBoundary addRoutinePresenter = new AddRoutinePresenter(viewManagerModel, addRoutineViewModel);
-        addRoutinePresenter.prepareSuccessView(new AddRoutineOutputData("routine1", false));
+        addRoutinePresenter.prepareSuccessView(new AddRoutineOutputData("routine1", false, null));
     }
 
     @Test

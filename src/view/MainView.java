@@ -58,9 +58,6 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource().equals(viewAllRoutines)) {
                     // call the controller for lookUpRoutines
-
-                    System.out.println("works?");
-                    //TODO: uncomment once lookupRoutines is done
                     lookUpRoutinesController.execute();
                     viewManagerModel.setActiveView(lookUpRoutinesView.lookUpRoutinesName);
                     viewManagerModel.firePropertyChanged();
