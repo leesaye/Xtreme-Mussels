@@ -57,7 +57,9 @@ class DeleteExerciseInteractorTest {
             }
         };
 
-        DeleteExerciseInputData inputData = new DeleteExerciseInputData("test2", "back and forth step");
+
+
+        DeleteExerciseInputData inputData = new DeleteExerciseInputData("test2", "bear crawl");
         DeleteExerciseInteractor interactor = new DeleteExerciseInteractor(routineDataAccessObject, deleteExercisePresenter);
 
         interactor.execute(inputData);
@@ -105,7 +107,7 @@ class DeleteExerciseInteractorTest {
     }
 }
 
-class TestAddExerciseDataAccess{
+class TestDeleteExerciseDataAccess{
     RoutineDataAccessObject deleteExerciseDataAccessObject = new RoutineDataAccessObject();
 
     HashMap<String, Routine> routineList = new HashMap<>();
