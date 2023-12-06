@@ -67,7 +67,7 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
                     LookUpState currState = lookUpViewModel.getState();
                     controller.execute(lookupByName.getText(), "name");
                     String[][] output = lookUpViewModel.getState().getExercisesDisplay();
-                    DefaultTableModel model = new DefaultTableModel(new String[0][], new String[]{"Exercise Name", "Target Area/Muscle"})
+                    DefaultTableModel model = new DefaultTableModel(new String[0][], new String[]{"Exercise Name", "Target Area/Muscle", "Equipment", "Instructions"})
 
                     {
                         @Override
@@ -78,9 +78,11 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
                     for (String[] row : output) {
                         String routineName = row[0];
                         String exercises = row[1];
+                        String equipment = row[2];
+                        String instructions = row[3];
 
                         // Add a new row to the model
-                        model.addRow(new Object[]{routineName, exercises});
+                        model.addRow(new Object[]{routineName, exercises, equipment, instructions});
                     }
 
 
@@ -88,6 +90,21 @@ public class LookupView extends JPanel implements ActionListener, PropertyChange
                     JScrollPane tableScrollPane = new JScrollPane(table);
                     table.getTableHeader().setReorderingAllowed(false);
 
+                    table.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            int row = table.rowAtPoint(e.getPoint());
+                            int col = table.columnAtPoint(e.getPoint());
+                            if (col == 0) {
+                                String routineName = (String) table.getValueAt(row, col);
+                                String instructions = (String) table.getValueAt(row,3);
+                                JOptionPane.showMessageDialog(LookupView.this, instructions, "Instructions", JOptionPane.PLAIN_MESSAGE);
+
+
+                            }
+
+                        }
+                    });
 
                     JOptionPane.showMessageDialog(LookupView.this, tableScrollPane, "Exercise Lookup Result", JOptionPane.PLAIN_MESSAGE);
                 }

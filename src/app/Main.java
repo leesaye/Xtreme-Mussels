@@ -86,7 +86,7 @@ class Main {
         MainView mainView = MainUseCaseFactory.create(viewManagerModel, mainViewModel, lookUpRoutinesViewModel, lookupView, lookUpRoutinesView, routineDataAccessObject);
         views.add(mainView, mainView.mainViewName);
 
-        viewManagerModel.setActiveView(lookupView.lookUpViewName);
+        viewManagerModel.setActiveView(mainView.mainViewName);
 
         viewManagerModel.firePropertyChanged();
 
