@@ -23,10 +23,10 @@ public class DeleteExerciseInteractor implements DeleteExerciseInputBoundary{
         // Check routine with id corresponding to id exists
         if (!deleteExerciseDataAccessObject.existsByName(routineName)) {
             // Use exceptions? instead
-            deleteExercisePresenter.prepareFailView("Routine" + routineName + "does not exist");
+            deleteExercisePresenter.prepareFailView("Selected routine does not exist");
             // Check exercise with name corresponding to exercise_name exists
         } else if (!deleteExerciseDataAccessObject.existsById(routineName, exerciseName)) {
-            deleteExercisePresenter.prepareFailView("Exercise" + exerciseName+ "does not exist in specified routine");
+            deleteExercisePresenter.prepareFailView("Selected exercise does not exist in specified routine");
         } else {
             // Update the routine named routine_name by adding the exercise corresponding to exercise_name
             deleteExerciseDataAccessObject.deleteExercise(routineName, exerciseName);
