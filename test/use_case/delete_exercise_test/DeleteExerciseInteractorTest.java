@@ -61,6 +61,22 @@ class DeleteExerciseInteractorTest {
         DeleteExerciseInteractor interactor = new DeleteExerciseInteractor(routineDataAccessObject, deleteExercisePresenter);
 
         interactor.execute(inputData);
+
+        //add exercise back and forth step to routine test2 for future tests
+        ArrayList<String> instr = new ArrayList<>();
+        instr.add("\"Start on all fours with your hands directly under your shoulders and your knees directly under your hips.\"");
+        instr.add("\"Lift your knees slightly off the ground");
+        instr.add(" keeping your back flat and your core engaged.\"");
+        instr.add("Move your right hand and left foot forward simultaneously");
+        instr.add(" followed by your left hand and right foot.\"");
+        instr.add("\"Continue crawling forward");
+        instr.add(" alternating your hand and foot movements.\"");
+        instr.add("\"Maintain a steady pace and keep your core tight throughout the exercise.\"");
+        instr.add("\"Continue for the desired distance or time.\"");
+        ArrayList<Exercise> put_back  = new ArrayList<>();
+        Exercise e = ExerciseFactory.create("bear crawl", "cardiovascular system", "body weight", instr, "3360", 0, 0);
+        put_back.add(e);
+        routineDataAccessObject.addExercise("test2", put_back);
     }
 
     @Test
@@ -111,19 +127,35 @@ class TestAddExerciseDataAccess{
     // hitting monthly limit issue
     @Test
     void existsByIdTest() {
-        assertTrue(deleteExerciseDataAccessObject.existsById("burpee", "test1"));
-        assertFalse(deleteExerciseDataAccessObject.existsById("non-existent exercise", "test1"));
+        assertTrue(deleteExerciseDataAccessObject.existsById("test2", "bear crawl"));
+        assertFalse(deleteExerciseDataAccessObject.existsById("test1", "non-existent exercise"));
     }
 
 
     //implement interactor to use nullpointer
     @Test
     void deleteExerciseTest() {
-        Routine r = routineList.get("test1");
+        Routine r = routineList.get("test2");
         int previous = r.getExercisesList().size();
-        deleteExerciseDataAccessObject.deleteExercise("test1", "burpee");
+        deleteExerciseDataAccessObject.deleteExercise("test2", "bear crawl");
         int curr = r.getExercisesList().size();
         assertTrue(previous - 1 == curr);
+
+        //re-add exercise bear crawl into routine test2 so future tests work
+        ArrayList<String> instr = new ArrayList<>();
+        instr.add("\"Start on all fours with your hands directly under your shoulders and your knees directly under your hips.\"");
+        instr.add("\"Lift your knees slightly off the ground");
+        instr.add(" keeping your back flat and your core engaged.\"");
+        instr.add("Move your right hand and left foot forward simultaneously");
+        instr.add(" followed by your left hand and right foot.\"");
+        instr.add("\"Continue crawling forward");
+        instr.add(" alternating your hand and foot movements.\"");
+        instr.add("\"Maintain a steady pace and keep your core tight throughout the exercise.\"");
+        instr.add("\"Continue for the desired distance or time.\"");
+        ArrayList<Exercise> put_back  = new ArrayList<>();
+        Exercise e = ExerciseFactory.create("bear crawl", "cardiovascular system", "body weight", instr, "3360", 0, 0);
+        put_back.add(e);
+        deleteExerciseDataAccessObject.addExercise("test2", put_back);
 
     }
 

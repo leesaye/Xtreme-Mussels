@@ -51,6 +51,9 @@ class AddExerciseInteractorTest {
         AddExerciseInteractor interactor = new AddExerciseInteractor(routineDataAccessObject, addExercisePresenter);
 
         interactor.execute(inputData);
+
+        //delete exercise archer pull up from routine test3 for future tests
+        routineDataAccessObject.deleteExercise("test3", "archer pull up");
     }
 
     // hitting monthly limit issue
@@ -101,7 +104,7 @@ class TestAddExerciseDataAccess{
 
     // hitting monthly limit issue
     @Test
-    void existsByIdTest() {
+    void getExercisesByNameTest() {
         ArrayList<String> instr = new ArrayList<>();
         instr.add("\"Start in a standing position with your feet shoulder-width apart.\"");
         instr.add("\"Lower your body into a squat position by bending your knees and placing your hands on the floor in front of you.\"");
@@ -158,6 +161,9 @@ class TestAddExerciseDataAccess{
         assertEquals(ex1.getId(), ex2.getId());
         assertEquals(ex1.getSets(), ex2.getSets());
         assertEquals(ex1.getReps(), ex2.getReps());
+
+        //delete exercise archer pull up from routine test1 for future tests
+        addExerciseDataAccessObject.deleteExercise("test1", "archer pull up");
     }
 
     @Test
