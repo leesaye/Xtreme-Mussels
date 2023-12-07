@@ -26,7 +26,7 @@ public class DeleteExerciseState {
     }
 
     public void setName(String name) {
-        this.routineName = routineName;
+        this.routineName = name;
     }
 
     public void setExercises(ArrayList<Exercise> exercises) {
