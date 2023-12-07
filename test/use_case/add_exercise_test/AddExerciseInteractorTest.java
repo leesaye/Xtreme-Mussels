@@ -1,11 +1,9 @@
 package use_case.add_exercise_test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import data_access.RoutineDataAccessObject;
 import entity.Exercise;
 import entity.ExerciseFactory;
 import entity.Routine;
-import entity.RoutineFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.add_exercise.*;
@@ -13,7 +11,6 @@ import use_case.add_exercise.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +27,6 @@ class AddExerciseInteractorTest {
         routineList = routineDataAccessObject.getRoutineList();
     }
 
-    // hitting monthly limit issue
     @Test
     void successTest() {
         AddExerciseOutputBoundary addExercisePresenter = new AddExerciseOutputBoundary() {
@@ -56,7 +52,6 @@ class AddExerciseInteractorTest {
         routineDataAccessObject.deleteExercise("test3", "archer pull up");
     }
 
-    // hitting monthly limit issue
     @Test
     void failureTest() {
 
@@ -101,7 +96,6 @@ class TestAddExerciseDataAccess{
         assertFalse(addExerciseDataAccessObject.existsByName("test5"));
     }
 
-    // hitting monthly limit issue
     @Test
     void getExercisesByNameTest() {
         ArrayList<String> instr = new ArrayList<>();
@@ -118,7 +112,7 @@ class TestAddExerciseDataAccess{
         Exercise exerciseTest = ExerciseFactory.create("burpee", "cardiovascular system", "body weight", instr, "1160", 0, 0);
         e.add(exerciseTest);
         ArrayList<Exercise> e2 = addExerciseDataAccessObject.getExercisesByName("burpee", 1);
-        assertTrue(e2.size() == e.size());
+        assertEquals(e2.size(), e.size());
         Exercise ex1 = e.get(0);
         Exercise ex2 = e2.get(0);
         assertEquals(ex1.getName(), ex2.getName());
@@ -128,15 +122,11 @@ class TestAddExerciseDataAccess{
         assertEquals(ex1.getId(), ex2.getId());
         assertEquals(ex1.getSets(), ex2.getSets());
         assertEquals(ex1.getReps(), ex2.getReps());
-    }
 
-    // hitting monthly limit issue
-    @Test
-    void getExercisesByNameReturnsEmpty(){
         assertTrue(addExerciseDataAccessObject.getExercisesByName("not-an-exercise", 1).isEmpty());
     }
 
-    //implement interactor to use nullpointer
+
     @Test
     void addExerciseTest() {
         Routine r1 = ((addExerciseDataAccessObject.getRoutineList()).get("test1"));
@@ -168,7 +158,7 @@ class TestAddExerciseDataAccess{
     @Test
     void getRoutineTest() {
         assertEquals(addExerciseDataAccessObject.getRoutine("test1"), routineList.get("test1"));
-        assertEquals(addExerciseDataAccessObject.getRoutine("nonexistent routine"), null);
+        assertNull(addExerciseDataAccessObject.getRoutine("nonexistent routine"));
     }
 
 }
