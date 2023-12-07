@@ -95,7 +95,6 @@ class TestAddExerciseDataAccess{
         routineList = addExerciseDataAccessObject.getRoutineList();
     }
 
-    //bug in the read() method- not fixed
     @Test
     void existsByNameTest() {
         assertTrue(addExerciseDataAccessObject.existsByName("test1"));
