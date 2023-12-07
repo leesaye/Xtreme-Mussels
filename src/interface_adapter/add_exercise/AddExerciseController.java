@@ -1,7 +1,6 @@
 package interface_adapter.add_exercise;
 
 
-import java.util.ArrayList;
 import use_case.add_exercise.AddExerciseInputBoundary;
 import use_case.add_exercise.AddExerciseInputData;
 

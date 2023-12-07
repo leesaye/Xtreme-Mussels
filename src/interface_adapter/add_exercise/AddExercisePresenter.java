@@ -1,8 +1,6 @@
 package interface_adapter.add_exercise;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_exercise.AddExerciseState;
-import interface_adapter.add_exercise.AddExerciseViewModel;
 import use_case.add_exercise.AddExerciseOutputBoundary;
 import use_case.add_exercise.AddExerciseOutputData;
 

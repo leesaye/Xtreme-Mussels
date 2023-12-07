@@ -1,6 +1,5 @@
 package use_case.add_exercise;
 
-import java.util.ArrayList;
 
 public class AddExerciseInputData {
     final private String routineName;

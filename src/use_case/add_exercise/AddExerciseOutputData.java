@@ -1,7 +1,5 @@
 package use_case.add_exercise;
 
-import java.util.ArrayList;
-import entity.Exercise;
 import entity.Routine;
 
 public class AddExerciseOutputData {

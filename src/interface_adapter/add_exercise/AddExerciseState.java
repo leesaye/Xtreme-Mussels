@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class AddExerciseState {
     private String name;
 
-    private String routineName;
-
     private ArrayList<Exercise> exercises = null;
 
     private String nameError;
