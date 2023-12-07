@@ -6,10 +6,6 @@ import entity.ExerciseFactory;
 import entity.Routine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.add_exercise.AddExerciseInputData;
-import use_case.add_exercise.AddExerciseInteractor;
-import use_case.add_exercise.AddExerciseOutputBoundary;
-import use_case.add_exercise.AddExerciseOutputData;
 import use_case.delete_exercise.DeleteExerciseInputData;
 import use_case.delete_exercise.DeleteExerciseInteractor;
 import use_case.delete_exercise.DeleteExerciseOutputBoundary;
@@ -17,6 +13,7 @@ import use_case.delete_exercise.DeleteExerciseOutputData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,7 +30,7 @@ class DeleteExerciseInteractorTest {
         routineList = routineDataAccessObject.getRoutineList();
     }
 
-    //discuss testing for routine with multiple instances of the same exercise
+
     @Test
     void successTest() {
         DeleteExerciseOutputBoundary deleteExercisePresenter = new DeleteExerciseOutputBoundary() {
@@ -42,9 +39,10 @@ class DeleteExerciseInteractorTest {
                 Routine result = output.getRoutine();
                 ArrayList<Exercise> e = result.getExercisesList();
                 boolean isRemoved = true;
-                for (int i = 0; i < e.size(); i++){
-                    if(e.get(i).getName() == output.getExerciseName()){
+                for (Exercise exercise : e) {
+                    if (Objects.equals(exercise.getName(), output.getExerciseName())) {
                         isRemoved = false;
+                        break;
                     }
 
                 }
@@ -64,7 +62,7 @@ class DeleteExerciseInteractorTest {
 
         interactor.execute(inputData);
 
-        //add exercise back and forth step to routine test2 for future tests
+
         ArrayList<String> instr = new ArrayList<>();
         instr.add("\"Start on all fours with your hands directly under your shoulders and your knees directly under your hips.\"");
         instr.add("\"Lift your knees slightly off the ground");
@@ -119,14 +117,14 @@ class TestDeleteExerciseDataAccess{
         routineList = deleteExerciseDataAccessObject.getRoutineList();
     }
 
-    //bug in the read() method- not fixed
+
     @Test
     void existsByNameTest() {
         assertTrue(deleteExerciseDataAccessObject.existsByName("test1"));
         assertFalse(deleteExerciseDataAccessObject.existsByName("test5"));
     }
 
-    // hitting monthly limit issue
+
     @Test
     void existsByIdTest() {
         assertTrue(deleteExerciseDataAccessObject.existsById("test2", "bear crawl"));
@@ -134,14 +132,14 @@ class TestDeleteExerciseDataAccess{
     }
 
 
-    //implement interactor to use nullpointer
+
     @Test
     void deleteExerciseTest() {
         Routine r = routineList.get("test2");
         int previous = r.getExercisesList().size();
         deleteExerciseDataAccessObject.deleteExercise("test2", "bear crawl");
         int curr = r.getExercisesList().size();
-        assertTrue(previous - 1 == curr);
+        assertEquals(previous - 1, curr);
 
         //re-add exercise bear crawl into routine test2 so future tests work
         ArrayList<String> instr = new ArrayList<>();
@@ -164,7 +162,7 @@ class TestDeleteExerciseDataAccess{
     @Test
     void getRoutineTest() {
         assertEquals(deleteExerciseDataAccessObject.getRoutine("test1"), routineList.get("test1"));
-        assertEquals(deleteExerciseDataAccessObject.getRoutine("nonexistent routine"), null);
+        assertNull(deleteExerciseDataAccessObject.getRoutine("nonexistent routine"));
     }
 
 }
