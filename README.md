@@ -22,7 +22,7 @@ Main features:
 - Add routine (cindy)
   - Users can create a new routine and customize the routine name
   - The default routine is empty. Users can add/delete exercises once the routine is created (srika)
-  - The routine can also be edited any time (change name, change reps (for a given exercise), reorder) (yan)
+  - The routine can also be edited any time (change name, change sets and reps) (yan)
 
 NOTES:
 Entities
