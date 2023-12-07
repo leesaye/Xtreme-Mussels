@@ -1,9 +1,5 @@
 package interface_adapter.delete_routine;
 
-import entity.Exercise;
-import entity.Routine;
-
-import java.util.ArrayList;
 
 public class DeleteRoutineState {
     private String routineName;
