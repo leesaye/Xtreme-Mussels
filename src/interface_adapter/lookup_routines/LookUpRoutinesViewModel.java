@@ -9,7 +9,7 @@ public class LookUpRoutinesViewModel extends ViewModel {
 
     public static final String[] COLUMN_HEADERS = {"Routine Name", "Exercises"};
     public static final String TITLE_LABEL = "All Routines View";
-    public static final String ADD_BUTTON_LABEL = "Add new routine manually)";
+    public static final String ADD_BUTTON_LABEL = "Add new routine manually";
     public static final String CANCEL_BUTTON_LABEL = "Back to main";
     public static final String GENERATE_BUTTON_LABEL = "Generate Routine";
 

@@ -21,17 +21,23 @@ AddExerciseInteractor implements AddExerciseInputBoundary{
     public void execute(AddExerciseInputData addExerciseInputData) {
         String routineName = addExerciseInputData.getRoutineName();
         String exerciseName = addExerciseInputData.getExerciseName();
-        ArrayList<Exercise> exerciseToAdd = addExerciseDataAccessObject.getExercisesByName(exerciseName, 1);
-
 
         // Check routine with id corresponding to id exists
         if (!addExerciseDataAccessObject.existsByName(routineName)) {
-            addExercisePresenter.prepareFailView("Selected routine does not exist");
-        } else if (exerciseToAdd.isEmpty()){
-            addExercisePresenter.prepareFailView("Selected exercise does not exist");
+            //Use exceptions? instead
+            addExercisePresenter.prepareFailView("Routine" + routineName + "does not exist");
         } else {
-            addExerciseDataAccessObject.addExercise(routineName, exerciseToAdd);
-            addExercisePresenter.prepareSuccessView(new AddExerciseOutputData(routineName, exerciseName, addExerciseDataAccessObject.getRoutine(routineName)));
+            // Check exercise with name corresponding to exercise_name exists
+            try{
+                ArrayList<Exercise> exerciseToAdd = addExerciseDataAccessObject.getExercisesByName(exerciseName, 1);
+                // Update the routine named routine_name by adding the exercise entity corresponding to exercise_name
+                addExerciseDataAccessObject.addExercise(routineName, exerciseToAdd);
+                addExercisePresenter.prepareSuccessView(new AddExerciseOutputData(routineName, exerciseToAdd.get(0).getName(), addExerciseDataAccessObject.getRoutine(routineName)));
+            }
+            catch(RuntimeException e){
+                addExercisePresenter.prepareFailView("Exercise " + exerciseName + " does not exist");
+            }
         }
+
     }
 }

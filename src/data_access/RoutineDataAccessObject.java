@@ -6,10 +6,6 @@ import entity.ExerciseFactory;
 import entity.Routine;
 import entity.RoutineFactory;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import use_case.add_exercise.AddExerciseDataAccessInterface;
 import use_case.add_routine.AddRoutineDataAccessInterface;
 import use_case.delete_exercise.DeleteExerciseDataAccessInterface;
@@ -22,29 +18,51 @@ import use_case.lookup_routines.LookUpRoutinesDataAccessInterface;
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * @author lisa
+ * @version 1.1, 4 Dec 2023
+ */
 public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, AddRoutineDataAccessInterface, AdjustSetRepDataAccessInterface, DeleteExerciseDataAccessInterface,
         GenerateRoutineDataAccessInterface, LookUpRoutineDataAccessInterface, LookUpRoutinesDataAccessInterface, RenameRoutineDataAccessInterface {
+    /**
+     * Hashmap storing the routine name and its associated routine entity.
+     */
     private HashMap<String, Routine> routineList;
+
+    /**
+     * String representing path to JSON file storing all routines.
+     */
     private String path;
+
+    /**
+     * Adapter object that converts the API to an Arraylist of Exercise entities
+     * @see ApiAdapter
+     */
     private ApiToDaoInterface apiAccess = new ApiAdapter();
 
+    /**
+     * Default constructor for RoutineDataAccessObject
+     */
     public RoutineDataAccessObject() {
         routineList = new HashMap<>();
         path = "RoutineFile.json";
     }
 
+    /**
+     * Constructor for RoutineDataAccessObject
+     * @param routineList the Hashmap representing all routines in file
+     * @param path the file path to the JSON file storing all routines
+     */
     public RoutineDataAccessObject(HashMap<String, Routine> routineList, String path) {
         this.routineList = routineList;
         this.path = path;
     }
 
     /**
-     * Methods for saving and for reading json file
-     *
+     * Method that reads the JSON file this object refers to
+     * and converts it into the Hashmap format valid for routineList
+     * @return the Hashmap representing all routines
      */
-
-    // Converts json of routines into hashmap
     public HashMap<String, Routine> read() {
         try {
             File file = new File(path);
@@ -75,7 +93,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
                 // Name of routine
                 String name = (String) linkedHashMap.get("routineName");
 
-                // Now exercisesList (arraylist of linked hash maps)
+                // exercisesList (arraylist of linked hash maps)
                 ArrayList exercisesList = (ArrayList) linkedHashMap.get("exercisesList");
 
                 // Going through exercisesList
@@ -100,11 +118,13 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         }
     }
 
+    /**
+     * Method that saves all routines (as represented in Hashmap) to the file.
+     */
     public void save() {
         this.save(routineList, path);
     }
 
-    // Writes all routines to json (save method)
     private void save(HashMap<String, Routine> routineList, String path) {
         try {
             final StringWriter sw = new StringWriter();
@@ -124,9 +144,9 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     }
 
     /**
-     * Setters and getters
+     * Setter method for Hashmap routineList
+     * @param routineList the Hashmap representing all routines in file
      */
-
     public void setRoutineList(HashMap<String, Routine> routineList) {
         this.routineList = routineList;
     }
@@ -141,6 +161,17 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
 
     public String getPath() {
         return path;
+    }
+
+    /**
+     * Method to remove a routine, intended for use in tests
+     * (specifically for the GenerateRoutine use case).
+     * May be extended to its own use case in the future.
+     * @param routineName Unique string identifier of routine, also known as its name
+     */
+    public void removeRoutine(String routineName) {
+        routineList.remove(routineName);
+        this.save();
     }
 
     /**
@@ -228,7 +259,7 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
         this.save();
     }
 
-    // For LookUpRoutineDataAccessInterface
+    // For LookUpRoutineDataAccessInterface and AdjustSetRepDataAccessInterface
     @Override
     public Routine getRoutine(String name) {
         return routineList.get(name);
@@ -252,39 +283,13 @@ public class RoutineDataAccessObject implements AddExerciseDataAccessInterface, 
     @Override
     public ArrayList<Exercise> getExercisesByTarget(String target, int numberOfExercises) {
         Response response = apiAccess.getApiTarget(target, numberOfExercises);
-        return convertResponse(response);
+        return apiAccess.convertResponse(response);
     }
 
     // For AddExerciseDataAccessInterface
-//    @Override
+    @Override
     public ArrayList<Exercise> getExercisesByName(String name, int numberOfExercises) {
         Response response = apiAccess.getApiName(name, numberOfExercises);
-        return convertResponse(response);
-    }
-
-    // Converts api response to array list of exercise entities
-    private ArrayList<Exercise> convertResponse(Response response) {
-        try {
-            ResponseBody responseBody = response.body();
-            assert responseBody != null;
-
-            String responseBodyStr = responseBody.string();
-            JSONTokener jsonTokener = new JSONTokener(responseBodyStr);
-            JSONArray jsonArray = new JSONArray(jsonTokener);
-
-            // Generating array list of exercises from jsonArray
-            ArrayList<Exercise> exercises = new ArrayList<>();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject object = jsonArray.getJSONObject(i);
-                ArrayList<String> instructions = new ArrayList<>(Arrays.asList(object.optString("instructions").replaceAll("[\\[\\]]", "").split(",")));
-                Exercise exercise = ExerciseFactory.create(object.getString("name"), object.getString("target"), object.getString("equipment"), instructions, object.getString("id"), 0, 0);
-                exercises.add(exercise);
-            }
-            return exercises;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return apiAccess.convertResponse(response);
     }
 }

@@ -6,13 +6,17 @@ import interface_adapter.lookup.LookUpViewModel;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.lookup_routines.LookUpRoutinesViewModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 
 public class MainView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String mainViewName = "Xtreme Mussels Main View";
@@ -33,8 +37,24 @@ public class MainView extends JPanel implements ActionListener, PropertyChangeLi
         this.lookUpRoutinesController = controller;
 
         mainViewModel.addPropertyChangeListener(this);
-        JLabel title = new JLabel(MainViewModel.TITLE_LABEL);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel title = new JLabel(MainViewModel.TITLE_LABEL, SwingConstants.LEFT);
+        title.setFont(new Font("Serif", Font.PLAIN, 25));
+//        title.setAlignmentX(-7f);
+
+        // Mussel image
+        try {
+            BufferedImage mussel = ImageIO.read(new File("muscled_mussel.png"));
+            Image image = mussel.getScaledInstance(325 , 200, Image.SCALE_DEFAULT);
+            JLabel picLabel = new JLabel();
+            picLabel.setIcon(new ImageIcon(image));
+            picLabel.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+
+
+            add(picLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         lookUpExercises = new JButton(MainViewModel.LOOKUP_LABEL);
         viewAllRoutines = new JButton(MainViewModel.VIEWALL_LABEL);
         JPanel buttons = new JPanel();

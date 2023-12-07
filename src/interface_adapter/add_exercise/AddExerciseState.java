@@ -18,12 +18,14 @@ public class AddExerciseState {
 
     private String[][] exercisesDisplay;
 
+    private boolean useCaseSuccess;
+
     public AddExerciseState() {
     }
 
-    public String getRoutineName() {return routineName;}
+    public String getName() {return name; }
 
-    public void setRoutineName(String routineName) {this.routineName= routineName;}
+    public void setName(String exerciseName) {this.name = exerciseName;}
 
     public void setExercises(ArrayList<Exercise> exercises) {
         this.exercises = exercises;
@@ -48,6 +50,10 @@ public class AddExerciseState {
     public void setExercisesDisplay() {
         this.exercisesDisplay = this.toStringArray(routine.getExercisesList());
     }
+
+    public void setUseCaseSuccess(boolean useCaseSuccess) { this.useCaseSuccess = useCaseSuccess; }
+
+    public boolean getUseCaseSuccess() { return useCaseSuccess; }
 
     public String[][] toStringArray(ArrayList<Exercise> exercise) {
         if (exercise.isEmpty()) {

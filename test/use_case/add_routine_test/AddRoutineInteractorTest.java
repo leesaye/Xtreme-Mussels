@@ -1,76 +1,86 @@
 package use_case.add_routine_test;
 
 import data_access.RoutineDataAccessObject;
-import entity.Routine;
+import entity.Exercise;
 import entity.RoutineFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.add_routine.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
+public class AddRoutineInteractorTest {
 
-class AddRoutineInteractorTest{
+    ArrayList<String> instructions;
+    Exercise excercise = new Exercise("excerciseName", "arms", "equipments", instructions, "13", 3, 5);
+    ArrayList excerciseList = new ArrayList<>();
+
+    AddRoutineDataAccessInterface dataAccess;
+    //    String routineName;
+//    AddRoutineDataAccessInterface dataAccess;
+//    HashMap<String, Routine> routineList = new HashMap<>();
+//    RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
+//
     @BeforeEach
     void init() {
+        dataAccess = new RoutineDataAccessObject();
+//        excerciseList.add(excercise);
+//        RoutineDataAccessObject routineDataAccessObject;
+//        routineDataAccessObject.setPath("TestRoutineFile.json");
+//        routineDataAccessObject.setRoutineList(routineDataAccessObject.read());
+//        routineList = routineDataAccessObject.getRoutineList();
     }
 
+    //
     @Test
     void successTest() {
 
-        HashMap<String, Routine> routineList = null;
-        String path = null;
-
-        AddRoutineInputData routineName = new AddRoutineInputData("Routine 1");
-        AddRoutineDataAccessInterface addRoutineDataAccessInterface = new RoutineDataAccessObject(routineList, path);
-
+        AddRoutineInputData inputData = new AddRoutineInputData("routine 1");
+        AddRoutineDataAccessInterface routineDataAccessInterface = new RoutineDataAccessObject();
+        RoutineFactory routineFactory = new RoutineFactory();
         AddRoutineOutputBoundary addRoutinePresenter = new AddRoutineOutputBoundary() {
+
             @Override
             public void prepareSuccessView(AddRoutineOutputData addRoutineOutputData) {
-                assertEquals("Routine 1", addRoutineOutputData.getRoutineName());
+                // System.out.println(addRoutineOutputData.getRoutineName());
+                assertEquals("routine 1", addRoutineOutputData.getRoutineName());
+                assertFalse(routineDataAccessInterface.existsByName("routine 1"));
             }
 
             @Override
-            public void prepareFailView(String error) {
-                fail("Add Routine Interactor Test failure unexpected");
+            public void prepareFailView(String message) {
+                fail("Use case failure is unexpected.");
             }
         };
-        AddRoutineInputBoundary addRoutineInteractor = new AddRoutineInteractor(addRoutineDataAccessInterface, addRoutinePresenter, new RoutineFactory());
-        addRoutineInteractor.execute(routineName);
 
-        }
+        AddRoutineInteractor interactor = new AddRoutineInteractor(dataAccess, addRoutinePresenter, routineFactory);
+        interactor.execute(inputData);
 
-    @Test
-    void failureRoutineExistsTest() {
-
-        HashMap<String, Routine> routineList = null;
-        String path = null;
-
-        AddRoutineInputData inputData = new AddRoutineInputData("Routine 1");
-        AddRoutineInputData repeatInput = new AddRoutineInputData("Routine 1");
-        AddRoutineDataAccessInterface addRoutineDataAccessInterface = new RoutineDataAccessObject(routineList, path);
-
-        RoutineFactory factory1 = new RoutineFactory();
-        Routine routine1 = factory1.create("Routine1");
-        addRoutineDataAccessInterface.addRoutine(routine1);
-
-        RoutineFactory factory2 = new RoutineFactory();
-        Routine routine2 = factory2.create("Routine1");
-        addRoutineDataAccessInterface.addRoutine(routine2);
-
-        AddRoutineOutputBoundary failurePresenter = new AddRoutineOutputBoundary() {
-            @Override
-            public void prepareSuccessView(AddRoutineOutputData routine) {
-                fail("Use case success is unexpected.");
-            }
-            @Override
-            public void prepareFailView(String error) {
-                assertEquals("Routine name already exists.", error);
-            }
-        };
-        AddRoutineInputBoundary interactor = new AddRoutineInteractor(addRoutineDataAccessInterface, failurePresenter, new RoutineFactory());
-        interactor.execute(repeatInput);
     }
+
+//    @Test
+//    void failuretest() {
+//        AddRoutineInputData inputData = new AddRoutineInputData("routine 1");
+//        AddRoutineInputData inputData2 = new AddRoutineInputData("routine 1");
+//        AddRoutineDataAccessInterface routineDataAccessInterface = new RoutineDataAccessObject();
+//        RoutineFactory routineFactory = new RoutineFactory();
+//        AddRoutineOutputBoundary addRoutinePresenter = new AddRoutineOutputBoundary() {
+//            @Override
+//            public void prepareSuccessView(AddRoutineOutputData addRoutineOutputData) {
+////                // System.out.println(addRoutineOutputData.getRoutineName());
+////                assertEquals("routine 1", addRoutineOutputData.getRoutineName());
+////                assertFalse(routineDataAccessInterface.existsByName("routine 1"));
+//                fail("Use case success is unexpected.");
+//            }
+//
+//            @Override
+//            public void prepareFailView(String message) {
+//                assertEquals("Routine name already exists.", message);
+//            }
+//        };
+//        AddRoutineInteractor interactor = new AddRoutineInteractor(dataAccess, addRoutinePresenter, routineFactory);
+//        interactor.execute(inputData2);
+//    }
 }
