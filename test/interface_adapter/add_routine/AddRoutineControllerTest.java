@@ -7,8 +7,6 @@ import use_case.add_routine.AddRoutineInputData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddRoutineControllerTest {
-
-    // TODO: Test this!
     @Test
     void test() {
         AddRoutineInputBoundary addRoutineInteractor = new AddRoutineInputBoundary() {
