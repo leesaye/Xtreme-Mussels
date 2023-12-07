@@ -1,8 +1,6 @@
 package interface_adapter.delete_exercise;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.delete_exercise.DeleteExerciseState;
-import interface_adapter.delete_exercise.DeleteExerciseViewModel;
 import use_case.delete_exercise.DeleteExerciseOutputBoundary;
 import use_case.delete_exercise.DeleteExerciseOutputData;
 
