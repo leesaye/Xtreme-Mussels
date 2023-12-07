@@ -39,6 +39,8 @@ public class AddExerciseState {
         this.nameError = nameError;
     }
 
+    public String getRoutineName() {return routine.getRoutineName();}
+
     public String getRoutineNameError() {
         return nameError;
     }
