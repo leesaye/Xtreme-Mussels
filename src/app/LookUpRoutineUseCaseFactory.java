@@ -8,6 +8,8 @@ import interface_adapter.adjust_setrep.AdjustSetRepController;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
+import interface_adapter.delete_routine.DeleteRoutineController;
+import interface_adapter.delete_routine.DeleteRoutineViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineController;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
@@ -22,6 +24,7 @@ import view.LookUpRoutineView;
 
 import java.io.IOException;
 
+import static app.DeleteRoutineUseCaseFactory.createDeleteRoutineUseCase;
 import static app.LookUpRoutinesUseCaseFactory.createLookUpRoutinesCase;
 import static app.edit_routine.AddExerciseUseCaseFactory.createAddExerciseUseCase;
 import static app.edit_routine.AdjustSetRepUseCaseFactory.createAdjustSetRepUseCase;
@@ -35,7 +38,7 @@ public class LookUpRoutineUseCaseFactory {
     public static LookUpRoutineView create(
             ViewManagerModel viewManagerModel, LookUpRoutineViewModel lookUpRoutineViewModel, LookUpRoutinesViewModel lookUpRoutinesViewModel,
             RenameRoutineViewModel renameRoutineRepViewModel, AddExerciseViewModel addExerciseViewModel,
-            DeleteExerciseViewModel deleteExerciseViewModel, AdjustSetRepViewModel adjustViewModel, RoutineDataAccessObject routineDataAccessObject) throws IOException {
+            DeleteExerciseViewModel deleteExerciseViewModel, AdjustSetRepViewModel adjustViewModel, DeleteRoutineViewModel deleteRoutineViewModel, RoutineDataAccessObject routineDataAccessObject) throws IOException {
 
         LookUpRoutinesController lookUpRoutinesController = createLookUpRoutinesCase(viewManagerModel, lookUpRoutinesViewModel, routineDataAccessObject);
 
@@ -43,9 +46,10 @@ public class LookUpRoutineUseCaseFactory {
         AddExerciseController addExerciseController = createAddExerciseUseCase(viewManagerModel, addExerciseViewModel, routineDataAccessObject);
         DeleteExerciseController deleteExerciseController = createDeleteExerciseUseCase(viewManagerModel, deleteExerciseViewModel, routineDataAccessObject);
         AdjustSetRepController adjustSetRepController = createAdjustSetRepUseCase(viewManagerModel, adjustViewModel, routineDataAccessObject);
+        DeleteRoutineController deleteRoutineController = createDeleteRoutineUseCase(viewManagerModel, deleteRoutineViewModel, routineDataAccessObject);
 
         return new LookUpRoutineView(lookUpRoutineViewModel, lookUpRoutinesController,renameRoutineController, renameRoutineRepViewModel, addExerciseController, addExerciseViewModel,
-                deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel, viewManagerModel);
+                deleteExerciseController, deleteExerciseViewModel, adjustSetRepController, adjustViewModel, deleteRoutineViewModel, deleteRoutineController, viewManagerModel);
     }
 
     // May not need these create use case methods, keeping them here just in case
