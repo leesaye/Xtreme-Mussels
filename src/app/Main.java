@@ -9,7 +9,7 @@ import interface_adapter.add_exercise.AddExerciseViewModel;
 import interface_adapter.add_routine.AddRoutineViewModel;
 import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
-
+import interface_adapter.delete_routine.DeleteRoutineViewModel;
 import interface_adapter.generate_routine.GenerateRoutineViewModel;
 import interface_adapter.lookup.LookUpViewModel;
 
@@ -57,6 +57,7 @@ class Main {
         AddExerciseViewModel addExerciseViewModel = new AddExerciseViewModel();
         DeleteExerciseViewModel deleteExerciseViewModel = new DeleteExerciseViewModel();
         AddRoutineViewModel addRoutineViewModel = new AddRoutineViewModel();
+        DeleteRoutineViewModel deleteRoutineViewModel = new DeleteRoutineViewModel();
         MainViewModel mainViewModel = new MainViewModel("Xtreme Mussels");
         LookUpViewModel lookUpViewModel = new LookUpViewModel("Look Up Exercise");
         RoutineDataAccessObject routineDataAccessObject = new RoutineDataAccessObject();
@@ -72,7 +73,7 @@ class Main {
         };
         LookUpRoutineView lookUpRoutineView = LookUpRoutineUseCaseFactory.create(viewManagerModel, lookUpRoutineViewModel,
                 lookUpRoutinesViewModel, renameRoutineViewModel, addExerciseViewModel, deleteExerciseViewModel,
-                adjustSetRepViewModel, routineDataAccessObject);
+                adjustSetRepViewModel, deleteRoutineViewModel, routineDataAccessObject);
         views.add(lookUpRoutineView, lookUpRoutineView.viewName);
 
         GenerateRoutineView generateRoutineView = GenerateRoutineUseCaseFactory.create(viewManagerModel, generateRoutineViewModel, routineDataAccessObject);

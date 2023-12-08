@@ -11,6 +11,9 @@ import interface_adapter.adjust_setrep.AdjustSetRepViewModel;
 import interface_adapter.delete_exercise.DeleteExerciseController;
 import interface_adapter.delete_exercise.DeleteExerciseState;
 import interface_adapter.delete_exercise.DeleteExerciseViewModel;
+import interface_adapter.delete_routine.DeleteRoutineController;
+import interface_adapter.delete_routine.DeleteRoutineState;
+import interface_adapter.delete_routine.DeleteRoutineViewModel;
 import interface_adapter.lookup_routine.LookUpRoutineViewModel;
 import interface_adapter.lookup_routines.LookUpRoutinesController;
 import interface_adapter.rename_routine.RenameRoutineController;
@@ -52,6 +55,10 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     private final AdjustSetRepController adjustSetRepController;
 
+    private final DeleteRoutineViewModel deleteRoutineViewModel;
+
+    private final DeleteRoutineController deleteRoutineController;
+
     private final ViewManagerModel viewManagerModel;
 
     private final JLabel title;
@@ -70,11 +77,14 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
 
     private final JButton back;
 
+    private final JButton delete_routine;
+
     public LookUpRoutineView(LookUpRoutineViewModel lookUpRoutineViewModel, LookUpRoutinesController lookUpRoutinesController,
                              RenameRoutineController renameRoutineController, RenameRoutineViewModel renameRoutineViewModel,
                              AddExerciseController addExerciseController, AddExerciseViewModel addExerciseViewModel,
                              DeleteExerciseController deleteExerciseController, DeleteExerciseViewModel deleteExerciseViewModel,
                              AdjustSetRepController adjustSetRepController, AdjustSetRepViewModel adjustSetRepViewModel,
+                             DeleteRoutineViewModel deleteRoutineViewModel, DeleteRoutineController deleteRoutineController,
                              ViewManagerModel viewManagerModel) {
 
         this.lookUpRoutineViewModel = lookUpRoutineViewModel;
@@ -92,6 +102,9 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         this.adjustSetRepController = adjustSetRepController;
         this.adjustSetRepViewModel = adjustSetRepViewModel;
 
+        this.deleteRoutineViewModel = deleteRoutineViewModel;
+        this.deleteRoutineController = deleteRoutineController;
+
         this.viewManagerModel = viewManagerModel;
 
         lookUpRoutineViewModel.addPropertyChangeListener(this);
@@ -99,6 +112,7 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         addExerciseViewModel.addPropertyChangeListener(this);
         deleteExerciseViewModel.addPropertyChangeListener(this);
         adjustSetRepViewModel.addPropertyChangeListener(this);
+        deleteRoutineViewModel.addPropertyChangeListener(this);
 
 
 
@@ -115,11 +129,13 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
         rename = new JButton(RenameRoutineViewModel.RENAME_BUTTON_LABEL);
         adjust = new JButton(AdjustSetRepViewModel.ADJUST_BUTTON_LABEL);
         back = new JButton(LookUpRoutineViewModel.BACK_BUTTON_LABEL);
+        delete_routine =  new JButton(DeleteRoutineViewModel.DELETE_ROUTINE_BUTTON_LABEL);
         buttons.add(add);
         buttons.add(delete);
         buttons.add(rename);
         buttons.add(adjust);
         buttons.add(back);
+        buttons.add(delete_routine);
 
         add.addActionListener(
                 new ActionListener() {
@@ -199,8 +215,22 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         lookUpRoutinesController.execute();
-                        viewManagerModel.setActiveView("All Routines");
+                        viewManagerModel.setActiveView("Xtreme Mussels Main View");
                         viewManagerModel.firePropertyChanged();
+                    }
+                }
+        );
+
+        delete_routine.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(delete_routine)) {
+                            Routine routine = lookUpRoutineViewModel.getState().getRoutine();
+                            deleteRoutineController.execute(routine.getRoutineName());
+                            viewManagerModel.setActiveView("Xtreme Mussels Main View");
+                            viewManagerModel.firePropertyChanged();
+                        }
                     }
                 }
         );
@@ -245,6 +275,12 @@ public class LookUpRoutineView extends JPanel implements ActionListener, Propert
             model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
             table.setModel(model);
             JOptionPane.showMessageDialog(this, "New sets and reps saved");
+        }
+
+        else if (evt.getNewValue() instanceof DeleteRoutineState) {
+            model = new DefaultTableModel(adjustSetRepViewModel.getState().getExercisesDisplay(), LookUpRoutineViewModel.COLUMN_HEADERS);
+            table.setModel(model);
+            JOptionPane.showMessageDialog(this, "Routine deleted");
         }
 
         else { // The event was switching into the view
